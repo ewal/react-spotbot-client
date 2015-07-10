@@ -2,10 +2,9 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
-import Track from './track';
+import Track from 'components/track_table_row';
 
-import PlaylistActions from '_actions/playlist_actions';
-import PlaylistStore from '_stores/playlist_store';
+import TrackMetadataApi from '_apis/track_metadata_api';
 
 class PlaylistContainer extends React.Component {
 
@@ -21,9 +20,13 @@ class PlaylistContainer extends React.Component {
   onPlaylistChange(snapshot) {
     let val = snapshot.val();
     if(!_.isNull(val)) {
-      PlaylistActions.load(val.tracks);
-      this.setState({
-        playlistName: val.name
+      TrackMetadataApi.fetch(val.tracks).then((response) => {
+        this.setState({
+          playlistName: val.name,
+          tracks: response.tracks
+        });
+      }).catch(() => {
+        console.log("Couldn't fetch metadata");
       });
     }
   }
@@ -34,12 +37,10 @@ class PlaylistContainer extends React.Component {
 
   componentDidMount() {
     FirebaseRef.child('playlist').on('value', this.onPlaylistChange.bind(this));
-    this.unsubscribe = PlaylistStore.listen(this.onTracksChange.bind(this));
   }
 
   componentWillUnmount() {
     FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
-    this.unsubscribe();
   }
 
   render() {
