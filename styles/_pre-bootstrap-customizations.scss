@@ -1,0 +1,9 @@
+// Customize Variables that get imported before the _variables file. Thus the _variables file
+// can depend on values here.
+
+@function themeColor($opacity) {
+  @return rgba($brand-primary, $opacity);
+}
+
+//$brand-primary: #2ebd59;
+$brand-primary: #84bd00;
