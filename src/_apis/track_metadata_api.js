@@ -4,7 +4,8 @@ import _ from 'lodash';
 
 export default {
   // Accepts string or an array of Spotify Uris
-  fetchMetaData(data) {
+  fetch(data) {
+
     return new Promise((resolve, reject) => {
 
       let uris = [];
@@ -29,6 +30,7 @@ export default {
           reject(response.text);
         }
       });
+
     });
 
   }
