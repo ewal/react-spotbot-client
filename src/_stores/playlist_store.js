@@ -1,8 +1,6 @@
 import Reflux from 'reflux';
 import Actions from '_actions/playlist_actions';
 
-console.log(Actions);
-
 let Store = Reflux.createStore({
   listenables: Actions,
 
