@@ -9,7 +9,8 @@ import PlayerControlsContainer from 'player_controls/player_controls_container.j
 import QueueContainer from 'queue/queue_container';
 import SavedPlaylistsContainer from 'saved_playlists/saved_playlists_container';
 import NavigationContainer from 'layout/navigation_container';
-import FirebaseRef from 'firebase_ref';
+import AlbumContainer from 'album/album_container';
+import ArtistContainer from 'artist/artist_container';
 
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
@@ -47,10 +48,12 @@ class App extends React.Component {
 let routes = (
   <Route handler={App} path='/'>
     <DefaultRoute handler={PlaylistContainer}/>
-    <Route name="playlist" path='playlist' handler={PlaylistContainer} />
-    <Route name="starred" path='starred/:uri' handler={PlaylistContainer} />
-    <Route name="search" path='search/:query' handler={SearchResultContainer} />
-    <Route name="queue" path='queue' handler={QueueContainer} />
+    <Route name='playlist' path='playlist' handler={PlaylistContainer} />
+    <Route name='starred' path='starred/:uri' handler={PlaylistContainer} />
+    <Route name='search' path='search/:query' handler={SearchResultContainer} />
+    <Route name='queue' path='queue' handler={QueueContainer} />
+    <Route name='album' path='album/:id' handler={AlbumContainer} />
+    <Route name='artist' path='artist/:id' handler={ArtistContainer} />
   </Route>
 );
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
-import Track from 'components/track_table_row';
+import Track from 'components/track_full_table_row';
 
 import TrackMetadataApi from '_apis/track_metadata_api';
 
@@ -15,6 +15,7 @@ class QueueContainer extends React.Component {
     super(props);
 
     this.state = {
+      tracks: []
     };
   }
 
@@ -25,11 +26,10 @@ class QueueContainer extends React.Component {
     if(!_.isNull(uris)) {
       TrackMetadataApi.fetch(uris).then((response) => {
         this.setState({
-          //playlistName: val.name,
           tracks: response.tracks
         });
-      }).catch(() => {
-        console.log("Couldn't fetch metadata");
+      }).catch((message) => {
+        throw new Error(message);
       });
     }
   }
