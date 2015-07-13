@@ -4,6 +4,15 @@ export default {
     return uri.split(':')[2];
   },
 
+  spotify: {
+    uriType(uri) {
+      return uri.split(':')[1];
+    },
+    parseId(uri) {
+      return uri.split(':')[2];
+    }
+  },
+
   formatDuration(ms) {
     ms = parseInt(ms, 10) / 1000;
     var minutes = Math.floor(ms / 60);

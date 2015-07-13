@@ -1,6 +1,5 @@
 import React from 'react';
 import { Nav } from 'react-bootstrap';
-import { Link } from 'react-router';
 import ReactRouterBootstrap from 'react-router-bootstrap';
 
 let NavItemLink = ReactRouterBootstrap.NavItemLink;
