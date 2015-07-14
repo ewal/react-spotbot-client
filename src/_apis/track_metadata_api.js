@@ -9,8 +9,44 @@ import CacheStore from '_stores/cache_store';
  * The Spotify web apis limit is 50 tracks per request
  */
 export default {
-  // Accepts string or an array of Spotify Uris
-  fetch(data) {
+
+  isFetching: false,
+
+  fetchTrack(trackId) {
+    // The spobot server will update currentTrack twice causing two requests to Spotifys api.
+    // Prevent by testing that we already are fetching.
+    // Since we use a promise we need to resolve or reject something.
+
+    return new Promise((resolve, reject) => {
+      if(this.isFetching) {
+        // Return an empty object and let the component handle it.
+        return resolve({});
+      }
+
+      this.isFetching = true;
+      let cacheKey = 'track_' + trackId;
+      let findInCache = CacheStore.get(cacheKey);
+      if(!_.isUndefined(findInCache)) {
+        console.log("from CACHE!");
+        this.isFetching = false;
+        return resolve(findInCache.data);
+      }
+
+      request.get('https://api.spotify.com/v1/tracks/' + trackId)
+      .end((error, response) => {
+        this.isFetching = false;
+        if(response.ok) {
+          CacheStore.set(cacheKey, response.body);
+          resolve(response.body);
+        }
+        else {
+          reject(response.text);
+        }
+      });
+    });
+  },
+
+  fetchTracks(data) {
 
     // TODO: consider accepting an ID instead URI
     return new Promise((resolve, reject) => {
@@ -18,7 +54,6 @@ export default {
       let cacheKey = 'track_' + data.join('');
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        console.log("fetch from cache!");
         return resolve(findInCache.data);
       }
 

@@ -14,7 +14,6 @@ export default {
       let cacheKey = 'artist_' + id;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        console.log("fetch from cache!");
         return resolve(findInCache.data);
       }
 
@@ -37,7 +36,6 @@ export default {
       let cacheKey = 'artist_albums_' + id;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        console.log("fetch from cache!");
         return resolve(findInCache.data);
       }
 
@@ -62,7 +60,6 @@ export default {
       let cacheKey = 'top_tracks_' + id;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        console.log("fetch from cache!");
         return resolve(findInCache.data);
       }
 

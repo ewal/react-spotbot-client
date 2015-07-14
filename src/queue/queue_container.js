@@ -22,9 +22,10 @@ class QueueContainer extends React.Component {
   onQueueChange(snapshot) {
     let val = _.toArray(snapshot.val());
     let uris = _.pluck(val, 'uri');
+    console.log(val);
 
-    if(!_.isNull(uris)) {
-      TrackMetadataApi.fetch(uris).then((response) => {
+    if(!_.isEmpty(val)) {
+      TrackMetadataApi.fetchTracks(uris).then((response) => {
         this.setState({
           tracks: response.tracks
         });
@@ -42,31 +43,38 @@ class QueueContainer extends React.Component {
     FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
   }
 
+  renderTable() {
+    let tracks = this.state.tracks.map((track, index) => {
+      return <Track key={index} track={track} />
+    });
+    return (
+      <Table hover>
+        <caption>{this.state.playlistName}</caption>
+        <thead>
+          <tr>
+            <th width="30">#</th>
+            <th>Track</th>
+            <th>Album</th>
+            <th>Artist</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tracks}
+        </tbody>
+      </Table>
+    );
+  }
+
   render() {
 
-    let tracks = '';
+    let queue = 'Queue is empty';
     if(!_.isEmpty(this.state.tracks)) {
-      tracks = this.state.tracks.map((track, index) => {
-        return <Track key={index} track={track} />
-      });
+      queue = this.renderTable();
     }
 
     return (
       <div>
-        <Table hover>
-          <caption>{this.state.playlistName}</caption>
-          <thead>
-            <tr>
-              <th width="30">#</th>
-              <th>Track</th>
-              <th>Album</th>
-              <th>Artist</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tracks}
-          </tbody>
-        </Table>
+      {queue}
       </div>
     );
   }

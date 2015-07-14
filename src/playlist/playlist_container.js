@@ -39,8 +39,7 @@ class PlaylistContainer extends React.Component {
         });
       }
       else {
-        TrackMetadataApi.fetch(val.tracks).then((response) => {
-          console.log(response);
+        TrackMetadataApi.fetchTracks(val.tracks).then((response) => {
           this.setState({
             playlistName: val.name,
             tracks: response.tracks,
@@ -117,6 +116,7 @@ class PlaylistContainer extends React.Component {
     // TODO:
     // - split into two different containers
     // - keep components small
+    // - handle keyboard up down. set active item. pass prop function
 
     if(!_.isEmpty(this.state.tracks)) {
       if(this.state.type === 'album') {
