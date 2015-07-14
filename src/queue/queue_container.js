@@ -49,15 +49,7 @@ class QueueContainer extends React.Component {
     });
     return (
       <Table hover>
-        <caption>{this.state.playlistName}</caption>
-        <thead>
-          <tr>
-            <th width="30">#</th>
-            <th>Track</th>
-            <th>Album</th>
-            <th>Artist</th>
-          </tr>
-        </thead>
+        <caption>Songs</caption>
         <tbody>
           {tracks}
         </tbody>
@@ -67,14 +59,19 @@ class QueueContainer extends React.Component {
 
   render() {
 
-    let queue = 'Queue is empty';
+    let queue = <p>Queue is empty</p>;
     if(!_.isEmpty(this.state.tracks)) {
       queue = this.renderTable();
     }
 
     return (
-      <div>
-      {queue}
+      <div className="container-fluid component">
+        <header>
+          <h1>Play Queue</h1>
+        </header>
+        <section>
+          {queue}
+        </section>
       </div>
     );
   }

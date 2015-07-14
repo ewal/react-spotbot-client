@@ -30,10 +30,24 @@ class NavigationContainer extends React.Component {
 
   render() {
     return (
-      <Nav stacked bsStyle="pills">
-        <NavItemLink to='playlist'>Playlist</NavItemLink>
-        <NavItemLink to='queue'>Queue <Badge className="pull-right">{this.state.queueSize}</Badge></NavItemLink>
-      </Nav>
+      <div>
+        <header>
+          <h2>Main</h2>
+        </header>
+        <section>
+          <Nav stacked bsStyle="pills">
+            <NavItemLink to='playlist'>
+              <i className="fa fa-headphones" />
+              Playlist
+            </NavItemLink>
+            <NavItemLink to='queue'>
+              <i className="fa fa-bars" />
+              Queue
+              <Badge className="pull-right">{this.state.queueSize}</Badge>
+            </NavItemLink>
+          </Nav>
+        </section>
+      </div>
     );
   }
 };

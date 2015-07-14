@@ -26,11 +26,12 @@ class Track extends React.Component {
 
     return (
       <tr tabIndex="0" onKeyUp={this.handleKeyUp.bind(this)}>
-        <td>{track.track_number}.</td>
+        <td className="image-cell"><img src={track.album.images[2].url} /></td>
+        <td className="track-number">{track.track_number}.</td>
         <td>{track.name}</td>
         <td><Link to='album' params={{ id: track.album.id }}>{track.album.name}</Link></td>
         <td><Link to='artist' params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link></td>
-        <td>{duration}</td>
+        <td className="duration">{duration}</td>
       </tr>
     );
   }

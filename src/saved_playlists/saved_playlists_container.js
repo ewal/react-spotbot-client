@@ -12,12 +12,12 @@ class SavedPlaylistsContainer extends React.Component {
 
   render() {
     return (
-      <div className="saved-playlists">
+      <div className="starred">
         <header>
-          <h2>Starred playlists <i className="fa fa-star" /></h2>
+          <h2>Starred <i className="fa fa-star" /></h2>
         </header>
         <section>
-          <Nav stacked>
+          <Nav stacked bsStyle="pills">
             <NavItemLink to="starred" params={{uri: "awesome"}}>
               <i className="fa fa-music" /> Awesome songs
             </NavItemLink>

@@ -3,6 +3,7 @@ import { ButtonGroup, Button } from 'react-bootstrap';
 import classNames from 'classnames';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
+import ShuffleButton from './shuffle_button';
 
 class PlayerControlsContainer extends React.Component {
 
@@ -47,7 +48,7 @@ class PlayerControlsContainer extends React.Component {
           <Button onClick={this.togglePlay.bind(this)}><i className={playPauseKlass} /></Button>
           <Button onClick={this.playNext.bind(this)}><i className="fa fa-step-forward" /></Button>
         </ButtonGroup>
-        <Button bsStyle="link"><i className="fa fa-random" /></Button>
+        <ShuffleButton />
       </div>
     );
   }

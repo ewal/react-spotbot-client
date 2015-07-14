@@ -27,8 +27,10 @@ class PlaylistContainer extends React.Component {
     let val = snapshot.val();
     if(!_.isNull(val)) {
       let type = utils.spotify.uriType(val.uri);
+      let albumId = utils.spotify.parseId(val.uri);
+
       if(type === 'album') {
-        AlbumMetadataApi.fetch(val.uri).then((response) => {
+        AlbumMetadataApi.fetch(albumId).then((response) => {
           this.setState({
             playlistName: val.name,
             tracks: response.tracks.items,
@@ -69,15 +71,6 @@ class PlaylistContainer extends React.Component {
     return (
       <Table hover>
         <caption>{this.state.playlistName} <i className="fa fa-star-o"></i></caption>
-        <thead>
-          <tr>
-            <th width="30">#</th>
-            <th>Track</th>
-            <th>Album</th>
-            <th>Artist</th>
-            <th width="30"><i className="fa fa-clock-o pull-right" /></th>
-          </tr>
-        </thead>
         <tbody>
           {tracks}
         </tbody>
@@ -94,13 +87,6 @@ class PlaylistContainer extends React.Component {
     return (
       <Table hover>
         <caption>{this.state.playlistName} <i className="fa fa-star-o"></i></caption>
-        <thead>
-          <tr>
-            <th width="30">#</th>
-            <th>Track</th>
-            <th width="30"><i className="fa fa-clock-o pull-right" /></th>
-          </tr>
-        </thead>
         <tbody>
           {tracks}
         </tbody>
@@ -128,8 +114,13 @@ class PlaylistContainer extends React.Component {
     }
 
     return (
-      <div>
-        {playlistType}
+      <div className="container-fluid component">
+        <header>
+          <h1>Playlist</h1>
+        </header>
+        <section>
+          {playlistType}
+        </section>
       </div>
     );
   }
