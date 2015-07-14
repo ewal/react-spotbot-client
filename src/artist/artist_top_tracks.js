@@ -3,7 +3,8 @@ import _ from 'lodash';
 import utils from 'utils';
 import { Link } from 'react-router';
 import ArtistMetadataApi from '_apis/artist_metadata_api';
-import TrackListItem from 'components/track_list_item';
+import TableRow from 'components/track_table_row';
+import { Table } from 'react-bootstrap';
 
 class ArtistTopTracks extends React.Component {
   constructor(props) {
@@ -27,14 +28,17 @@ class ArtistTopTracks extends React.Component {
   render() {
     if(_.isEmpty(this.state.tracks)) { return false; }
 
-    let tracks = this.state.tracks.map((track) => {
-      return <TrackListItem track={track} />;
+    let tracks = this.state.tracks.map((track, index) => {
+      return <TableRow track={track} key={index} />;
     });
 
     return (
-      <ul>
-        {tracks}
-      </ul>
+      <Table hover>
+        <caption>Top tracks</caption>
+        <tbody>
+          {tracks}
+        </tbody>
+      </Table>
     );
   }
 };

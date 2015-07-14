@@ -4,7 +4,8 @@ import utils from 'utils';
 import { Link } from 'react-router';
 import ArtistMetadataApi from '_apis/artist_metadata_api';
 import ArtistTopTracks from './artist_top_tracks';
-import AlbumList from 'components/album_list';
+import AlbumList from 'album/album_list';
+import { Thumbnail } from 'react-bootstrap';
 
 class ArtistContainer extends React.Component {
 
@@ -37,15 +38,23 @@ class ArtistContainer extends React.Component {
   render() {
     let artist = this.state.artist;
     if(_.isEmpty(artist)) { return false; }
+    console.log(artist);
     return (
-      <div>
-        <h2>
-          {artist.name}
-        </h2>
-        <h3>Top tracks</h3>
-        <ArtistTopTracks artistId={this.props.params.id} />
-        <h3>Albums</h3>
-        <AlbumList albums={this.state.albums} />
+      <div className="artist-container">
+        <div className="container-fluid">
+          <header>
+            <Thumbnail bsSize="small" src={artist.images[1].url} />
+            <h2>
+              ARTIST<br />
+              {artist.name}
+            </h2>
+          </header>
+          <ArtistTopTracks artistId={this.props.params.id} />
+          <header className="section-header">
+            <h3>Albums</h3>
+          </header>
+          <AlbumList albums={this.state.albums} />
+        </div>
       </div>
     );
   }
