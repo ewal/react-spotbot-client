@@ -2,15 +2,30 @@ import React from 'react';
 import _ from 'lodash';
 import utils from 'utils';
 import { Link } from 'react-router';
+import { ContextMenuLayer } from "react-contextmenu";
+import FirebaseRef from 'firebase_ref';
 
 class Track extends React.Component {
+
+  handleKeyUp(e) {
+    switch(e.which) {
+      case 81:
+        FirebaseRef.child('queue').push({uri: this.props.track.uri});
+      break;
+      case 80:
+        FirebaseRef.child('player/current_track/uri').set(this.props.track.uri);
+      break;
+      default: return;
+    }
+  }
+
   render() {
 
     let track = this.props.track;
     let duration = utils.formatDuration(track.duration_ms);
 
     return (
-      <tr>
+      <tr tabIndex="0" onKeyUp={this.handleKeyUp.bind(this)}>
         <td>{track.track_number}.</td>
         <td>{track.name}</td>
         <td><Link to='album' params={{ id: track.album.id }}>{track.album.name}</Link></td>
@@ -25,4 +40,8 @@ Track.propTypes = {
   track: React.PropTypes.object.isRequired
 };
 
-export default Track;
+export default ContextMenuLayer("track", (props) => {
+    return {
+      spotifyUri: props.track.uri
+    };
+})(Track);

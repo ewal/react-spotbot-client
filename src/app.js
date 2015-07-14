@@ -11,6 +11,8 @@ import SavedPlaylistsContainer from 'saved_playlists/saved_playlists_container';
 import NavigationContainer from 'layout/navigation_container';
 import AlbumContainer from 'album/album_container';
 import ArtistContainer from 'artist/artist_container';
+import ContextMenuTrack from 'components/context_menu_track';
+import CurrentTrackContainer from 'current_track/current_track_container';
 
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
@@ -20,11 +22,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="flex">
+        <ContextMenuTrack />
         <header className="main-header" role="banner">
-          <div className="logo pull-left">
-            <i className="fa fa-spotify" />
+          <div className="col current-track">
+            <CurrentTrackContainer />
           </div>
-          <SearchContainer />
+          <div className="col search">
+            <SearchContainer />
+          </div>
         </header>
         <main role="main" className="main-content">
           <section className="yield">

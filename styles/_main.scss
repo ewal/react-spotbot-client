@@ -47,15 +47,23 @@ header, footer {
 }
 
 .main-header {
+  display: flex;
+  flex-direction: row;
   .form-group {
     margin: 0;
   }
-}
 
-.logo {
-  i {
-    color: themeColor(1);
-    font-size: 34px;
+  .col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .current-track {
+    flex: 0 0 70%;
+  }
+
+  .search {
+    flex: 0 0 30%;
   }
 }
 
@@ -75,5 +83,11 @@ header, footer {
   }
   section {
 
+  }
+}
+
+.current-track {
+  .media-object {
+    max-height: 32px;
   }
 }
