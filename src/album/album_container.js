@@ -2,18 +2,9 @@ import React from 'react';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import { Link } from 'react-router';
-
-class Track extends React.Component {
-  render() {
-    return (
-      <li>
-        {this.props.track.name}
-      </li>
-    );
-  }
-};
-
-Track.propTypes = { track: React.PropTypes.object.isRequired };
+import TableRow from 'components/track_table_row';
+import { Table, Thumbnail } from 'react-bootstrap';
+import FirebaseRef from 'firebase_ref';
 
 class Artists extends React.Component {
   render() {
@@ -54,26 +45,34 @@ class AlbumContainer extends React.Component {
     });
   }
 
+  handleClick() {
+    FirebaseRef.child('playlist/uri').set(this.state.album.uri);
+    FirebaseRef.child('player/next').set(true);
+  }
+
   render() {
     if(_.isEmpty(this.state.album)) { return false; }
 
-    let tracks = this.state.album.tracks.items.map((track) => {
-      return <Track track={track} />;
+    let album = this.state.album;
+    let tracks = album.tracks.items.map((track, index) => {
+      return <TableRow track={track} key={index} />;
     });
 
     // TODO:
     // - list and link artists
     // - album cover
-    // - queue tracks
     // - set album as current playlist
 
     return (
-      <div>
-        <h2>{this.state.album.name}</h2>
+      <div className="container-fluid">
+        <header>
+          <Thumbnail onClick={this.handleClick.bind(this)} src={album.images[1].url} />
+          <h2>{this.state.album.name}</h2>
+        </header>
         <Artists artists={this.state.album.artists} />
-        <ul>
+        <Table hover>
           {tracks}
-        </ul>
+        </Table>
       </div>
     );
   }

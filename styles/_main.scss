@@ -20,17 +20,13 @@
     flex: 0 0 200px;
     overflow: auto;
   }
-
-   article {
-     padding: $gutter $gutter*2;
-  }
 }
 
-header, footer, .main-navigation {
+.main-header, footer, .main-navigation {
   background: $gray-darker;
 }
 
-header {
+.main-header {
   border-bottom: solid $gray-base 1px;
 }
 
@@ -40,9 +36,14 @@ footer {
 
 .main-navigation {
   border-right: solid $gray-base 1px;
+
+  h2 {
+    color: $gray-light;
+    font-weight: normal;
+  }
 }
 
-header, footer {
+.main-header, footer {
   padding: $gutter;
 }
 
@@ -67,22 +68,24 @@ header, footer {
   }
 }
 
-.saved-playlists {
-  margin: $gutter 0;
+.main-navigation {
   header {
     padding: $gutter;
     border: none;
-    //border-top: solid $gray-base 1px;
 
     h2 {
       margin: 0;
       padding: 0;
-      font-size: 14px;
+      font-size: 12px;
       text-transform: uppercase;
+
+      i {
+        margin-left: 10px;
+      }
     }
   }
   section {
-
+    margin-bottom: $gutter;
   }
 }
 
@@ -91,3 +94,126 @@ header, footer {
     max-height: 32px;
   }
 }
+
+.artist-container {
+  header {
+    position: relative;
+    /*
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 300px;
+    background-position: center center;
+    */
+
+    .thumbnail {
+      width: 200px;
+      height: 200px;
+      overflow: hidden;
+      img {
+      }
+    }
+
+    &:after {
+      display: none;
+      content: " ";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.4);
+    }
+  }
+}
+
+main {
+  .section-header {
+    margin-bottom: $gutter;
+    h2, h3 {
+      color: $gray-light;
+      text-transform: uppercase;
+      font-size: 14px;
+      padding: 8px 0;
+      margin: 0;
+      clear: both;
+      border-bottom: solid $gray-dark 1px;
+    }
+  }
+}
+
+table {
+  caption {
+    color: $gray-light;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+
+  tbody {
+
+    td {
+      vertical-align: middle !important;
+
+      &.image-cell {
+        padding: 0 !important;
+        width: 50px;
+
+        img {
+          height: 40px;
+          width: 40px;
+        }
+      }
+
+
+      &.duration {
+        text-align: right;
+      }
+
+      &.track-number {
+        width: 30px;
+      }
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: solid $gray-dark 1px;
+      }
+    }
+  }
+}
+
+.nav {
+  a > i {
+    margin-right: 10px;
+  }
+}
+
+.nav-stacked {
+  a {
+    color: $gray-light;
+    &:hover {
+      color: $text-color;
+    }
+  }
+  li {
+    border-left: solid $gray-darker 4px;
+
+    &.active {
+      border-left: solid themeColor(1) 4px;
+      a {
+        color: $text-color;
+      }
+    }
+  }
+}
+
+.component {
+  > header {
+    h1 {
+      font-weight: normal;
+    }
+  }
+  > section {
+  }
+}
+
+@import "album";

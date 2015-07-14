@@ -1,0 +1,68 @@
+.album-list {
+  .row {
+    margin-left: -$gutter*2;
+    margin-right: -$gutter*2;
+  }
+  .thumbnail {
+    margin-bottom: $gutter*2;
+  }
+}
+
+.album-item {
+  .caption {
+    min-height: 60px;
+  }
+
+  h3 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  &-image-wrapper {
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    padding-bottom: 100%;
+
+    &:hover {
+      .album-item-actions {
+        display: block;
+      }
+    }
+  }
+
+  &-image-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-actions {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+
+    button {
+      width: 64px;
+      height: 64px;
+      position: absolute;
+      top: 50%;
+      margin-top: -32px;
+      margin-left: -32px;
+      padding: 0;
+
+      i {
+        font-size: 50px;
+      }
+    }
+  }
+
+}
