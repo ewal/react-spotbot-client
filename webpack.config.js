@@ -84,7 +84,10 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('development'),
-        FIREBASE_URL: JSON.stringify(process.env.FIREBASE_DEV_URL)
+        FIREBASE_URL: JSON.stringify(process.env.FIREBASE_DEV_URL),
+        SPOTIFY_MARKET: JSON.stringify(process.env.SPOTIFY_MARKET),
+        SPOTIFY_SEARCH_LIMIT: JSON.stringify(process.env.SPOTIFY_SEARCH_LIMIT),
+        SPOTIFY_SEARCH_TYPES: JSON.stringify(process.env.SPOTIFY_SEARCH_TYPES)
       }
     })
   ]

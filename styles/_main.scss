@@ -1,93 +1,139 @@
+@import url(http://fonts.googleapis.com/css?family=Exo+2:400,200);
+
+@mixin display-flex() {
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex($val) {
+  -webkit-box-flex: $val;      /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-flex: $val;         /* OLD - Firefox 19- */
+  -webkit-flex: $val;          /* Chrome */
+  -ms-flex: $val;              /* IE 10 */
+  flex: $val;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+@mixin flex-order($val) {
+  -webkit-box-ordinal-group: $val;   /* OLD - iOS 6-, Safari 3.1-6 */
+  -moz-box-ordinal-group: $val;      /* OLD - Firefox 19- */
+  -ms-flex-order: $val;              /* TWEENER - IE 10 */
+  -webkit-order: $val;               /* NEW - Chrome */
+  order: $val;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
 .flex {
-  display: flex;
+  @include display-flex();
   height: 100vh;
+  overflow: hidden;
   flex-direction: column;
 }
 
 .main-content {
-  display: flex;
-  flex: 1;
+  @include display-flex();
+  @include flex(1);
   flex-direction: row;
+  position: relative;
 
-  & > .yield {
-    order: 0;
-    flex: 1;
-    overflow: auto;
+  &.search-visible {
+    .yield {
+
+      &:before {
+        content: " ";
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,.5);
+        z-index: 100;
+      }
+
+      .inner {
+        left: 250px;
+      }
+
+    }
+
+    .main-search {
+      left: 60px;
+    }
+
+    .player {
+      box-shadow: -4px 0 4px #000;
+    }
+
+  }
+
+  .yield {
+    @include flex-order(0);
+    @include flex(1);
+    position: relative;
+
+    // Scrolling container
+    // TODO: find a better className
+    .inner {
+      position: absolute;
+      height: 100%;
+      overflow: auto;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      transform: translate3d(0,0,0);
+      transition: left 0.2s ease 0s;
+    }
+  }
+
+  .main-search {
+    position: absolute;
+    width: 250px;
+    height: 100vh;
+    left: 60px;
+    z-index: 500;
+    left: - 250px;
+    //transform: translateX(0);
+    transform: translate3d(0,0,0);
+    transition: left 0.2s ease 0s;
+    //@include flex-order(-1);
+    //@include flex(0 0 200px);
+    background: $gray-darker;
   }
 
   & > .main-navigation {
-    order: -1;
-    flex: 0 0 200px;
-    overflow: auto;
+    @include flex-order(-2);
+    @include flex(0 0 60px);
+    position: relative;
+    z-index: 5000;
+  }
+
+  & > .player {
+    @include flex-order(1);
+    @include flex(0 0 250px);
+    background: $gray-darker;
+    position: relative;
+    z-index: 5000;
   }
 }
 
-.main-header, footer, .main-navigation {
-  background: $gray-darker;
+h1 {
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 200;
 }
 
-.main-header {
-  border-bottom: solid $gray-base 1px;
+
+a:hover {
+  border-bottom: solid $link-hover-color 1px;
 }
 
-footer {
-  border-top: solid $gray-base 1px;
+.logo {
+  @include flex(0 0 60px);
+  font-size: 25px;
+  color: themeColor(1);
+  text-align: center;
 }
 
-.main-navigation {
-  border-right: solid $gray-base 1px;
-
-  h2 {
-    color: $gray-light;
-    font-weight: normal;
-  }
-}
-
-.main-header, footer {
-  padding: $gutter;
-}
-
-.main-header {
-  display: flex;
-  flex-direction: row;
-  .form-group {
-    margin: 0;
-  }
-
-  .col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .current-track {
-    flex: 0 0 70%;
-  }
-
-  .search {
-    flex: 0 0 30%;
-  }
-}
-
-.main-navigation {
-  header {
-    padding: $gutter;
-    border: none;
-
-    h2 {
-      margin: 0;
-      padding: 0;
-      font-size: 12px;
-      text-transform: uppercase;
-
-      i {
-        margin-left: 10px;
-      }
-    }
-  }
-  section {
-    margin-bottom: $gutter;
-  }
-}
 
 .current-track {
   .media-object {
@@ -95,125 +141,31 @@ footer {
   }
 }
 
-.artist-container {
-  header {
-    position: relative;
-    /*
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 300px;
-    background-position: center center;
-    */
-
-    .thumbnail {
-      width: 200px;
-      height: 200px;
-      overflow: hidden;
-      img {
-      }
-    }
-
-    &:after {
-      display: none;
-      content: " ";
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background: rgba(0,0,0,0.4);
-    }
+.dropdown-menu {
+  a:hover {
+    border: none;
   }
 }
-
-main {
-  .section-header {
-    margin-bottom: $gutter;
-    h2, h3 {
-      color: $gray-light;
-      text-transform: uppercase;
-      font-size: 14px;
-      padding: 8px 0;
-      margin: 0;
-      clear: both;
-      border-bottom: solid $gray-dark 1px;
-    }
-  }
+.context-menu {
+  z-index: 2000;
 }
 
-table {
-  caption {
-    color: $gray-light;
-    text-transform: uppercase;
-    font-size: 14px;
-  }
-
-  tbody {
-
-    td {
-      vertical-align: middle !important;
-
-      &.image-cell {
-        padding: 0 !important;
-        width: 50px;
-
-        img {
-          height: 40px;
-          width: 40px;
-        }
-      }
-
-
-      &.duration {
-        text-align: right;
-      }
-
-      &.track-number {
-        width: 30px;
-      }
-    }
-
-    tr:last-child {
-      td {
-        border-bottom: solid $gray-dark 1px;
-      }
-    }
-  }
+:focus {
+      outline-style: solid !important;
+      outline-color: themeColor(1) !important;
+      outline-width: 1px !important;
+      //outline-offset: 1px !important;
 }
 
-.nav {
-  a > i {
-    margin-right: 10px;
-  }
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+
 }
 
-.nav-stacked {
-  a {
-    color: $gray-light;
-    &:hover {
-      color: $text-color;
-    }
-  }
-  li {
-    border-left: solid $gray-darker 4px;
-
-    &.active {
-      border-left: solid themeColor(1) 4px;
-      a {
-        color: $text-color;
-      }
-    }
-  }
-}
-
-.component {
-  > header {
-    h1 {
-      font-weight: normal;
-    }
-  }
-  > section {
-  }
-}
-
+@import "component";
 @import "album";
+@import "table";
+@import "main_navigation";
+@import "artist";
+@import "current_track";

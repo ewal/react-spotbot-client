@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import Track from 'components/track_table_row';
-import FullTrack from 'components/track_full_table_row';
+import TableHeader from 'components/track_table_header';
 import utils from 'utils';
 
 import AlbumMetadataApi from '_apis/album_metadata_api';
@@ -65,12 +65,13 @@ class PlaylistContainer extends React.Component {
   renderPlaylist() {
 
     let tracks = this.state.tracks.map((track, index) => {
-      return <FullTrack key={index} track={track} />
+      return <Track key={index} index={index} track={track} album artist />
     });
 
     return (
       <Table hover>
         <caption>{this.state.playlistName} <i className="fa fa-star-o"></i></caption>
+        <TableHeader index album artist />
         <tbody>
           {tracks}
         </tbody>
@@ -81,12 +82,13 @@ class PlaylistContainer extends React.Component {
   renderAlbum() {
 
     let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} track={track} />
+      return <Track key={index} index={index} track={track} />
     });
 
     return (
       <Table hover>
         <caption>{this.state.playlistName} <i className="fa fa-star-o"></i></caption>
+        <TableHeader index />
         <tbody>
           {tracks}
         </tbody>
@@ -96,26 +98,25 @@ class PlaylistContainer extends React.Component {
 
   render() {
 
+    if(_.isEmpty(this.state.tracks)) { return false; }
+
     let tracks = '',
         playlistType = '';
 
     // TODO:
     // - split into two different containers
-    // - keep components small
     // - handle keyboard up down. set active item. pass prop function
 
-    if(!_.isEmpty(this.state.tracks)) {
-      if(this.state.type === 'album') {
-        playlistType = this.renderAlbum();
-      }
-      else {
-        playlistType = this.renderPlaylist();
-      }
+    if(this.state.type === 'album') {
+      playlistType = this.renderAlbum();
+    }
+    else {
+      playlistType = this.renderPlaylist();
     }
 
     return (
-      <div className="container-fluid component">
-        <header>
+      <div className="container-fluid">
+        <header className="page-header">
           <h1>Playlist</h1>
         </header>
         <section>

@@ -13,7 +13,6 @@ class ShuffleButton extends React.Component {
 
   onShuffleChange(snapshot) {
     let val = snapshot.val();
-    console.log(val);
     if(!_.isNull(val)) {
       this.setState({ isShuffle: val });
     }

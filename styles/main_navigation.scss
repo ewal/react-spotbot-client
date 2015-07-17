@@ -1,0 +1,41 @@
+.main-navigation {
+  border-right: solid $gray-base 1px;
+  background: $gray-darker;
+
+  .active {
+    a, a:hover {
+      color: themeColor(1);
+    }
+  }
+
+  .in-queue {
+    position: absolute;
+    top: 12px;
+    left: 30px;
+    font-size: 8px;
+  }
+
+  a, button {
+    display: table-cell !important;
+    vertical-align: middle;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: center;
+  }
+  a:hover {
+    border: none;
+  }
+}
+
+
+.nav-stacked {
+  a {
+    color: $gray-light;
+    &:hover {
+      color: $text-color;
+    }
+  }
+}

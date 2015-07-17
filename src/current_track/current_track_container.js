@@ -44,16 +44,12 @@ class CurrentTrackContainer extends React.Component {
         duration = utils.formatDuration(track.duration_ms);
 
     return (
-      <div className="media">
-        <div className="media-left">
-          <img className="media-object" src={track.album.images[2].url} alt="..." />
+      <div className="current-track-container">
+        <div className="thumbnail">
+          <img src={track.album.images[1].url} />
         </div>
-        <div className="media-body">
-          <h5 className="media-heading">
-            {track.name} {duration}
-          </h5>
-          <Link to="album" params={{ id: track.album.id }}>{track.album.name}</Link> / <Link to="artist" params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link>
-        </div>
+        {track.name} {duration}<br />
+        <Link to="album" params={{ id: track.album.id }}>{track.album.name}</Link> / <Link to="artist" params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link>
       </div>
     );
   }

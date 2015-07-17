@@ -61,19 +61,7 @@ export default {
         return reject("TrackMetadataApi expexted input as string or array");
       }
 
-      let uris = [];
-
-
-      if(_.isString(data)) {
-        // TODO: test of correct spotify uri
-        uris.push(data);
-      }
-      else {
-        // TODO: test all spotify uris
-        uris = data;
-      }
-
-      let trackIds = uris.map(uri => {
+      let trackIds = data.map(uri => {
         return utils.parseSpotifyId(uri);
       });
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
-import ReactBootstrap from 'react-bootstrap';
+import { Input } from 'react-bootstrap';
 
 import PlaylistContainer from 'playlist/playlist_container';
 import SearchContainer from 'search/search_container';
@@ -13,38 +13,59 @@ import AlbumContainer from 'album/album_container';
 import ArtistContainer from 'artist/artist_container';
 import ContextMenuTrack from 'components/context_menu_track';
 import CurrentTrackContainer from 'current_track/current_track_container';
+import classNames from 'classnames';
 
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
     DefaultRoute = Router.DefaultRoute;
 
+// TODO:
+// - set market in .env file
 class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchVisible: false
+    };
+  }
+
+  toggleSearch() {
+    this.setState({ searchVisible: !this.state.searchVisible });
+  }
+
+  hideSearchContainer() {
+    this.setState({ searchVisible: false });
+  }
+
   render() {
+
+    let searchVisibleKlass = classNames('main-content', {'search-visible': this.state.searchVisible});
+
     return (
       <div className="flex">
         <ContextMenuTrack />
-        <header className="main-header" role="banner">
-          <div className="col current-track">
+        <main role="main" className={searchVisibleKlass}>
+          <aside className="player">
             <CurrentTrackContainer />
-          </div>
-          <div className="col search">
-            <SearchContainer />
-          </div>
-        </header>
-        <main role="main" className="main-content">
-          <section className="yield">
-            <article>
+            <PlayerControlsContainer />
+          </aside>
+          <section className="yield" onClick={this.hideSearchContainer.bind(this)}>
+            <article className="inner">
               <RouteHandler />
             </article>
           </section>
+          <aside className="main-search">
+            <SearchContainer searchVisible={this.state.searchVisible} toggleSearch={this.toggleSearch.bind(this)} />
+          </aside>
           <aside className="main-navigation">
-            <NavigationContainer />
-            <SavedPlaylistsContainer />
+            <div className="logo">
+              <i className="fa fa-spotify" />
+            </div>
+            <NavigationContainer toggleSearch={this.toggleSearch.bind(this)} />
           </aside>
         </main>
-        <footer className="main-footer">
-          <PlayerControlsContainer />
-        </footer>
       </div>
     );
   }
@@ -54,7 +75,7 @@ let routes = (
   <Route handler={App} path='/'>
     <DefaultRoute handler={PlaylistContainer}/>
     <Route name='playlist' path='playlist' handler={PlaylistContainer} />
-    <Route name='starred' path='starred/:uri' handler={PlaylistContainer} />
+    <Route name='starred' path='starred' handler={PlaylistContainer} />
     <Route name='search' path='search/:query' handler={SearchResultContainer} />
     <Route name='queue' path='queue' handler={QueueContainer} />
     <Route name='album' path='album/:id' handler={AlbumContainer} />

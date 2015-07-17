@@ -17,26 +17,29 @@ class AlbumItem extends React.Component {
 
   render() {
 
-    let album = this.props.album;
-    let name = _.trunc(album.name, 45);
-    let bgImage = {
-      backgroundImage: 'url(' + album.images[1].url + ')',
-    };
+    // TODO:
+    // - take param artist and show if so
+
+    let album = this.props.album,
+        name = _.trunc(album.name,40),
+        imageUrl = (!_.isEmpty(album.images)) ? album.images[1].url : '',
+        bgImage = {
+          backgroundImage: 'url(' + imageUrl + ')',
+        };
 
     return (
-      <div className="thumbnail album-item">
-        <div className="album-item-image-wrapper">
-          <div className="album-item-image-container" style={bgImage} />
-          <div className="album-item-actions">
-            <Button bsStyle="link" onClick={this.handleClick.bind(this)}>
-              <i className="fa fa-play-circle" />
-            </Button>
+      <div className="album-item">
+        <div className="thumbnail">
+          <div className="album-item-image-wrapper">
+            <div className="album-item-image-container" style={bgImage} />
+            <div className="album-item-actions">
+              <Button bsStyle="link" onClick={this.handleClick.bind(this)}>
+                <i className="fa fa-play" />
+              </Button>
+            </div>
           </div>
-        </div>
-        <div className="caption">
-          <h3>
-            <Link to="album" params={{ id: album.id }}>{name}</Link>
-          </h3>
+
+          <Link className="caption" to="album" params={{ id: album.id }}>{name}</Link>
         </div>
       </div>
     );

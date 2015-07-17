@@ -2,7 +2,8 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
-import Track from 'components/track_full_table_row';
+import Track from 'components/track_table_row';
+import TableHeader from 'components/track_table_header';
 
 import TrackMetadataApi from '_apis/track_metadata_api';
 
@@ -22,7 +23,6 @@ class QueueContainer extends React.Component {
   onQueueChange(snapshot) {
     let val = _.toArray(snapshot.val());
     let uris = _.pluck(val, 'uri');
-    console.log(val);
 
     if(!_.isEmpty(val)) {
       TrackMetadataApi.fetchTracks(uris).then((response) => {
@@ -45,11 +45,13 @@ class QueueContainer extends React.Component {
 
   renderTable() {
     let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} track={track} />
+      return <Track key={index} index={index} track={track} artist image album />;
     });
+
     return (
       <Table hover>
-        <caption>Songs</caption>
+        <caption className="sr-only">Songs</caption>
+        <TableHeader image artist album index />
         <tbody>
           {tracks}
         </tbody>
@@ -65,8 +67,8 @@ class QueueContainer extends React.Component {
     }
 
     return (
-      <div className="container-fluid component">
-        <header>
+      <div className="container-fluid">
+        <header className="page-header">
           <h1>Play Queue</h1>
         </header>
         <section>

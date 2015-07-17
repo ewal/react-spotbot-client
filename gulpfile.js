@@ -41,7 +41,10 @@ gulp.task('webpack:build', function(callback) {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        FIREBASE_URL: JSON.stringify(process.env.FIREBASE_PROD_URL)
+        FIREBASE_URL: JSON.stringify(process.env.FIREBASE_PROD_URL),
+        SPOTIFY_MARKET: JSON.stringify(process.env.SPOTIFY_MARKET),
+        SPOTIFY_SEARCH_LIMIT: JSON.stringify(process.env.SPOTIFY_SEARCH_LIMIT),
+        SPOTIFY_SEARCH_TYPES: JSON.stringify(process.env.SPOTIFY_SEARCH_TYPES)
       }
     }),
     new webpack.optimize.DedupePlugin(),

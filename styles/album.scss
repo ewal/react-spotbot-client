@@ -1,33 +1,55 @@
-.album-list {
-  .row {
-    margin-left: -$gutter*2;
-    margin-right: -$gutter*2;
-  }
-  .thumbnail {
-    margin-bottom: $gutter*2;
-  }
+.album-list, .artist-list {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: -8px;
+  margin-right: -8px;
 }
 
 .album-item {
+
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 20%;
+
+  .thumbnail {
+    margin: 8px;
+  }
+
   .caption {
+    display: block;
     min-height: 60px;
   }
 
-  h3 {
-    font-size: 16px;
-    margin: 0;
-  }
-
   &-image-wrapper {
-    overflow: hidden;
     position: relative;
-    height: 100%;
+    height: auto; // responsive aspect ratio trick
     padding-bottom: 100%;
 
     &:hover {
       .album-item-actions {
         display: block;
       }
+    }
+
+
+    &:after {
+      position: absolute;
+      z-index: 50;
+      font-family: FontAwesome;
+      content: "\f1c5";
+      left: 50%;
+      top: 50%;
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      margin-top: -25px;
+      font-size: 30px;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+      color: $gray-dark;
     }
   }
 
@@ -38,6 +60,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
+    z-index: 100;
   }
 
   &-actions {
@@ -49,18 +72,29 @@
     left: 0;
     background: rgba(0,0,0,0.8);
     text-align: center;
+    z-index: 500;
 
     button {
-      width: 64px;
-      height: 64px;
+      width: 60px;
+      height: 60px;
       position: absolute;
       top: 50%;
-      margin-top: -32px;
-      margin-left: -32px;
+      margin-top: -30px;
+      margin-left: -30px;
       padding: 0;
+      background: rgba(0,0,0,.2);
+      border-radius: 60px;
+      text-align: center;
+      border: solid $gray-dark 2px;
+
+      &:hover {
+        border: solid #fff 2px;
+        color: #fff;
+      }
 
       i {
-        font-size: 50px;
+        font-size: 30px;
+        margin-left: 6px;
       }
     }
   }

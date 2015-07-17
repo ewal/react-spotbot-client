@@ -2,9 +2,10 @@ import React from 'react';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import { Link } from 'react-router';
-import TableRow from 'components/track_table_row';
-import { Table, Thumbnail } from 'react-bootstrap';
+import Track from 'components/track_table_row';
+import { Table } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
+import TableHeader from 'components/track_table_header';
 
 class Artists extends React.Component {
   render() {
@@ -55,22 +56,32 @@ class AlbumContainer extends React.Component {
 
     let album = this.state.album;
     let tracks = album.tracks.items.map((track, index) => {
-      return <TableRow track={track} key={index} />;
+      return <Track track={track} key={index} index={index} />;
     });
 
     // TODO:
-    // - list and link artists
-    // - album cover
     // - set album as current playlist
+    // - test if images exist
+
+    let imageUrl = (!_.isEmpty(album.images)) ? album.images[1].url : '';
+    let bs = {
+      backgroundImage: 'url(' + imageUrl + ')'
+    };
 
     return (
       <div className="container-fluid">
-        <header>
-          <Thumbnail onClick={this.handleClick.bind(this)} src={album.images[1].url} />
-          <h2>{this.state.album.name}</h2>
+        <header className="page-header">
+          Album
+          <div className="media-header-image-container">
+            <div className="media-header-image-object" style={bs} />
+          </div>
+          <h1>{album.name}</h1>
+          <h3>Release date {album.release_date}</h3>
         </header>
-        <Artists artists={this.state.album.artists} />
+        <h3>Artists</h3>
+        <Artists artists={album.artists} />
         <Table hover>
+          <TableHeader index />
           {tracks}
         </Table>
       </div>

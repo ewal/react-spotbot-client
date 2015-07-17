@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import utils from 'utils';
+import { Link } from 'react-router';
 import { ContextMenuLayer } from "react-contextmenu";
 import FirebaseRef from 'firebase_ref';
 
@@ -18,20 +19,60 @@ class Track extends React.Component {
     }
   }
 
+  hiddenCell() {
+    return <td className="hide" />;
+  }
+
+  imageCell() {
+    let cell = this.hiddenCell(),
+        track = this.props.track;
+
+    if(!_.isUndefined(track.album) && this.props.image) {
+      cell = <td className="image-cell"><img src={track.album.images[2].url} /></td>;
+    }
+    return cell;
+  }
+
+  artistCell() {
+    let cell = this.hiddenCell(),
+        track = this.props.track;
+
+    if(this.props.artist) {
+      cell = <td><Link to='artist' params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link></td>
+    }
+    return cell;
+  }
+
+  albumCell() {
+    let cell = this.hiddenCell(),
+        track = this.props.track;
+
+    if(this.props.album) {
+      cell = <td><Link to='album' params={{ id: track.album.id }}>{track.album.name}</Link></td>;
+    }
+    return cell;
+  }
+
+  indexCell() {
+    let cell = this.hiddenCell();
+    if(!_.isUndefined(this.props.index)) {
+      cell = <td className="track-number">{this.props.index+1}.</td>;
+    }
+    return cell;
+  }
+
   render() {
 
     let track = this.props.track;
     let duration = utils.formatDuration(track.duration_ms);
-    let imageCell = <td className="hide"></td>;
-    if(!_.isUndefined(track.album)) {
-        imageCell = <td className="image-cell"><img src={track.album.images[2].url} /></td>;
-    }
 
     return (
       <tr tabIndex="0" onKeyUp={this.handleKeyUp.bind(this)}>
-        {imageCell}
-        <td className="track-number">{track.track_number}.</td>
+        {this.imageCell()}
+        {this.indexCell()}
         <td>{track.name}</td>
+        {this.albumCell()}
+        {this.artistCell()}
         <td className="duration">{duration}</td>
       </tr>
     );
@@ -39,7 +80,8 @@ class Track extends React.Component {
 };
 
 Track.propTypes = {
-  track: React.PropTypes.object.isRequired
+  track: React.PropTypes.object.isRequired,
+  index: React.PropTypes.number.isRequired
 };
 
 export default ContextMenuLayer("track", (props) => {

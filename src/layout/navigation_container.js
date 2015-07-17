@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, Badge } from 'react-bootstrap';
+import { Nav, Badge, Button } from 'react-bootstrap';
 import ReactRouterBootstrap from 'react-router-bootstrap';
 import FirebaseRef from 'firebase_ref';
 
@@ -31,22 +31,25 @@ class NavigationContainer extends React.Component {
   render() {
     return (
       <div>
-        <header>
-          <h2>Main</h2>
-        </header>
-        <section>
-          <Nav stacked bsStyle="pills">
-            <NavItemLink to='playlist'>
-              <i className="fa fa-headphones" />
-              Playlist
-            </NavItemLink>
-            <NavItemLink to='queue'>
-              <i className="fa fa-bars" />
-              Queue
-              <Badge className="pull-right">{this.state.queueSize}</Badge>
-            </NavItemLink>
-          </Nav>
-        </section>
+        <Button bsStyle="link" onClick={this.props.toggleSearch}>
+          <i className="fa fa-search" />
+          <span className="sr-only">Search</span>
+        </Button>
+        <Nav stacked bsStyle="pills">
+          <NavItemLink to='playlist'>
+            <i className="fa fa-headphones" />
+            <span className="sr-only">Playlist</span>
+          </NavItemLink>
+          <NavItemLink to='queue'>
+            <i className="fa fa-bars" />
+            <span className="sr-only">Queue</span>
+            <Badge title="Songs in queue" className="in-queue">{this.state.queueSize}</Badge>
+          </NavItemLink>
+          <NavItemLink to='starred'>
+            <span className="sr-only">Starred</span>
+            <i className="fa fa-star" />
+          </NavItemLink>
+        </Nav>
       </div>
     );
   }

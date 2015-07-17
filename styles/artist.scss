@@ -1,0 +1,71 @@
+.artist-container {
+
+  .media-header-image-container {
+    float: left;
+  }
+
+  .artist-name {
+    float: left;
+    margin: 65px 0 0 $gutter;
+
+    .label-artist {
+      font-family: 'Exo 2', sans-serif;
+      text-transform: uppercase;
+      color: $gray-light;
+    }
+    h1 {
+      font-size: 32px;
+      margin: 0;
+    }
+  }
+}
+
+
+
+
+.media-header-image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  overflow: hidden;
+  position: relative;
+
+  .media-header-image-object {
+    width: 200px;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+  }
+
+  &:before {
+    content: " ";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: solid rgba(0,0,0,.5) 5px;
+    border-radius: 200px;
+  }
+}
+
+.image-collage {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+
+  .wrapper {
+    flex-direction: column;
+    display: flex;
+    flex: 0 0 20%;
+    height: 100%;
+    padding-bottom: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .item {
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}

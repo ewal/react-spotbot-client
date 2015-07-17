@@ -11,7 +11,18 @@ class SearchContainer extends React.Component {
       query: ''
     };
 
-    this.after = <i className="fa fa-search" />;
+  }
+
+  componentWillReceiveProps(nextProps) {
+
+    if(nextProps.searchVisible) {
+      // Hopefully everythings is rendered and done.
+      // Wait for it ... and focus
+      setTimeout(() => {
+        let input = this.refs.input.getInputDOMNode();
+        React.findDOMNode(input).focus();
+      }, 150);
+    }
   }
 
   handleSubmit(e) {
@@ -19,6 +30,7 @@ class SearchContainer extends React.Component {
 
     if(!_.isEmpty(this.state.query)) {
       this.context.router.transitionTo('search', { query: this.state.query });
+      this.props.toggleSearch();
     }
   }
 
@@ -26,6 +38,12 @@ class SearchContainer extends React.Component {
     this.setState({
       query: this.refs.input.getValue()
     });
+  }
+
+  handleKeyUp(e) {
+    if(e.which === 27) {
+      this.props.toggleSearch();
+    }
   }
 
   render() {
@@ -37,7 +55,7 @@ class SearchContainer extends React.Component {
           value={this.state.query}
           ref="input"
           onChange={this.handleChange.bind(this)}
-          addonAfter={this.after}
+          onKeyUp={this.handleKeyUp.bind(this)}
           />
       </form>
     );

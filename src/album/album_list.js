@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
 import AlbumItem from 'album/album_item';
 
 class AlbumList extends React.Component {
@@ -9,21 +8,15 @@ class AlbumList extends React.Component {
   }
 
   render() {
-    let albums = this.props.albums.map((album) => {
+    let albums = this.props.albums.map((album, index) => {
       return (
-        <Col xs={12} sm={6} md={3}>
-          <AlbumItem album={album} />
-        </Col>
+        <AlbumItem album={album} key={index} />
       );
     });
 
     return (
       <div className="album-list">
-        <Grid fluid>
-          <Row>
-            {albums}
-          </Row>
-        </Grid>
+        {albums}
       </div>
     );
   }

@@ -19,8 +19,8 @@ $gutter: 15px;
 //## Gray and brand colors for use across Bootstrap.
 
 // $gray-base:              #000
-// $gray-darker:            lighten($gray-base, 13.5%) // #222
-// $gray-dark:              lighten($gray-base, 20%)   // #333
+$gray-darker:            lighten($gray-base, 10%); // #222
+$gray-dark:              lighten($gray-base, 15%);   // #333
 // $gray:                   lighten($gray-base, 33.5%) // #555
 // $gray-light:             lighten($gray-base, 46.7%) // #777
 // $gray-lighter:           lighten($gray-base, 93.5%) // #eee
@@ -53,11 +53,11 @@ $link-hover-decoration: none;
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-// $font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif
+$font-family-sans-serif:  "Lucida Grande", Tahoma, "Helvetica Neue", Helvetica, Arial, sans-serif;
 // $font-family-serif:       Georgia, "Times New Roman", Times, serif
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
-//$font-family-base:        $font-family-monospace;
+//$font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base:        $font-family-sans-serif;
 
 $font-size-base:          12px;
 // $font-size-large:         ceil(($font-size-base * 1.25)) // ~18px
@@ -159,9 +159,9 @@ $table-border-color:            $gray-dark;
 
 // $btn-font-weight:                normal
 
-// $btn-default-color:              #333
-// $btn-default-bg:                 #fff
-// $btn-default-border:             #ccc
+$btn-default-color:              #fff;
+$btn-default-bg:                 themeColor(.1);
+$btn-default-border:             themeColor(1);
 
 // $btn-primary-color:              #fff
 // $btn-primary-bg:                 $brand-primary
@@ -196,7 +196,7 @@ $table-border-color:            $gray-dark;
 //##
 
 //** `<input>` background color
-$input-bg:                       $gray-darker;
+$input-bg:                       $gray-dark;
 //** `<input disabled>` background color
 // $input-bg-disabled:              $gray-lighter
 
@@ -215,7 +215,7 @@ $input-border:                   $gray-base;
 // $input-border-radius-small:      $border-radius-small
 
 //** Border color for inputs on focus
-// $input-border-focus:             #66afe9
+$input-border-focus:             themeColor(1);
 
 //** Placeholder text color
 // $input-color-placeholder:        #999
@@ -234,7 +234,7 @@ $input-border:                   $gray-base;
 // $legend-border-color:            #e5e5e5
 
 //** Background color for textual input addons
-$input-group-addon-bg:           $gray-dark;
+$input-group-addon-bg:           $gray-darker;
 //** Border color for textual input addons
 $input-group-addon-border-color: $gray-base;
 
@@ -247,7 +247,7 @@ $input-group-addon-border-color: $gray-base;
 //## Dropdown menu container and contents.
 
 //** Background for the dropdown menu.
-// $dropdown-bg:                    #fff
+$dropdown-bg:                    $gray-dark;
 //** Dropdown menu `border-color`.
 // $dropdown-border:                rgba(0,0,0,.15)
 //** Dropdown menu `border-color` **for IE8**.
@@ -256,11 +256,11 @@ $input-group-addon-border-color: $gray-base;
 // $dropdown-divider-bg:            #e5e5e5
 
 //** Dropdown link text color.
-// $dropdown-link-color:            $gray-dark
+$dropdown-link-color:            $text-color;
 //** Hover color for dropdown links.
-// $dropdown-link-hover-color:      darken($gray-dark, 5%)
+$dropdown-link-hover-color:      $text-color;
 //** Hover background for dropdown links.
-// $dropdown-link-hover-bg:         #f5f5f5
+$dropdown-link-hover-bg:         $gray-light;
 
 //** Active dropdown menu item text color.
 // $dropdown-link-active-color:     $component-active-color
@@ -766,7 +766,7 @@ $thumbnail-border:            $gray-dark;
 $thumbnail-border-radius:     0;
 
 //** Custom text color for thumbnail captions
-$thumbnail-caption-color:     $text-color
+$thumbnail-caption-color:     $text-color;
 //** Padding around the thumbnail caption
 // $thumbnail-caption-padding:   9px
 
@@ -875,7 +875,7 @@ $thumbnail-caption-color:     $text-color
 //** Blockquote border color
 // $blockquote-border-color:     $gray-lighter
 //** Page header border color
-// $page-header-border-color:    $gray-lighter
+$page-header-border-color:    $gray-dark;
 //** Width of horizontal description list titles
 // $dl-horizontal-offset:        $component-offset-horizontal
 //** Horizontal line color.

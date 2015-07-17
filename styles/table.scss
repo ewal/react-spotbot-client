@@ -1,0 +1,55 @@
+table {
+  caption {
+    color: $gray-light;
+    text-transform: uppercase;
+    font-size: 14px;
+    border-bottom: solid $gray-dark 1px;
+  }
+
+
+  .duration {
+    text-align: right;
+  }
+
+  thead {
+    th {
+      text-transform: uppercase;
+      color: $gray-light;
+    }
+  }
+
+  tbody {
+
+    tr:focus {
+      outline-style: solid;
+      outline-color: themeColor(1);
+      outline-width: 1px;
+    }
+
+    td {
+      vertical-align: middle !important;
+
+      &.image-cell {
+        padding: 0 !important;
+        width: 50px;
+
+        img {
+          height: 40px;
+          width: 40px;
+        }
+      }
+
+
+
+      &.track-number {
+        width: 30px;
+      }
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: solid $gray-dark 1px;
+      }
+    }
+  }
+}

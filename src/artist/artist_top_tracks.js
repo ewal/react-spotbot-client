@@ -3,7 +3,7 @@ import _ from 'lodash';
 import utils from 'utils';
 import { Link } from 'react-router';
 import ArtistMetadataApi from '_apis/artist_metadata_api';
-import TableRow from 'components/track_table_row';
+import Track from 'components/track_table_row';
 import { Table } from 'react-bootstrap';
 
 class ArtistTopTracks extends React.Component {
@@ -29,12 +29,12 @@ class ArtistTopTracks extends React.Component {
     if(_.isEmpty(this.state.tracks)) { return false; }
 
     let tracks = this.state.tracks.map((track, index) => {
-      return <TableRow track={track} key={index} />;
+      return <Track track={track} key={index} index={index} image />;
     });
 
     return (
       <Table hover>
-        <caption>Top tracks</caption>
+        <caption>Popular</caption>
         <tbody>
           {tracks}
         </tbody>
