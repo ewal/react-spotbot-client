@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import ArtistMetadataApi from '_apis/artist_metadata_api';
 import ArtistTopTracks from './artist_top_tracks';
 import AlbumList from 'album/album_list';
+import BackgroundImage from 'components/background_image';
 
 class ArtistContainer extends React.Component {
 
@@ -68,10 +69,6 @@ class ArtistContainer extends React.Component {
     let artist = this.state.artist;
     if(_.isEmpty(artist)) { return false; }
 
-    let bs = {
-      backgroundImage: 'url(' + artist.images[1].url + ')'
-    };
-
     // TODO:
     // - mashup background image of cover art
 
@@ -79,7 +76,7 @@ class ArtistContainer extends React.Component {
       <div className="artist-container container-fluid">
         <header className="clearfix page-header">
           <div className="media-header-image-container">
-            <div className="media-header-image-object" style={bs} />
+            <BackgroundImage classNames="media-header-image-object" image={artist.images[1]} />
           </div>
           <div className="artist-name">
             <span className="label-artist">Artist</span>

@@ -1,15 +1,20 @@
-export default {
+import _ from 'lodash';
 
-  parseSpotifyId(uri) {
-    return uri.split(':')[2];
-  },
+export default {
 
   spotify: {
     uriType(uri) {
       return uri.split(':')[1];
     },
     parseId(uri) {
-      return uri.split(':')[2];
+      let vals = uri.split(':');
+      return _.last(vals);
+    }
+  },
+
+  date: {
+    year(val) {
+      return val.split('-')[0];
     }
   },
 

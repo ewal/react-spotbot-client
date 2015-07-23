@@ -1,0 +1,30 @@
+.page-header {
+  .media {
+    float: left;
+
+    &-object {
+      height: 250px;
+      width: 250px;
+      background-size: cover;
+    }
+  }
+
+  .header-label {
+    font-family: 'Exo 2', sans-serif;
+    text-transform: uppercase;
+    color: $gray-light;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin: 0;
+  }
+
+  .info {
+    float: left;
+    margin-left: $gutter;
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}

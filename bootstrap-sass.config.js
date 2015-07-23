@@ -56,7 +56,7 @@ module.exports = {
     'scaffolding': true,
     'type': true,
     'code': false,
-    'grid': true,
+    'grid': false,
     'tables': true,
     'forms': true,
     'buttons': true,

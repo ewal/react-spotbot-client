@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import _ from 'lodash';
 import { Button } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
+import BackgroundImage from 'components/background_image';
 
 class AlbumItem extends React.Component {
 
@@ -19,19 +20,16 @@ class AlbumItem extends React.Component {
 
     // TODO:
     // - take param artist and show if so
+    // - zoom play button like Netflix does
 
     let album = this.props.album,
-        name = _.trunc(album.name,40),
-        imageUrl = (!_.isEmpty(album.images)) ? album.images[1].url : '',
-        bgImage = {
-          backgroundImage: 'url(' + imageUrl + ')',
-        };
+        name = _.trunc(album.name,40);
 
     return (
       <div className="album-item">
         <div className="thumbnail">
           <div className="album-item-image-wrapper">
-            <div className="album-item-image-container" style={bgImage} />
+            <BackgroundImage image={album.images[1]} classNames="album-item-image-container" />
             <div className="album-item-actions">
               <Button bsStyle="link" onClick={this.handleClick.bind(this)}>
                 <i className="fa fa-play" />

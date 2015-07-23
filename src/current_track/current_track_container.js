@@ -48,8 +48,11 @@ class CurrentTrackContainer extends React.Component {
         <div className="thumbnail">
           <img src={track.album.images[1].url} />
         </div>
-        {track.name} {duration}<br />
-        <Link to="album" params={{ id: track.album.id }}>{track.album.name}</Link> / <Link to="artist" params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link>
+        <h2>{track.name}</h2>
+        <h3 className="duration">{duration}</h3>
+        <p>
+          <Link to="album" params={{ id: track.album.id }}>{track.album.name}</Link> / <Link to="artist" params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link>
+        </p>
       </div>
     );
   }

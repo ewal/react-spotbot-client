@@ -62,10 +62,11 @@ export default {
       }
 
       let trackIds = data.map(uri => {
-        return utils.parseSpotifyId(uri);
+        return utils.spotify.parseId(uri);
       });
 
-      request.get('https://api.spotify.com/v1/tracks/').query({ ids: _.take(trackIds, 50).join(',')})
+      request.get('https://api.spotify.com/v1/tracks/')
+      .query({ ids: _.take(trackIds, 50).join(',')})
       .end((error, response) => {
         if(response.ok) {
           CacheStore.set(cacheKey, response.body);

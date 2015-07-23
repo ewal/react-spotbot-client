@@ -23,12 +23,20 @@ class Track extends React.Component {
     return <td className="hide" />;
   }
 
+  // TODO: Use same approach as album image. Use a background image instead.
   imageCell() {
     let cell = this.hiddenCell(),
         track = this.props.track;
 
     if(!_.isUndefined(track.album) && this.props.image) {
-      cell = <td className="image-cell"><img src={track.album.images[2].url} /></td>;
+      let url = _.isUndefined(track.album.images[2]) ? '#' : track.album.images[2].url;
+      let style = {
+        backgroundImage: 'url(' + url + ')',
+        backgroundSize: '40px',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center'
+      };
+      cell = <td className="image-cell" style={style}></td>;
     }
     return cell;
   }

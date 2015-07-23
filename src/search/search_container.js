@@ -42,7 +42,12 @@ class SearchContainer extends React.Component {
 
   handleKeyUp(e) {
     if(e.which === 27) {
-      this.props.toggleSearch();
+      if(_.isEmpty(this.state.query)) {
+        this.props.toggleSearch();
+      }
+      else {
+        this.setState({ query: '' });
+      }
     }
   }
 
@@ -50,7 +55,7 @@ class SearchContainer extends React.Component {
     return (
       <form method="get" onSubmit={this.handleSubmit.bind(this)}>
         <Input
-          type="search"
+          type="text"
           placeholder="Search..."
           value={this.state.query}
           ref="input"

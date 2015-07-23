@@ -77,7 +77,7 @@ module.exports = {
 
   plugins: [
     // Development settings.
-    // Plugins for prodiction is set in gulps webpack:build task.
+    // Plugins for prodiction is set in gulps webpack:dist task.
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(), // Prevent reload if error in code
     new webpack.optimize.OccurenceOrderPlugin(true),

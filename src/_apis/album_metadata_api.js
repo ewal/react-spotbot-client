@@ -24,5 +24,34 @@ export default {
         }
       });
     });
+  },
+
+  albums(album_ids) {
+    return new Promise((resolve, reject) => {
+
+      let cacheKey = 'albums_' + album_ids;
+      let cacheItem = CacheStore.get(cacheKey);
+      if(!_.isUndefined(cacheItem)) {
+        return resolve(cacheItem.data);
+      }
+
+      let params = {
+        ids: album_ids.join(',')
+      };
+
+      request.get('https://api.spotify.com/v1/albums/')
+      .query(params)
+      .end((error, response) => {
+        if(response.ok) {
+          CacheStore.set(cacheKey, response.body);
+          resolve(response.body);
+        }
+        else {
+          reject(response.text);
+        }
+      });
+
+    });
   }
+
 };

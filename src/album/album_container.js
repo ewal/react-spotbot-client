@@ -3,23 +3,22 @@ import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import { Link } from 'react-router';
 import Track from 'components/track_table_row';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import TableHeader from 'components/track_table_header';
+import BackgroundImage from 'components/background_image';
 
 class Artists extends React.Component {
   render() {
 
-    // TODO:
-    // - link artist to artist page
-    let artists = this.props.artists.map((artist) => {
-      return <li><Link to='artist' params={{ id: artist.id }}>{artist.name}</Link></li>;
+    let artists = this.props.artists.map((artist, index) => {
+      return <span key={index}><Link to='artist' params={{ id: artist.id }}>{artist.name}</Link></span>;
     });
 
     return (
-      <ul>
+      <div>
         {artists}
-      </ul>
+      </div>
     );
   }
 };
@@ -61,25 +60,27 @@ class AlbumContainer extends React.Component {
 
     // TODO:
     // - set album as current playlist
-    // - test if images exist
-
-    let imageUrl = (!_.isEmpty(album.images)) ? album.images[1].url : '';
-    let bs = {
-      backgroundImage: 'url(' + imageUrl + ')'
-    };
+    //
+    let releaseDate = utils.date.year(album.release_date);
 
     return (
-      <div className="container-fluid">
-        <header className="page-header">
-          Album
-          <div className="media-header-image-container">
-            <div className="media-header-image-object" style={bs} />
+      <div className="container-fluid album-container">
+        <header className="page-header clearfix">
+          <div className="media">
+            <BackgroundImage classNames="media-object" image={album.images[1]} />
           </div>
-          <h1>{album.name}</h1>
-          <h3>Release date {album.release_date}</h3>
+          <div className="info">
+            <span className="header-label">Album</span>
+            <h1>{album.name} {releaseDate}</h1>
+            <div>
+              <h3>Artists</h3>
+              <Artists artists={album.artists} />
+            </div>
+            <div className="actions">
+              <Button bsStyle="primary">Play album</Button>
+            </div>
+          </div>
         </header>
-        <h3>Artists</h3>
-        <Artists artists={album.artists} />
         <Table hover>
           <TableHeader index />
           {tracks}

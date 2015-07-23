@@ -28,10 +28,12 @@ table {
 
     td {
       vertical-align: middle !important;
+      min-height: 40px;
 
       &.image-cell {
         padding: 0 !important;
         width: 50px;
+        height: 40px;
 
         img {
           height: 40px;

@@ -5,7 +5,7 @@ import _ from 'lodash';
 import Track from 'components/track_table_row';
 import TableHeader from 'components/track_table_header';
 import utils from 'utils';
-
+import { Link } from 'react-router';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import TrackMetadataApi from '_apis/track_metadata_api';
 
@@ -16,14 +16,13 @@ class PlaylistContainer extends React.Component {
 
     this.state = {
       playlistName: '',
-      tracks: []
+      tracks: [],
+      tyoe: '',
+      uri: ''
     };
   }
 
   onPlaylistChange(snapshot) {
-    // TODO:
-    // - user playlist or album? Switch and use different apis
-    //
     let val = snapshot.val();
     if(!_.isNull(val)) {
       let type = utils.spotify.uriType(val.uri);
@@ -34,7 +33,8 @@ class PlaylistContainer extends React.Component {
           this.setState({
             playlistName: val.name,
             tracks: response.tracks.items,
-            type: type
+            type: type,
+            uri: val.uri
           });
         }).catch((message) => {
           throw new Error(message);
@@ -45,7 +45,8 @@ class PlaylistContainer extends React.Component {
           this.setState({
             playlistName: val.name,
             tracks: response.tracks,
-            type: type
+            type: type,
+            uri: val.uri
           });
         }).catch((message) => {
           throw new Error(message);
@@ -70,7 +71,7 @@ class PlaylistContainer extends React.Component {
 
     return (
       <Table hover>
-        <caption>{this.state.playlistName} <i className="fa fa-star-o"></i></caption>
+        <caption>{this.state.playlistName}</caption>
         <TableHeader index album artist />
         <tbody>
           {tracks}
@@ -87,7 +88,7 @@ class PlaylistContainer extends React.Component {
 
     return (
       <Table hover>
-        <caption>{this.state.playlistName} <i className="fa fa-star-o"></i></caption>
+        <caption>{this.state.playlistName}</caption>
         <TableHeader index />
         <tbody>
           {tracks}
@@ -104,7 +105,6 @@ class PlaylistContainer extends React.Component {
         playlistType = '';
 
     // TODO:
-    // - split into two different containers
     // - handle keyboard up down. set active item. pass prop function
 
     if(this.state.type === 'album') {

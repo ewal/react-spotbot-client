@@ -11,6 +11,7 @@ let CacheStore = Reflux.createStore({
     return this.cache;
   },
 
+  // TODO: use _.findWhere instead
   get(cacheKey) {
     return (_.filter(this.cache, (item) => {
       return item.key === cacheKey;

@@ -13,7 +13,7 @@ var conf = Object.create(webpackConfig);
 conf.devtool = 'source-map';
 
 gulp.task('default', ['webpack-dev-server'], function() {});
-gulp.task('build', ['webpack:build'], function() {});
+gulp.task('dist', ['webpack:dist'], function() {});
 
 /*
  * Run dev server
@@ -33,7 +33,7 @@ gulp.task('webpack-dev-server', function(callback) {
 /*
  * Build for production
  */
-gulp.task('webpack:build', function(callback) {
+gulp.task('webpack:dist', function(callback) {
 
   conf.output.path = path.join(__dirname, 'dist');
 
@@ -57,9 +57,9 @@ gulp.task('webpack:build', function(callback) {
 
   return webpack(conf, function(err, stats) {
     if (err) {
-      throw new gutil.PluginError('webpack:build', err);
+      throw new gutil.PluginError('webpack:dist', err);
     }
-    gutil.log('[webpack:build]', stats.toString({
+    gutil.log('[webpack:dist]', stats.toString({
       colors: true
     }));
     return callback();

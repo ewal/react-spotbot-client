@@ -1,6 +1,7 @@
 import React from 'react';
 import FirebaseRef from 'firebase_ref';
 import { Button } from 'react-bootstrap';
+import classNames from 'classnames';
 
 class ShuffleButton extends React.Component {
   constructor(props) {
@@ -31,8 +32,16 @@ class ShuffleButton extends React.Component {
   }
 
   render() {
+
+    let klass = classNames('shuffle', { 'active': this.state.isShuffle });
+    let title = '';
+    if(this.state.isShuffle) {
+      title = 'Shuffle off';
+    }
+    else { title = 'Shuffle on'; }
+
     return (
-      <Button onClick={this.handleClick.bind(this)} bsStyle="link"><i className="fa fa-random" /></Button>
+      <Button onClick={this.handleClick.bind(this)} bsStyle="link" className={klass}><i className="fa fa-random" /></Button>
     );
   }
 };

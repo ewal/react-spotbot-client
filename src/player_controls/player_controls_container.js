@@ -45,8 +45,8 @@ class PlayerControlsContainer extends React.Component {
     return (
       <div>
         <ButtonGroup>
-          <Button onClick={this.togglePlay.bind(this)}><i className={playPauseKlass} /></Button>
-          <Button onClick={this.playNext.bind(this)}><i className="fa fa-step-forward" /></Button>
+          <Button onClick={this.togglePlay.bind(this)} bsStyle="primary" className="play"><i className={playPauseKlass} /></Button>
+          <Button onClick={this.playNext.bind(this)} bsStyle="default" className="pause"><i className="fa fa-step-forward" /></Button>
         </ButtonGroup>
         <ShuffleButton />
       </div>

@@ -11,7 +11,7 @@ class SearchResultContainer extends React.Component {
 
     this.state = {
       albums: [],
-      artists: {},
+      artists: [],
       tracks: []
     };
   }
@@ -32,6 +32,8 @@ class SearchResultContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("nextProps");
+    console.log(nextProps);
     this.fetchSearchResult(nextProps.params.query);
   }
 

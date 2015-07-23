@@ -28,6 +28,10 @@ class NavigationContainer extends React.Component {
     FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
   }
 
+  handleClick() {
+    console.log("hej");
+  }
+
   render() {
     return (
       <div>
@@ -35,7 +39,7 @@ class NavigationContainer extends React.Component {
           <i className="fa fa-search" />
           <span className="sr-only">Search</span>
         </Button>
-        <Nav stacked bsStyle="pills">
+        <Nav onClick={this.props.hideSearchContainer} stacked bsStyle="pills">
           <NavItemLink to='playlist'>
             <i className="fa fa-headphones" />
             <span className="sr-only">Playlist</span>
@@ -45,7 +49,7 @@ class NavigationContainer extends React.Component {
             <span className="sr-only">Queue</span>
             <Badge title="Songs in queue" className="in-queue">{this.state.queueSize}</Badge>
           </NavItemLink>
-          <NavItemLink to='starred'>
+          <NavItemLink to='starred' className="hide">
             <span className="sr-only">Starred</span>
             <i className="fa fa-star" />
           </NavItemLink>

@@ -13,13 +13,13 @@ class SearchResultTracks extends React.Component {
     if(_.isEmpty(this.props.tracks)) { return false; }
 
     let tracks = this.props.tracks.map((track, index) => {
-      return <Track track={track} key={index} image album artist />;
+      return <Track track={track} key={index} index={index} image album artist />;
     });
 
     return (
       <div className="component">
         <Table hover>
-          <caption>Tracks</caption>
+          <caption>Songs</caption>
           <TableHeader image album artist />
           <tbody>
             {tracks}

@@ -1,0 +1,44 @@
+.player {
+  h2 {
+    font-size: 14px;
+    font-weight: bold;
+
+  }
+
+  .duration {
+    font-weight: normal;
+    color: $gray-light;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  p {
+    margin: $gutter 0;
+  }
+
+  .btn {
+    outline: none !important;
+  }
+
+  .play {
+  }
+
+  .pause {
+  }
+
+  .shuffle {
+    color: $gray-light;
+
+    &:focus, &:hover {
+      color: #fff;
+    }
+
+    &.active {
+      color: themeColor(1);
+
+      &:focus, &:hover {
+        color: themeColor(.6);
+      }
+    }
+  }
+}

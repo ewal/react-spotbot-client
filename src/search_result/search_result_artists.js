@@ -23,7 +23,7 @@ class SearchResultArtists extends React.Component {
 };
 
 SearchResultArtists.propTypes = {
-  artists: React.PropTypes.object.isRequired
+  artists: React.PropTypes.array.isRequired
 };
 
 export default SearchResultArtists;
