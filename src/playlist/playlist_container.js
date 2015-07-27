@@ -66,13 +66,13 @@ class PlaylistContainer extends React.Component {
   renderPlaylist() {
 
     let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} index={index} track={track} album artist />
+      return <Track key={index} index={index} track={track} album artist image />
     });
 
     return (
       <Table hover>
         <caption>{this.state.playlistName}</caption>
-        <TableHeader index album artist />
+        <TableHeader index album artist image />
         <tbody>
           {tracks}
         </tbody>
