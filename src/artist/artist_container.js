@@ -34,7 +34,8 @@ class ArtistContainer extends React.Component {
   }
 
   fetchData(id) {
-    ArtistMetadataApi.fetch(id).then((response) => {
+
+    ArtistMetadataApi.artist(id).then((response) => {
       this.setState({
         artist: response,
         artistId: id
@@ -42,6 +43,7 @@ class ArtistContainer extends React.Component {
     }).catch((message) => {
       throw new Error(message);
     });
+
     ArtistMetadataApi.albums(id).then((response) => {
       this.setState({
         albums: response.items,
@@ -50,6 +52,7 @@ class ArtistContainer extends React.Component {
     }).catch((message) => {
       throw new Error(message);
     });
+
     ArtistMetadataApi.singles(id).then((response) => {
       this.setState({
         singles: response.items,

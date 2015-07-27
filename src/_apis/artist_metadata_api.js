@@ -8,7 +8,7 @@ import CacheStore from '_stores/cache_store';
 //
 export default {
 
-  fetch(id) {
+  artist(id) {
     return new Promise((resolve, reject) => {
 
       let cacheKey = 'artist_' + id;
