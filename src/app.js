@@ -47,7 +47,8 @@ class App extends React.Component {
 
     let searchContainerProps = {
       searchVisible: this.state.searchVisible,
-      toggleSearch: this.toggleSearch.bind(this)
+      toggleSearch: this.toggleSearch.bind(this),
+      hideSearchContainer: this.hideSearchContainer.bind(this)
     };
 
     let navigationContainerProps = {

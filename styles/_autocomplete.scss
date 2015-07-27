@@ -1,0 +1,42 @@
+.auto-complete {
+
+  dt {
+    text-transform: uppercase;
+    color: $gray-light;
+  }
+
+  dd {
+    background: $gray-dark;
+    margin-bottom: 1px;
+  }
+
+  dt, dd {
+    padding: 8px;
+  }
+
+  .active, dd:hover {
+    background: $gray-light;
+
+    &.track {
+      .artist {
+        color: $text-color;
+      }
+    }
+  }
+
+  .track {
+
+    .artist {
+      display: block;
+      color: $gray-light;
+    }
+  }
+
+  .album {
+
+    .artist {
+      display: block;
+      color: $gray-light;
+    }
+  }
+}
