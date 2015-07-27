@@ -1,3 +1,9 @@
+.album-container {
+  .actions {
+    margin: $gutter 0;
+  }
+}
+
 .album-list, .artist-list {
   display: flex;
   flex: 1;

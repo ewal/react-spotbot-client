@@ -36,18 +36,30 @@ class AlbumContainer extends React.Component {
   }
 
   componentDidMount() {
-    AlbumMetadataApi.fetch(this.props.params.id).then((response) => {
+    this.fetchAlbum(this.props.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.fetchAlbum(nextProps.params.id);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return nextProps.params.id !== this.state.album.id;
+  }
+
+  handleClick() {
+    FirebaseRef.child('playlist/uri').set(this.state.album.uri);
+    FirebaseRef.child('player/next').set(true);
+  }
+
+  fetchAlbum(id) {
+    AlbumMetadataApi.fetch(id).then((response) => {
       this.setState({
         album: response
       });
     }).catch((message) => {
       throw new Error(message);
     });
-  }
-
-  handleClick() {
-    FirebaseRef.child('playlist/uri').set(this.state.album.uri);
-    FirebaseRef.child('player/next').set(true);
   }
 
   render() {
@@ -58,9 +70,6 @@ class AlbumContainer extends React.Component {
       return <Track track={track} key={index} index={index} />;
     });
 
-    // TODO:
-    // - set album as current playlist
-    //
     let releaseDate = utils.date.year(album.release_date);
 
     return (
@@ -73,7 +82,6 @@ class AlbumContainer extends React.Component {
             <span className="header-label">Album</span>
             <h1>{album.name} {releaseDate}</h1>
             <div>
-              <h3>Artists</h3>
               <Artists artists={album.artists} />
             </div>
             <div className="actions">
@@ -83,7 +91,9 @@ class AlbumContainer extends React.Component {
         </header>
         <Table hover>
           <TableHeader index />
-          {tracks}
+          <tbody>
+            {tracks}
+          </tbody>
         </Table>
       </div>
     );
