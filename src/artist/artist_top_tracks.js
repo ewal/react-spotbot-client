@@ -16,7 +16,15 @@ class ArtistTopTracks extends React.Component {
   }
 
   componentDidMount() {
-    ArtistMetadataApi.topTracks(this.props.artistId).then((response) => {
+    this.fetchData(this.props.artistId);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.fetchData(nextProps.artistId);
+  }
+
+  fetchData(id) {
+    ArtistMetadataApi.topTracks(id).then((response) => {
       this.setState({
         tracks: response.tracks
       });

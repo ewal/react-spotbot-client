@@ -15,34 +15,52 @@ class ArtistContainer extends React.Component {
     this.state = {
       artist: {},
       albums: [],
-      singles: []
+      singles: [],
+      artistId: null
     };
   }
 
   componentDidMount() {
-    ArtistMetadataApi.fetch(this.props.params.id).then((response) => {
+    this.fetchData(this.props.params.id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.fetchData(nextProps.params.id);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return true;
+    //return nextProps.params.id !== this.state.artist.id;
+  }
+
+  fetchData(id) {
+    ArtistMetadataApi.fetch(id).then((response) => {
       this.setState({
-        artist: response
+        artist: response,
+        artistId: id
       });
     }).catch((message) => {
       throw new Error(message);
     });
-    ArtistMetadataApi.albums(this.props.params.id).then((response) => {
+    ArtistMetadataApi.albums(id).then((response) => {
       this.setState({
-        albums: response.items
+        albums: response.items,
+        artistId: id
       });
     }).catch((message) => {
       throw new Error(message);
     });
-    ArtistMetadataApi.singles(this.props.params.id).then((response) => {
+    ArtistMetadataApi.singles(id).then((response) => {
       this.setState({
-        singles: response.items
+        singles: response.items,
+        artistId: id
       });
     }).catch((message) => {
       throw new Error(message);
     });
   }
 
+  // TODO:----
   imageCollage() {
     if(_.isEmpty(this.state.albums)) { return false; }
 
@@ -85,7 +103,7 @@ class ArtistContainer extends React.Component {
             </h1>
           </div>
         </header>
-        <ArtistTopTracks artistId={this.props.params.id} />
+        <ArtistTopTracks artistId={this.state.artistId} />
         <div className="component">
           <header>
             <h2>Singles</h2>
