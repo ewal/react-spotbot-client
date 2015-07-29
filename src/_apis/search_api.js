@@ -9,7 +9,6 @@ export default {
       let cacheKey = 'search_' + query;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        console.log("result from cache!");
         return resolve(findInCache.data);
       }
 
