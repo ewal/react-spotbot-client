@@ -12,7 +12,7 @@ export default {
 
   isFetching: false,
 
-  fetchTrack(trackId) {
+  track(trackId) {
     // The spobot server will update currentTrack twice causing two requests to Spotifys api.
     // Prevent by testing that we already are fetching.
     // Since we use a promise we need to resolve or reject something.
@@ -46,7 +46,7 @@ export default {
     });
   },
 
-  fetchTracks(data) {
+  tracks(data) {
 
     // TODO: consider accepting an ID instead URI
     return new Promise((resolve, reject) => {

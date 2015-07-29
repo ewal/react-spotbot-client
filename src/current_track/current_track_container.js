@@ -17,7 +17,7 @@ class CurrentTrackContainer extends React.Component {
   onSetTrack(snapshot) {
     let trackId = utils.spotify.parseId(snapshot.val().uri);
     if(!_.isNull(trackId)) {
-      TrackMetadataApi.fetchTrack(trackId).then((response) => {
+      TrackMetadataApi.track(trackId).then((response) => {
         if(!_.isEmpty(response)) {
           this.setState({
             track: response

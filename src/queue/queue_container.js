@@ -4,11 +4,7 @@ import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import Track from 'components/track_table_row';
 import TableHeader from 'components/track_table_header';
-
 import TrackMetadataApi from '_apis/track_metadata_api';
-
-// TODO:
-// Cache tracks. don't use the API if not needed
 
 class QueueContainer extends React.Component {
 
@@ -25,7 +21,7 @@ class QueueContainer extends React.Component {
     let uris = _.pluck(val, 'uri');
 
     if(!_.isEmpty(val)) {
-      TrackMetadataApi.fetchTracks(uris).then((response) => {
+      TrackMetadataApi.tracks(uris).then((response) => {
         this.setState({
           tracks: response.tracks
         });

@@ -41,7 +41,7 @@ class PlaylistContainer extends React.Component {
         });
       }
       else {
-        TrackMetadataApi.fetchTracks(val.tracks).then((response) => {
+        TrackMetadataApi.tracks(val.tracks).then((response) => {
           this.setState({
             playlistName: val.name,
             tracks: response.tracks,
