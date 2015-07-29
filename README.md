@@ -13,3 +13,12 @@ SPOTIFY_MARKET=se
 SPOTIFY_SEARCH_LIMIT=10
 SPOTIFY_SEARCH_TYPES=track,album,artist
 ```
+
+### Start dev server
+run ```gulp```
+
+### Build for production
+run ```gulp dist```
+
+### Deploy to divshot
+// TODO:
