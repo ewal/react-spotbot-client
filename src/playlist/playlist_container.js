@@ -29,7 +29,7 @@ class PlaylistContainer extends React.Component {
       let albumId = utils.spotify.parseId(val.uri);
 
       if(type === 'album') {
-        AlbumMetadataApi.fetch(albumId).then((response) => {
+        AlbumMetadataApi.album(albumId).then((response) => {
           this.setState({
             playlistName: val.name,
             tracks: response.tracks.items,

@@ -4,16 +4,16 @@ import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
 export default {
-  fetch(album_id) {
+  album(albumId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'album_' + album_id;
+      let cacheKey = 'album_' + albumId;
       let cacheItem = CacheStore.get(cacheKey);
       if(!_.isUndefined(cacheItem)) {
         return resolve(cacheItem.data);
       }
 
-      request.get('https://api.spotify.com/v1/albums/' + album_id)
+      request.get('https://api.spotify.com/v1/albums/' + albumId)
       .end((error, response) => {
         if(response.ok) {
           CacheStore.set(cacheKey, response.body);
@@ -26,17 +26,17 @@ export default {
     });
   },
 
-  albums(album_ids) {
+  albums(albumIds) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'albums_' + album_ids;
+      let cacheKey = 'albums_' + albumIds;
       let cacheItem = CacheStore.get(cacheKey);
       if(!_.isUndefined(cacheItem)) {
         return resolve(cacheItem.data);
       }
 
       let params = {
-        ids: album_ids.join(',')
+        ids: albumIds.join(',')
       };
 
       request.get('https://api.spotify.com/v1/albums/')

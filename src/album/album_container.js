@@ -53,7 +53,7 @@ class AlbumContainer extends React.Component {
   }
 
   fetchAlbum(id) {
-    AlbumMetadataApi.fetch(id).then((response) => {
+    AlbumMetadataApi.album(id).then((response) => {
       this.setState({
         album: response
       });
