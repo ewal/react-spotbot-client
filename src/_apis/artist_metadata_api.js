@@ -3,21 +3,18 @@ import utils from 'utils';
 import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
-// TODO:
-// - common method for fetching with params
-//
 export default {
 
-  artist(id) {
+  artist(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'artist_' + id;
+      let cacheKey = 'artist_' + artistId;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
 
-      request.get('https://api.spotify.com/v1/artists/' + id)
+      request.get('https://api.spotify.com/v1/artists/' + artistId)
       .end((error, response) => {
         if(response.ok) {
           CacheStore.set(cacheKey, response.body);
@@ -59,10 +56,10 @@ export default {
     });
   },
 
-  albums(id) {
+  albums(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'artist_albums_' + id;
+      let cacheKey = 'artist_albums_' + artistId;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
@@ -74,7 +71,7 @@ export default {
         limit: 50
       };
 
-      request.get('https://api.spotify.com/v1/artists/' + id + '/albums')
+      request.get('https://api.spotify.com/v1/artists/' + artistId + '/albums')
       .query(params)
       .end((error, response) => {
         if(response.ok) {
@@ -88,12 +85,10 @@ export default {
     });
   },
 
-  topTracks(id) {
-    // TODO:
-    // - pass country from some clever stuff
+  topTracks(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'top_tracks_' + id;
+      let cacheKey = 'top_tracks_' + artistId;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
@@ -103,7 +98,7 @@ export default {
         country: process.env.SPOTIFY_MARKET
       };
 
-      request.get('https://api.spotify.com/v1/artists/' + id + '/top-tracks')
+      request.get('https://api.spotify.com/v1/artists/' + artistId + '/top-tracks')
       .query(params)
       .end((error, response) => {
         if(response.ok) {
