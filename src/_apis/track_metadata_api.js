@@ -27,7 +27,6 @@ export default {
       let cacheKey = 'track_' + trackId;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        console.log("from CACHE!");
         this.isFetching = false;
         return resolve(findInCache.data);
       }
@@ -46,6 +45,7 @@ export default {
     });
   },
 
+  // TODO: data should be called trackIds. Use same approch as in albums
   tracks(data) {
 
     // TODO: consider accepting an ID instead URI
