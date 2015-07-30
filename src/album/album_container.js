@@ -75,7 +75,7 @@ class AlbumContainer extends React.Component {
     let tracks = album.tracks.items.map((track, index) => {
       let ref = '';
       if(!_.isEmpty(this.props.query)) {
-        if(this.props.query.track === utils.spotify.parseId(track.uri)) {
+        if(this.props.query.track === track.id) {
           ref = 'search_active';
         }
       }
