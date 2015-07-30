@@ -3,12 +3,15 @@ import _ from 'lodash';
 import ArtistList from 'artist/artist_list';
 
 class SearchResultArtists extends React.Component {
+
   constructor(props) {
     super(props);
   }
 
   render() {
+
     if(_.isEmpty(this.props.artists)) { return false; }
+
     return (
       <div className="component">
         <header>
@@ -20,6 +23,7 @@ class SearchResultArtists extends React.Component {
       </div>
     );
   }
+
 };
 
 SearchResultArtists.propTypes = {

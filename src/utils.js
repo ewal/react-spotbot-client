@@ -20,8 +20,8 @@ export default {
 
   formatDuration(ms) {
     ms = parseInt(ms, 10) / 1000;
-    var minutes = Math.floor(ms / 60);
-    var seconds = Math.floor(ms - (minutes * 60));
+    let minutes = Math.floor(ms / 60);
+    let seconds = Math.floor(ms - (minutes * 60));
 
     if(minutes < 10){
       minutes = `0${minutes}`;

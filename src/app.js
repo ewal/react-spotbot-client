@@ -1,7 +1,6 @@
 import React from 'react';
 import Router from 'react-router';
 import { Input } from 'react-bootstrap';
-
 import PlaylistContainer from 'playlist/playlist_container';
 import SearchContainer from 'search/search_container';
 import SearchResultContainer from 'search_result/search_result_container';
@@ -19,8 +18,6 @@ let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
     DefaultRoute = Router.DefaultRoute;
 
-// TODO:
-// - set market in .env file
 class App extends React.Component {
 
   constructor(props) {

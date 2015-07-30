@@ -128,6 +128,18 @@ class SearchContainer extends React.Component {
     this.timer = null;
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Always reset the index
+    if(nextProps.searchVisible) {
+      // Hopefully everythings is rendered and done.
+      // Wait for it ... and focus
+      setTimeout(() => {
+        let input = this.refs.input.getInputDOMNode();
+        React.findDOMNode(input).focus();
+      }, 150);
+    }
+  }
+
   fetchSearchResult() {
     if(this.state.query.length < 2) { return; }
     let query = this.state.query;
@@ -145,18 +157,6 @@ class SearchContainer extends React.Component {
     }).catch((message) => {
       throw new Error(message);
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // Always reset the index
-    if(nextProps.searchVisible) {
-      // Hopefully everythings is rendered and done.
-      // Wait for it ... and focus
-      setTimeout(() => {
-        let input = this.refs.input.getInputDOMNode();
-        React.findDOMNode(input).focus();
-      }, 150);
-    }
   }
 
   handleSubmit(e) {

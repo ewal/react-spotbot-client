@@ -3,11 +3,15 @@ import _ from 'lodash';
 import AlbumList from 'album/album_list';
 
 class SearchResultAlbums extends React.Component {
+
   constructor(props) {
     super(props);
   }
+
   render() {
+
     if(_.isEmpty(this.props.albums)) { return false; }
+
     return (
       <div className="component">
         <header>
@@ -19,6 +23,7 @@ class SearchResultAlbums extends React.Component {
       </div>
     );
   }
+
 };
 
 export default SearchResultAlbums;

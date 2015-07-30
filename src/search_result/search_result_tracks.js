@@ -5,9 +5,11 @@ import Track  from 'components/track_table_row';
 import TableHeader from 'components/track_table_header';
 
 class SearchResultTracks extends React.Component {
+
   constructor(props) {
     super(props);
   }
+
   render() {
 
     if(_.isEmpty(this.props.tracks)) { return false; }
@@ -28,6 +30,7 @@ class SearchResultTracks extends React.Component {
       </div>
     );
   }
+
 };
 
 export default SearchResultTracks;

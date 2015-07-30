@@ -34,6 +34,7 @@ class ArtistTopTracks extends React.Component {
   }
 
   render() {
+
     if(_.isEmpty(this.state.tracks)) { return false; }
 
     let tracks = this.state.tracks.map((track, index) => {

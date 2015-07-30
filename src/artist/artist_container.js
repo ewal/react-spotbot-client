@@ -15,8 +15,7 @@ class ArtistContainer extends React.Component {
     this.state = {
       artist: {},
       albums: [],
-      singles: [],
-      artistId: null
+      singles: []
     };
   }
 
@@ -37,8 +36,7 @@ class ArtistContainer extends React.Component {
 
     ArtistMetadataApi.artist(id).then((response) => {
       this.setState({
-        artist: response,
-        artistId: id
+        artist: response
       });
     }).catch((message) => {
       throw new Error(message);
@@ -46,8 +44,7 @@ class ArtistContainer extends React.Component {
 
     ArtistMetadataApi.albums(id).then((response) => {
       this.setState({
-        albums: response.items,
-        artistId: id
+        albums: response.items
       });
     }).catch((message) => {
       throw new Error(message);
@@ -55,8 +52,7 @@ class ArtistContainer extends React.Component {
 
     ArtistMetadataApi.singles(id).then((response) => {
       this.setState({
-        singles: response.items,
-        artistId: id
+        singles: response.items
       });
     }).catch((message) => {
       throw new Error(message);
@@ -106,7 +102,7 @@ class ArtistContainer extends React.Component {
             </h1>
           </div>
         </header>
-        <ArtistTopTracks artistId={this.state.artistId} />
+        <ArtistTopTracks artistId={this.state.artist.id} />
         <div className="component">
           <header>
             <h2>Singles</h2>
