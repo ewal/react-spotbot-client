@@ -48,7 +48,9 @@ class AlbumContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    React.findDOMNode(this.refs.search_active).focus();
+    if(!_.isEmpty(this.props.query)) {
+      React.findDOMNode(this.refs.search_active).focus();
+    }
   }
 
   handleClick() {
