@@ -28,7 +28,9 @@ class SearchItemTrack extends SearchItem {
 
     return (
       <dd className={klass}>
-        {this.props.item.name}
+        <Link to="album" params={{ id: item.album.id }} query={{track: item.id }} onClick={this.handleClick.bind(this)}>
+          {this.props.item.name}
+        </Link>
         <span className="artist">{item.artists[0].name}</span>
       </dd>
     );
