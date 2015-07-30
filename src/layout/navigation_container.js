@@ -28,10 +28,6 @@ class NavigationContainer extends React.Component {
     FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
   }
 
-  handleClick() {
-    console.log("hej");
-  }
-
   render() {
     return (
       <Nav onClick={this.props.hideSearchContainer} stacked bsStyle="pills">
