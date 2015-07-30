@@ -11,8 +11,8 @@ var serverConf = {
 };
 
 var devUrl = serverConf.protocol + serverConf.host + ':' + serverConf.port,
-    buildPath = path.join(__dirname, 'build'), // Development build server
-    srcPath = path.join(__dirname, 'src'); // Src folder
+    buildPath = path.join(__dirname, 'build'),
+    srcPath = path.join(__dirname, 'src');
 
 module.exports = {
 
@@ -77,9 +77,8 @@ module.exports = {
 
   plugins: [
     // Development settings.
-    // Plugins for prodiction is set in gulps webpack:dist task.
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(), // Prevent reload if error in code
+    new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(true),
     new webpack.DefinePlugin({
       'process.env': {
