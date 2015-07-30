@@ -47,6 +47,10 @@ class AlbumContainer extends React.Component {
     return nextProps.params.id !== this.state.album.id;
   }
 
+  componentDidUpdate(prevProps) {
+    React.findDOMNode(this.refs.search_active).focus();
+  }
+
   handleClick() {
     FirebaseRef.child('playlist/uri').set(this.state.album.uri);
     FirebaseRef.child('player/next').set(true);
@@ -67,7 +71,13 @@ class AlbumContainer extends React.Component {
 
     let album = this.state.album;
     let tracks = album.tracks.items.map((track, index) => {
-      return <Track track={track} key={index} index={index} />;
+      let ref = '';
+      if(!_.isEmpty(this.props.query)) {
+        if(this.props.query.track === utils.spotify.parseId(track.uri)) {
+          ref = 'search_active';
+        }
+      }
+      return <Track track={track} key={index} index={index} ref={ref} />;
     });
 
     let releaseDate = utils.date.year(album.release_date);
