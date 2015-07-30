@@ -1,5 +1,4 @@
 import request from 'superagent';
-import utils from 'utils';
 import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
