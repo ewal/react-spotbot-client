@@ -5,25 +5,31 @@ import SearchApi from '_apis/search_api';
 import FirebaseRef from 'firebase_ref';
 import classNames from 'classnames';
 import { Link } from 'react-router';
+import SearchStore from '_stores/search_store';
 
 class SearchItem extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    if(this.props.currentIndex === prevProps.index) {
+      SearchStore.setNavigateObject(this.props);
+    }
+  }
+
   handleClick() {
     this.props.hideSearchContainer();
   }
-  render() {
-    return false;
-  }
 };
 
-class SearchItemTrack extends React.Component {
+class SearchItemTrack extends SearchItem {
   render() {
 
     let klass = classNames('track', { 'active': (this.props.currentIndex === this.props.index) });
+    let item = this.props.item;
 
     return (
       <dd className={klass}>
         {this.props.item.name}
-        <span className="artist">{this.props.item.artists[0].name}</span>
+        <span className="artist">{item.artists[0].name}</span>
       </dd>
     );
   }
@@ -64,29 +70,30 @@ class SearchItemArtist extends SearchItem {
 class AutoComplete extends React.Component {
 
   getIndex(index) {
-    return index+=1;
+    return index +=1;
   }
 
   render() {
 
     let index = -1;
     let commonProps = {
-      hideSearchContainer: this.props.hideSearchContainer
+      hideSearchContainer: this.props.hideSearchContainer,
+      currentIndex: this.props.index
     };
 
     let tracks = this.props.tracks.map((track) => {
       index = this.getIndex(index);
-      return <SearchItemTrack {...commonProps} currentIndex={this.props.index} index={index} key={index} item={track} />;
+      return <SearchItemTrack {...commonProps} route="album" index={index} key={index} item={track} />;
     });
 
     let albums = this.props.albums.map((album) => {
       index = this.getIndex(index);
-      return <SearchItemAlbum {...commonProps} currentIndex={this.props.index} index={index} key={index} item={album} />;
+      return <SearchItemAlbum {...commonProps} route="album" index={index} key={index} item={album} />;
     });
 
     let artists = this.props.artists.map((artist) => {
       index = this.getIndex(index);
-      return <SearchItemArtist {...commonProps} currentIndex={this.props.index} index={index} key={index} item={artist} />;
+      return <SearchItemArtist {...commonProps} route="artist" index={index} key={index} item={artist} />;
     });
 
     return (
@@ -140,7 +147,6 @@ class SearchContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Always reset the index
-    this.setState({ index: 0});
     if(nextProps.searchVisible) {
       // Hopefully everythings is rendered and done.
       // Wait for it ... and focus
@@ -154,9 +160,21 @@ class SearchContainer extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    if(!_.isEmpty(this.state.query)) {
-      this.context.router.transitionTo('search', { query: this.state.query });
+    if(this.state.index !== -1) {
+      var obj = SearchStore.gGetNavigateObject();
+      if(obj.item.type === 'track') {
+        this.context.router.transitionTo(obj.route, { id: obj.item.album.id }, { track: obj.item.id });
+      }
+      else {
+        this.context.router.transitionTo(obj.route, { id: obj.item.id });
+      }
       this.props.toggleSearch();
+    }
+    else {
+      if(!_.isEmpty(this.state.query)) {
+        this.context.router.transitionTo('search', { query: this.state.query });
+        this.props.toggleSearch();
+      }
     }
   }
 
@@ -164,22 +182,22 @@ class SearchContainer extends React.Component {
     clearTimeout(this.timer);
 
     this.setState({
-      query: this.refs.input.getValue()
+      query: this.refs.input.getValue(),
+      index: -1
     });
+
     if(this.state.query.length > 1) {
       this.timer = setTimeout(this.fetchSearchResult.bind(this), 250);
     }
     else {
-      this.clearState();
+      this.setState({
+        albums: [],
+        tracks: [],
+        artists: [],
+        index: -1,
+        total: 0
+      });
     }
-  }
-
-  clearState() {
-    this.setState({
-      albums: [],
-      tracks: [],
-      artists: []
-    });
   }
 
   moveUp() {
