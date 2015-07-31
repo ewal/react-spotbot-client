@@ -3,6 +3,11 @@ import utils from 'utils';
 import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
+/**
+ * Track metadata api module
+ * @module _apis/track_metadata_api
+ */
+
 /*
  * Since we can't fetch a playlist without authentication
  * we must fetch meta information directly from the tracks.
@@ -12,6 +17,10 @@ export default {
 
   isFetching: false,
 
+  /**
+   * Fetch information for a single track
+   * @param {string} trackId - A track id
+   */
   track(trackId) {
     // The spobot server will update currentTrack twice causing two requests to Spotifys api.
     // Prevent by testing that we already are fetching.
@@ -45,28 +54,27 @@ export default {
     });
   },
 
-  // TODO: data should be called trackIds. Use same approch as in albums
-  tracks(data) {
+  /**
+   * Fetch information for several tracks
+   * @param {array} trackIds - List of track ids
+   */
+  tracks(trackIds) {
 
-    // TODO: consider accepting an ID instead URI
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'track_' + data.join('');
+      let cacheKey = 'track_' + trackIds.join('');
       let findInCache = CacheStore.get(cacheKey);
+
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
 
-      if(!_.isArray(data) && !_.isString(data)) {
-        return reject("TrackMetadataApi expexted input as string or array");
-      }
-
-      let trackIds = data.map(uri => {
-        return utils.spotify.parseId(uri);
-      });
+      let params = {
+        ids: _.take(trackIds, 50).join(',')
+      };
 
       request.get('https://api.spotify.com/v1/tracks/')
-      .query({ ids: _.take(trackIds, 50).join(',')})
+      .query(params)
       .end((error, response) => {
         if(response.ok) {
           CacheStore.set(cacheKey, response.body);
