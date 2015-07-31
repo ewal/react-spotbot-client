@@ -28,4 +28,8 @@ class ArtistItem extends React.Component {
   }
 };
 
+ArtistItem.propTypes = {
+  artist: React.PropTypes.object.isRequired
+};
+
 export default ArtistItem;
