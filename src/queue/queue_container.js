@@ -5,6 +5,7 @@ import _ from 'lodash';
 import Track from 'components/track_table_row';
 import TableHeader from 'components/track_table_header';
 import TrackMetadataApi from '_apis/track_metadata_api';
+import utils from 'utils';
 
 class QueueContainer extends React.Component {
 
@@ -21,7 +22,12 @@ class QueueContainer extends React.Component {
     let uris = _.pluck(val, 'uri');
 
     if(!_.isEmpty(val)) {
-      TrackMetadataApi.tracks(uris).then((response) => {
+
+      let trackIds = uris.map(uri => {
+        return utils.spotify.parseId(uri);
+      });
+
+      TrackMetadataApi.tracks(trackIds).then((response) => {
         this.setState({
           tracks: response.tracks
         });
