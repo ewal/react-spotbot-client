@@ -28,7 +28,7 @@ class SearchItemTrack extends SearchItem {
 
     return (
       <dd className={klass}>
-        <Link to="album" params={{ id: item.album.id }} query={{track: item.id }} onClick={this.handleClick.bind(this)}>
+        <Link to="album" params={{ id: item.album.id }} query={{trackId: item.id }} onClick={this.handleClick.bind(this)}>
           {this.props.item.name}
         </Link>
         <span className="artist">{item.artists[0].name}</span>
@@ -165,7 +165,7 @@ class SearchContainer extends React.Component {
     if(this.state.index !== -1) {
       var obj = SearchStore.gGetNavigateObject();
       if(obj.item.type === 'track') {
-        this.context.router.transitionTo(obj.route, { id: obj.item.album.id }, { track: obj.item.id });
+        this.context.router.transitionTo(obj.route, { id: obj.item.album.id }, { trackId: obj.item.id });
       }
       else {
         this.context.router.transitionTo(obj.route, { id: obj.item.id });

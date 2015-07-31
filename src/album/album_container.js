@@ -8,6 +8,11 @@ import FirebaseRef from 'firebase_ref';
 import TableHeader from 'components/track_table_header';
 import BackgroundImage from 'components/background_image';
 
+/**
+ * Album container module
+ * @module album/album_container
+ */
+
 class Artists extends React.Component {
   render() {
 
@@ -48,8 +53,9 @@ class AlbumContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(!_.isEmpty(this.props.query)) {
-      React.findDOMNode(this.refs.search_active).focus();
+    let row = React.findDOMNode(this.refs.search_active);
+    if(!_.isEmpty(this.props.query) && !_.isNull(row)) {
+      row.focus();
     }
   }
 
@@ -73,9 +79,9 @@ class AlbumContainer extends React.Component {
 
     let album = this.state.album;
     let tracks = album.tracks.items.map((track, index) => {
-      let ref = '';
+      let ref = 'item_' + index;
       if(!_.isEmpty(this.props.query)) {
-        if(this.props.query.track === track.id) {
+        if(this.props.query.trackId === track.id) {
           ref = 'search_active';
         }
       }
