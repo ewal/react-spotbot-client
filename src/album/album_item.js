@@ -23,10 +23,6 @@ class AlbumItem extends React.Component {
 
   render() {
 
-    // TODO:
-    // - take param artist and show if so
-    // - zoom play button like Netflix does
-
     let album = this.props.album,
         name = _.trunc(album.name,40);
 
