@@ -10,7 +10,7 @@ class BackgroundImage extends React.Component {
     }
 
     let bgImage =  {
-      backgroundImage: 'url(' + url + ')'
+      backgroundImage: `url(${url})`
     };
 
     return (
