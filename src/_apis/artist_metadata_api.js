@@ -2,8 +2,17 @@ import request from 'superagent';
 import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
+/**
+ * Artist metadata api module
+ * @module _apis/artist_metadata_api
+ */
+
 export default {
 
+  /**
+   * Information about an artist
+   * @param {string} artistId - An artist id
+   */
   artist(artistId) {
     return new Promise((resolve, reject) => {
 
@@ -26,6 +35,10 @@ export default {
     });
   },
 
+  /**
+   * Information about an artist singles
+   * @param {string} artistId - An artist id
+   */
   singles(artistId) {
     return new Promise((resolve, reject) => {
 
@@ -55,6 +68,10 @@ export default {
     });
   },
 
+  /**
+   * Information about an artist albums
+   * @param {string} artistId - An artist id
+   */
   albums(artistId) {
     return new Promise((resolve, reject) => {
 
@@ -84,6 +101,10 @@ export default {
     });
   },
 
+  /**
+   * Information about an artist top tracks
+   * @param {string} artistId - An artist id
+   */
   topTracks(artistId) {
     return new Promise((resolve, reject) => {
 

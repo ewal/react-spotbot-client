@@ -1,6 +1,11 @@
 import React from 'react';
 import AlbumItem from 'album/album_item';
 
+/**
+ * Album list module
+ * @module album/album_list
+ */
+
 class AlbumList extends React.Component {
 
   constructor(props) {

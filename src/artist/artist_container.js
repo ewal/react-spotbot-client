@@ -7,6 +7,11 @@ import ArtistTopTracks from './artist_top_tracks';
 import AlbumList from 'album/album_list';
 import BackgroundImage from 'components/background_image';
 
+/**
+ * Artist container module
+ * @module artist/artist_container
+ */
+
 class ArtistContainer extends React.Component {
 
   constructor(props) {

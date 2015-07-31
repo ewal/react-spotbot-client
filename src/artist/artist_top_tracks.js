@@ -6,7 +6,13 @@ import ArtistMetadataApi from '_apis/artist_metadata_api';
 import Track from 'components/track_table_row';
 import { Table } from 'react-bootstrap';
 
+/**
+ * Artist top tracks module
+ * @module artist/artist_top_tracks
+ */
+
 class ArtistTopTracks extends React.Component {
+
   constructor(props) {
     super(props);
 

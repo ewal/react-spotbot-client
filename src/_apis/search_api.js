@@ -2,7 +2,17 @@ import request from 'superagent';
 import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
+/**
+ * Search api module
+ * @module _apis/search_api
+ */
+
 export default {
+
+  /**
+   * Search whatever specified in .env SPOTIFY_SEARCH_TYPES
+   * @param {string} query - Search query
+   */
   search(query) {
     return new Promise((resolve, reject) => {
 
@@ -31,4 +41,5 @@ export default {
 
     });
   }
+
 };

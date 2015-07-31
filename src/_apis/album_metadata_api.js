@@ -2,7 +2,17 @@ import request from 'superagent';
 import _ from 'lodash';
 import CacheStore from '_stores/cache_store';
 
+/**
+ * Album metadata api module
+ * @module _apis/album_metadata_api
+ */
+
 export default {
+
+  /**
+   * Fetch information for a single album
+   * @param {string} albumId - An album id
+   */
   album(albumId) {
     return new Promise((resolve, reject) => {
 
@@ -25,10 +35,14 @@ export default {
     });
   },
 
+  /**
+   * Fetch information for several albums
+   * @param {array} albumIds - List of album ids
+   */
   albums(albumIds) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'albums_' + albumIds;
+      let cacheKey = 'albums_' + albumIds.join('');
       let cacheItem = CacheStore.get(cacheKey);
       if(!_.isUndefined(cacheItem)) {
         return resolve(cacheItem.data);

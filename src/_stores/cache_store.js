@@ -1,6 +1,11 @@
 import Reflux from 'reflux';
 import _ from 'lodash';
 
+/**
+ * Cache store module
+ * @module _stores/cache_store
+ */
+
 let CacheStore = Reflux.createStore({
 
   init() {
