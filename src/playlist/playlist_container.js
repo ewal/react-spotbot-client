@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button, Modal, Input } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import Track from 'components/track_table_row';
@@ -18,8 +18,17 @@ class PlaylistContainer extends React.Component {
       playlistName: '',
       tracks: [],
       tyoe: '',
-      uri: ''
+      uri: '',
+      showModal: false
     };
+  }
+
+  componentDidMount() {
+    FirebaseRef.child('playlist').on('value', this.onPlaylistChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
   }
 
   onPlaylistChange(snapshot) {
@@ -58,14 +67,6 @@ class PlaylistContainer extends React.Component {
     }
   }
 
-  componentDidMount() {
-    FirebaseRef.child('playlist').on('value', this.onPlaylistChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
-  }
-
   renderPlaylist() {
 
     let tracks = this.state.tracks.map((track, index) => {
@@ -100,6 +101,20 @@ class PlaylistContainer extends React.Component {
     );
   }
 
+  showModal() {
+    this.setState({ showModal: true });
+  }
+
+  closeModal() {
+    this.setState({ showModal: false });
+  }
+
+  changePlaylist() {
+    let val = this.refs.input_change.getValue();
+    FirebaseRef.child('playlist/uri').set(val);
+    this.closeModal();
+  }
+
   render() {
 
     if(_.isEmpty(this.state.tracks)) { return false; }
@@ -121,10 +136,24 @@ class PlaylistContainer extends React.Component {
       <div className="container-fluid">
         <header className="page-header">
           <h1>Playlist</h1>
+          <Button bsStyle="link" onClick={this.showModal.bind(this)}>Change playlist</Button>
         </header>
         <section>
           {playlistType}
         </section>
+        <Modal show={this.state.showModal} onHide={this.closeModal.bind(this)} autoFocus backdrop>
+          <Modal.Header closeButton>
+            <Modal.Title>Change playlist</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Input ref="input_change" type="text" placeholder="Paste uri or link" />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.closeModal.bind(this)}>Close</Button>
+            <Button bsStyle="primary" onClick={this.changePlaylist.bind(this)}>Ok</Button>
+          </Modal.Footer>
+        </Modal>
+
       </div>
     );
   }
