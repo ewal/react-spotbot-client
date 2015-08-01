@@ -48,10 +48,6 @@ class AlbumContainer extends React.Component {
     this.fetchAlbum(nextProps.params.id);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return nextProps.params.id !== this.state.album.id;
-  }
-
   componentDidUpdate(prevProps) {
     let row = React.findDOMNode(this.refs.search_active);
     if(!_.isEmpty(this.props.query) && !_.isNull(row)) {
