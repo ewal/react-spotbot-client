@@ -6,110 +6,12 @@ import FirebaseRef from 'firebase_ref';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 import SearchStore from '_stores/search_store';
+import AutoComplete from 'search/auto_complete';
 
-class SearchItem extends React.Component {
-
-  componentDidUpdate(prevProps) {
-    if(this.props.currentIndex === prevProps.index) {
-      SearchStore.setNavigateObject(this.props);
-    }
-  }
-
-  handleClick() {
-    this.props.hideSearchContainer();
-  }
-};
-
-class SearchItemTrack extends SearchItem {
-  render() {
-
-    let klass = classNames('track', { 'active': (this.props.currentIndex === this.props.index) });
-    let item = this.props.item;
-
-    return (
-      <dd className={klass}>
-        <Link to="album" params={{ id: item.album.id }} query={{trackId: item.id }} onClick={this.handleClick.bind(this)}>
-          {this.props.item.name}
-        </Link>
-        <span className="artist">{item.artists[0].name}</span>
-      </dd>
-    );
-  }
-};
-
-class SearchItemAlbum extends SearchItem {
-  render() {
-
-    let klass = classNames('album', { 'active': (this.props.currentIndex === this.props.index) });
-    let item = this.props.item;
-
-    return (
-      <dd className={klass}>
-        <Link to="album" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
-          {item.name}
-        </Link>
-      </dd>
-    );
-  }
-};
-
-class SearchItemArtist extends SearchItem {
-  render() {
-
-    let klass = classNames('artist', { 'active': (this.props.currentIndex === this.props.index) });
-    let item = this.props.item;
-
-    return (
-      <dd className={klass}>
-        <Link to="artist" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
-          {this.props.item.name}
-        </Link>
-      </dd>
-    );
-  }
-};
-
-class AutoComplete extends React.Component {
-
-  getIndex(index) {
-    return index +=1;
-  }
-
-  render() {
-
-    let index = -1;
-    let commonProps = {
-      hideSearchContainer: this.props.hideSearchContainer,
-      currentIndex: this.props.index
-    };
-
-    let tracks = this.props.tracks.map((track) => {
-      index = this.getIndex(index);
-      return <SearchItemTrack {...commonProps} route="album" index={index} key={index} item={track} />;
-    });
-
-    let albums = this.props.albums.map((album) => {
-      index = this.getIndex(index);
-      return <SearchItemAlbum {...commonProps} route="album" index={index} key={index} item={album} />;
-    });
-
-    let artists = this.props.artists.map((artist) => {
-      index = this.getIndex(index);
-      return <SearchItemArtist {...commonProps} route="artist" index={index} key={index} item={artist} />;
-    });
-
-    return (
-      <dl className="auto-complete">
-        <dt>Songs</dt>
-        {tracks}
-        <dt>Albums</dt>
-        {albums}
-        <dt>Artists</dt>
-        {artists}
-      </dl>
-    );
-  }
-};
+/**
+ * Search container module
+ * @module search/search_container
+ */
 
 class SearchContainer extends React.Component {
 
