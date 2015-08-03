@@ -17,6 +17,14 @@ class QueueContainer extends React.Component {
     };
   }
 
+  componentDidMount() {
+    FirebaseRef.child('queue').on('value', this.onQueueChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
+  }
+
   onQueueChange(snapshot) {
     let val = _.toArray(snapshot.val());
     let uris = _.pluck(val, 'uri');
@@ -35,14 +43,6 @@ class QueueContainer extends React.Component {
         throw new Error(message);
       });
     }
-  }
-
-  componentDidMount() {
-    FirebaseRef.child('queue').on('value', this.onQueueChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
   }
 
   renderTable() {
