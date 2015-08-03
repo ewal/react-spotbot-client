@@ -20,17 +20,23 @@ module.exports = {
   devUrl: devUrl,
   serverConf: serverConf,
 
-  entry: [
-    'webpack-dev-server/client?' + devUrl,
-    'webpack/hot/only-dev-server',
-    'bootstrap-sass!./bootstrap-sass.config.js',
-    './src/app.js'
-  ],
+  entry: {
+    build: [
+      'webpack-dev-server/client?' + devUrl,
+      'webpack/hot/only-dev-server',
+      'bootstrap-sass!./bootstrap-sass.config.js',
+      './src/app.js'
+    ],
+    dist: [
+      'bootstrap-sass!./bootstrap-sass.config.js',
+      './src/app.js'
+    ]
+  },
 
   output: {
     path: buildPath,
     publicPath: devUrl + '/', // Omit the slash and everything breaks
-    filename: 'bundle.js',
+    filename: '[name].entry.js',
     sourceMapFilename: '[file].map'
   },
 
