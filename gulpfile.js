@@ -37,7 +37,7 @@ gulp.task('webpack:dist', function(callback) {
 
   conf.output.path = path.join(__dirname, 'dist');
 
-  conf.plugins = conf.plugins.concat(
+  conf.plugins = [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
@@ -53,7 +53,7 @@ gulp.task('webpack:dist', function(callback) {
         warnings: false
       }
     })
-  );
+  ];
 
   return webpack(conf, function(err, stats) {
     if (err) {
