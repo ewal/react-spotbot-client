@@ -19,4 +19,8 @@ class BackgroundImage extends React.Component {
   }
 };
 
+BackgroundImage.propTypes = {
+  image: React.PropTypes.object
+};
+
 export default BackgroundImage;
