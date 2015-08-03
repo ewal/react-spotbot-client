@@ -22,3 +22,4 @@ run ```gulp dist```
 
 ### Deploy to divshot
 // TODO:
+* Copy the index.html file from /build to /dist.
