@@ -99,7 +99,7 @@ class AlbumContainer extends React.Component {
               <Artists artists={album.artists} />
             </div>
             <div className="actions">
-              <Button bsStyle="primary">Play album</Button>
+              <Button bsStyle="primary" onClick={this.handleClick.bind(this)}>Play album</Button>
             </div>
           </div>
         </header>
