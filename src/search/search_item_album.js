@@ -17,9 +17,12 @@ class SearchItemAlbum extends SearchItem {
 
     return (
       <dd className={klass}>
-        <Link to="album" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
-          {item.name}
-        </Link>
+        <BackgroundImage image={item.images[2]} classNames="bg-image" />
+        <span className="info">
+          <Link to="album" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
+            {item.name}
+          </Link>
+        </span>
       </dd>
     );
   }

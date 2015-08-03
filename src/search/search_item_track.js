@@ -2,7 +2,6 @@ import React from 'react';
 import SearchItem from 'search/search_item';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import BackgroundImage from 'components/background_image';
 
 /**
  * Search item track module
@@ -17,10 +16,12 @@ class SearchItemTrack extends SearchItem {
 
     return (
       <dd className={klass}>
-        <Link to="album" params={{ id: item.album.id }} query={{trackId: item.id }} onClick={this.handleClick.bind(this)}>
-          {this.props.item.name}
-        </Link>
-        <span className="artist">{item.artists[0].name}</span>
+        <span className="info">
+          <Link to="album" params={{ id: item.album.id }} query={{trackId: item.id }} onClick={this.handleClick.bind(this)}>
+            {this.props.item.name}
+          </Link>
+          <span className="artist">{item.artists[0].name}</span>
+        </span>
       </dd>
     );
   }

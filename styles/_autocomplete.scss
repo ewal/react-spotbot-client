@@ -8,9 +8,28 @@
   dd {
     background: $gray-dark;
     margin-bottom: 1px;
+
+    .info {
+      display: inline-block;
+      padding: 8px;
+    }
+
+    .bg-image {
+      width: 33px;
+      height: 33px;
+      float: left;
+      background-size: cover;
+
+      &.artist {
+        width: 23px;
+        height: 23px;
+        margin: 5px 0 0 5px;
+        border-radius: 100%;
+      }
+    }
   }
 
-  dt, dd {
+  dt {
     padding: 8px;
   }
 

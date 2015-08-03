@@ -17,9 +17,12 @@ class SearchItemArtist extends SearchItem {
 
     return (
       <dd className={klass}>
-        <Link to="artist" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
-          {this.props.item.name}
-        </Link>
+        <BackgroundImage image={item.images[2]} classNames="bg-image artist" />
+        <span className="info">
+          <Link to="artist" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
+            {this.props.item.name}
+          </Link>
+        </span>
       </dd>
     );
   }
