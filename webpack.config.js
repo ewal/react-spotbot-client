@@ -21,7 +21,7 @@ module.exports = {
   serverConf: serverConf,
 
   entry: {
-    build: [
+    dev: [
       'webpack-dev-server/client?' + devUrl,
       'webpack/hot/only-dev-server',
       'bootstrap-sass!./bootstrap-sass.config.js',
