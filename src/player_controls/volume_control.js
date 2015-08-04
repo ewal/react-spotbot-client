@@ -53,9 +53,7 @@ class VolumeControl extends React.Component {
 
     return (
       <div className="volume-control">
-        <i className="fa fa-volume-down"></i>
         <input {...volumeProps} />
-        <i className="fa fa-volume-up"></i>
       </div>
     );
   }

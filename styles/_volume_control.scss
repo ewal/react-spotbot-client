@@ -9,12 +9,6 @@
     width: 80%;
   }
 
-  i {
-    color: themeColor(1);
-    position: relative;
-    top: 3px;
-  }
-
   input[type=range] {
     -webkit-appearance: none;
     background: none;
@@ -45,11 +39,11 @@
   }
 
   input[type=range]::-moz-range-track {
-    height: 5px;
     cursor: pointer;
     background: themeColor(.2);
     border-radius: 0px;
     border: none;
+    height: 1px;
   }
 
   input[type=range]::-moz-range-thumb {
@@ -59,5 +53,6 @@
     width: 10px;
     border-radius: 50%;
     cursor: pointer;
+    margin-top: -5px;
   }
 }
