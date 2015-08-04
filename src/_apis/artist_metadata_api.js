@@ -130,5 +130,37 @@ export default {
         }
       });
     });
+  },
+
+  /**
+   * Information about an artist related artists
+   * @param {string} artistId - An artist id
+   */
+  relatedArtists(artistId) {
+    return new Promise((resolve, reject) => {
+
+      let cacheKey = 'related_artists_' + artistId;
+      let findInCache = CacheStore.get(cacheKey);
+      if(!_.isUndefined(findInCache)) {
+        return resolve(findInCache.data);
+      }
+
+      let params = {
+        country: process.env.SPOTIFY_MARKET
+      };
+
+      request.get('https://api.spotify.com/v1/artists/' + artistId + '/related-artists')
+      .query(params)
+      .end((error, response) => {
+        if(response.ok) {
+          CacheStore.set(cacheKey, response.body);
+          resolve(response.body);
+        }
+        else {
+          reject(response.text);
+        }
+      });
+    });
+
   }
 };

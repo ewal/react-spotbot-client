@@ -6,6 +6,7 @@ import ArtistMetadataApi from '_apis/artist_metadata_api';
 import ArtistTopTracks from './artist_top_tracks';
 import AlbumList from 'album/album_list';
 import BackgroundImage from 'components/background_image';
+import ArtistList from 'artist/artist_list';
 
 /**
  * Artist container module
@@ -20,7 +21,8 @@ class ArtistContainer extends React.Component {
     this.state = {
       artist: {},
       albums: [],
-      singles: []
+      singles: [],
+      relatedArtists: []
     };
   }
 
@@ -30,11 +32,6 @@ class ArtistContainer extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.fetchData(nextProps.params.id);
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return true;
-    //return nextProps.params.id !== this.state.artist.id;
   }
 
   fetchData(id) {
@@ -58,6 +55,14 @@ class ArtistContainer extends React.Component {
     ArtistMetadataApi.singles(id).then((response) => {
       this.setState({
         singles: response.items
+      });
+    }).catch((message) => {
+      throw new Error(message);
+    });
+
+    ArtistMetadataApi.relatedArtists(id).then((response) => {
+      this.setState({
+        relatedArtists: response.artists
       });
     }).catch((message) => {
       throw new Error(message);
@@ -108,6 +113,12 @@ class ArtistContainer extends React.Component {
           </div>
         </header>
         <ArtistTopTracks artistId={this.state.artist.id} />
+        <div className="component">
+          <header>
+            <h2>Related artists</h2>
+          </header>
+          <ArtistList artists={this.state.relatedArtists} />
+        </div>
         <div className="component">
           <header>
             <h2>Singles</h2>
