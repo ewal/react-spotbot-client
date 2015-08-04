@@ -1,6 +1,5 @@
 import Reflux from 'reflux';
 import TrackMetadataApi from '_apis/track_metadata_api';
-import _ from 'lodash';
 
 let CurrentTrackActions = Reflux.createActions({
   'set': {
