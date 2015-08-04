@@ -37,7 +37,6 @@ class VolumeControl extends React.Component {
 
   render() {
 
-    console.log("volume", this.state.volume);
     if(this.state.volume === -1) { return false; }
 
     let volumeProps = {
