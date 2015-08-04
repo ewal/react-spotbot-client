@@ -19,7 +19,9 @@ class ArtistItem extends React.Component {
       <div className="album-item">
         <div className="thumbnail">
           <div className="album-item-image-wrapper">
-            <BackgroundImage image={artist.images[1]} classNames="album-item-image-container" />
+            <Link to="artist" params={{ id: artist.id }}>
+              <BackgroundImage image={artist.images[1]} classNames="album-item-image-container" />
+            </Link>
           </div>
           <Link className="caption" to="artist" params={{ id: artist.id }}>{name}</Link>
         </div>
