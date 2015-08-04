@@ -13,6 +13,12 @@ import ContextMenuTrack from 'components/context_menu_track';
 import CurrentTrackContainer from 'current_track/current_track_container';
 import StarredPlaylistsContainer from 'starred_playlists/starred_playlists_container';
 import classNames from 'classnames';
+import FirebaseRef from 'firebase_ref';
+import utils from 'utils';
+
+import CurrentTrackStore from '_stores/current_track_store';
+
+import CurrentTrackActions from '_actions/current_track_actions';
 
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
@@ -26,6 +32,13 @@ class App extends React.Component {
     this.state = {
       searchVisible: false
     };
+  }
+
+  componentDidMount() {
+    FirebaseRef.child('player/current_track').on('value', (snapshot) => {
+      let trackId = utils.spotify.parseId(snapshot.val().uri);
+      CurrentTrackActions.set(trackId);
+    });
   }
 
   toggleSearch() {

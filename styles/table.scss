@@ -26,6 +26,10 @@ table {
       outline-width: 1px;
     }
 
+    .current-track td {
+      background-color: $gray-light;
+    }
+
     td {
       vertical-align: middle !important;
       min-height: 40px;

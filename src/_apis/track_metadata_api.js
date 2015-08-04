@@ -15,34 +15,22 @@ import CacheStore from '_stores/cache_store';
  */
 export default {
 
-  isFetching: false,
-
   /**
    * Fetch information for a single track
    * @param {string} trackId - A track id
    */
   track(trackId) {
-    // The spobot server will update currentTrack twice causing two requests to Spotifys api.
-    // Prevent by testing that we already are fetching.
-    // Since we use a promise we need to resolve or reject something.
 
     return new Promise((resolve, reject) => {
-      if(this.isFetching) {
-        // Return an empty object and let the component handle it.
-        return resolve({});
-      }
 
-      this.isFetching = true;
       let cacheKey = 'track_' + trackId;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
-        this.isFetching = false;
         return resolve(findInCache.data);
       }
 
       request.get('https://api.spotify.com/v1/tracks/' + trackId)
       .end((error, response) => {
-        this.isFetching = false;
         if(response.ok) {
           CacheStore.set(cacheKey, response.body);
           resolve(response.body);

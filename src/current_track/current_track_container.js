@@ -1,8 +1,7 @@
 import React from 'react';
-import FirebaseRef from 'firebase_ref';
-import TrackMetadataApi from '_apis/track_metadata_api';
 import utils from 'utils';
 import { Link } from 'react-router';
+import CurrentTrackStore from '_stores/current_track_store';
 
 class CurrentTrackContainer extends React.Component {
 
@@ -14,27 +13,16 @@ class CurrentTrackContainer extends React.Component {
     };
   }
 
-  onSetTrack(snapshot) {
-    let trackId = utils.spotify.parseId(snapshot.val().uri);
-    if(!_.isNull(trackId)) {
-      TrackMetadataApi.track(trackId).then((response) => {
-        if(!_.isEmpty(response)) {
-          this.setState({
-            track: response
-          });
-        }
-      }).catch((message) => {
-        throw new Error(message);
-      });
-    }
-  }
-
   componentDidMount() {
-    FirebaseRef.child('player/current_track').on('value', this.onSetTrack.bind(this));
+    this.unsubscribe = CurrentTrackStore.listen(this.onTrackChange.bind(this));
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('player/current_track').off('value', this.onSetTrack.bind(this));
+    this.unsubscribe();
+  }
+
+  onTrackChange() {
+    this.setState({ track: CurrentTrackStore.get() });
   }
 
   render() {
