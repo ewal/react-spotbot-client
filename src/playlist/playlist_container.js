@@ -135,8 +135,9 @@ class PlaylistContainer extends React.Component {
     return (
       <div className="container-fluid">
         <header className="page-header">
-          <h1>Playlist</h1>
-          <Button bsStyle="link" onClick={this.showModal.bind(this)}>Change playlist</Button>
+          <h1>
+            Playlist <Button bsStyle="link" onClick={this.showModal.bind(this)}>Change playlist</Button>
+          </h1>
         </header>
         <section>
           {playlistType}
@@ -146,7 +147,7 @@ class PlaylistContainer extends React.Component {
             <Modal.Title>Change playlist</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Input ref="input_change" type="text" placeholder="Paste uri or link" />
+            <Input ref="input_change" type="text" placeholder="Paste uri or link to playlist or album" />
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.closeModal.bind(this)}>Close</Button>
