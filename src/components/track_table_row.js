@@ -73,7 +73,7 @@ class Track extends React.Component {
         track = this.props.track;
 
     if(this.props.artist) {
-      cell = <td><Link to='artist' params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link></td>
+      cell = <td><Link tabIndex="-1" to='artist' params={{ id: track.artists[0].id }}>{track.artists[0].name}</Link></td>
     }
     return cell;
   }
@@ -83,7 +83,7 @@ class Track extends React.Component {
         track = this.props.track;
 
     if(this.props.album) {
-      cell = <td><Link to='album' params={{ id: track.album.id }}>{track.album.name}</Link></td>;
+      cell = <td><Link tabIndex="-1" to='album' params={{ id: track.album.id }}>{track.album.name}</Link></td>;
     }
     return cell;
   }
