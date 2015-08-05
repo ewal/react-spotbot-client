@@ -26,10 +26,11 @@ class QueueContainer extends React.Component {
   }
 
   onQueueChange(snapshot) {
+    // TODO: is toArray the right way to go?
     let val = _.toArray(snapshot.val());
     let uris = _.pluck(val, 'uri');
 
-    if(!_.isEmpty(val)) {
+    if(!_.isEmpty(val) && !_.isNull(val)) {
 
       let trackIds = uris.map(uri => {
         return utils.spotify.parseId(uri);

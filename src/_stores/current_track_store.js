@@ -1,5 +1,6 @@
 import Reflux from 'reflux';
 import Actions from '_actions/current_track_actions';
+import _ from 'lodash';
 
 /**
  * Current Track store module
@@ -15,12 +16,20 @@ let Store = Reflux.createStore({
   },
 
   onSetCompleted(track) {
-    this.track = track;
+    // TODO:
+    // Some major bug in spotbot server. Somethimes we get an object, sometimes an array.
+    // Write a test for this and or fix in it spotbot server.
+    if(_.keys(track).length === 1) {
+      this.track = track.tracks[0];
+    }
+    else {
+      this.track = track;
+    }
     this.trigger();
   },
 
   onSetFailed(message) {
-    console.log(message);
+    throw new Error(message);
   },
 
   get() {
