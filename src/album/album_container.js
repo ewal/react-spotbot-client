@@ -36,12 +36,18 @@ class AlbumContainer extends React.Component {
     super(props);
 
     this.state = {
-      album: {}
+      album: {},
+      currentTrack: {}
     };
   }
 
   componentDidMount() {
     this.fetchAlbum(this.props.params.id);
+    FirebaseRef.child('player/current_track').on('value', this.onTrackChange.bind(this));
+  }
+
+  componentWillUnmount() {
+    FirebaseRef.child('player/current_track').off('value', this.onTrackChange.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,6 +59,11 @@ class AlbumContainer extends React.Component {
     if(!_.isEmpty(this.props.query) && !_.isNull(row)) {
       row.focus();
     }
+  }
+
+  onTrackChange(snapshot) {
+    let val = snapshot.val();
+    this.setState({ currentTrack: val });
   }
 
   handleClick() {
@@ -81,7 +92,7 @@ class AlbumContainer extends React.Component {
           ref = 'search_active';
         }
       }
-      return <Track track={track} key={index} index={index} ref={ref} />;
+      return <Track track={track} key={index} index={index} ref={ref} currentTrack={this.state.currentTrack} />;
     });
 
     let releaseDate = utils.date.year(album.release_date);

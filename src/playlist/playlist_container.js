@@ -19,16 +19,24 @@ class PlaylistContainer extends React.Component {
       tracks: [],
       tyoe: '',
       uri: '',
-      showModal: false
+      showModal: false,
+      currentTrack: {}
     };
   }
 
   componentDidMount() {
     FirebaseRef.child('playlist').on('value', this.onPlaylistChange.bind(this));
+    FirebaseRef.child('player/current_track').on('value', this.onTrackChange.bind(this));
   }
 
   componentWillUnmount() {
     FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
+    FirebaseRef.child('player/current_track').off('value', this.onTrackChange.bind(this));
+  }
+
+  onTrackChange(snapshot) {
+    let val = snapshot.val();
+    this.setState({ currentTrack: val });
   }
 
   onPlaylistChange(snapshot) {
@@ -70,7 +78,7 @@ class PlaylistContainer extends React.Component {
   renderPlaylist() {
 
     let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} index={index} track={track} album artist image />
+      return <Track key={index} index={index} track={track} album artist image currentTrack={this.state.currentTrack} />
     });
 
     return (
@@ -87,7 +95,7 @@ class PlaylistContainer extends React.Component {
   renderAlbum() {
 
     let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} index={index} track={track} />
+      return <Track key={index} index={index} track={track} currentTrack={this.state.currentTrack} />
     });
 
     return (

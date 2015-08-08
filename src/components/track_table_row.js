@@ -5,33 +5,11 @@ import { Link } from 'react-router';
 import { ContextMenuLayer } from "react-contextmenu";
 import FirebaseRef from 'firebase_ref';
 import classNames from 'classnames';
-import CurrentTrackStore from '_stores/current_track_store';
 
-// TODO: Something is strange with the current track...
 class Track extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      isCurrent: false
-    };
-  }
-
-  componentDidMount() {
-    this.unsubscribe = CurrentTrackStore.listen(this.onChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
-
-  onChange() {
-    this.setState({ isCurrent: CurrentTrackStore.get().id === this.props.track.id });
   }
 
   handleKeyUp(e) {
@@ -102,9 +80,15 @@ class Track extends React.Component {
 
   render() {
 
+    let currentTrack = this.props.currentTrack;
+    let currentUri = '';
+    if(!_.isUndefined(currentTrack)) {
+      currentUri = currentTrack.uri;
+    }
+
     let track = this.props.track,
         duration = utils.formatDuration(track.duration_ms),
-        klass = classNames({ "current-track": CurrentTrackStore.get().id === track.id });
+        klass = classNames({ "current-track": currentUri === track.uri });
 
     return (
       <tr tabIndex="0" onDoubleClick={this.handleDoubleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} className={klass}>
