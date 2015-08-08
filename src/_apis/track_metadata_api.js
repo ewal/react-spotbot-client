@@ -15,6 +15,7 @@ import CacheStore from '_stores/cache_store';
  */
 export default {
 
+  isLoading: false,
   /**
    * Fetch information for a single track
    * @param {string} trackId - A track id
@@ -23,15 +24,23 @@ export default {
 
     return new Promise((resolve, reject) => {
 
+      if(this.isLoading) {
+        console.log("already loading");
+        return resolve({});
+      }
+
+      this.isLoading = true;
       let cacheKey = 'track_' + trackId;
       let findInCache = CacheStore.get(cacheKey);
       if(!_.isUndefined(findInCache)) {
+        this.isLoading = false;
         return resolve(findInCache.data);
       }
 
       request.get('https://api.spotify.com/v1/tracks/' + trackId)
       .end((error, response) => {
         if(response.ok) {
+          this.isLoading = false;
           CacheStore.set(cacheKey, response.body);
           resolve(response.body);
         }
