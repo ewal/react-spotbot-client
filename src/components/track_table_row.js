@@ -46,6 +46,10 @@ class Track extends React.Component {
     }
   }
 
+  handleDoubleClick(e) {
+    FirebaseRef.child('queue').push({uri: this.props.track.uri});
+  }
+
   hiddenCell() {
     return <td className="hide" />;
   }
@@ -103,7 +107,7 @@ class Track extends React.Component {
         klass = classNames({ "current-track": CurrentTrackStore.get().id === track.id });
 
     return (
-      <tr tabIndex="0" onKeyUp={this.handleKeyUp.bind(this)} className={klass}>
+      <tr tabIndex="0" onDoubleClick={this.handleDoubleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} className={klass}>
         {this.imageCell()}
         {this.indexCell()}
         <td>{track.name}</td>
