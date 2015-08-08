@@ -26,8 +26,10 @@ table {
       outline-width: 1px;
     }
 
-    .current-track td {
-      color: themeColor(1);
+    .current-track {
+      td, a {
+        color: themeColor(1);
+      }
     }
 
     td {
