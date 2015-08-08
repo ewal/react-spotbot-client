@@ -16,9 +16,9 @@ import classNames from 'classnames';
 import FirebaseRef from 'firebase_ref';
 import utils from 'utils';
 
-import CurrentTrackStore from '_stores/current_track_store';
-
 import CurrentTrackActions from '_actions/current_track_actions';
+import QueueActions from '_actions/queue_actions';
+import CurrentTrackStore from '_stores/current_track_store';
 
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
@@ -35,9 +35,30 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+
     FirebaseRef.child('player/current_track').on('value', (snapshot) => {
+      let currentTrack = CurrentTrackStore.get();
       let trackId = utils.spotify.parseId(snapshot.val().uri);
-      CurrentTrackActions.set(trackId);
+      if(!_.isEmpty(currentTrack)) {
+        // Too many updates from Firebase. We don't want to call Spotifys api for each update.
+        if(currentTrack.id !== trackId) {
+          CurrentTrackActions.set(trackId);
+        }
+      }
+      else {
+        CurrentTrackActions.set(trackId);
+      }
+    });
+
+    FirebaseRef.child('queue').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        let uris = _.toArray(val);
+        let ids = uris.map((obj) => {
+          return utils.spotify.parseId(obj.uri);
+        });
+        QueueActions.set(ids);
+      }
     });
   }
 

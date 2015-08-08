@@ -6,6 +6,7 @@ import Track from 'components/track_table_row';
 import TableHeader from 'components/track_table_header';
 import TrackMetadataApi from '_apis/track_metadata_api';
 import utils from 'utils';
+import QueueStore from '_stores/queue_store';
 
 class QueueContainer extends React.Component {
 
@@ -18,32 +19,15 @@ class QueueContainer extends React.Component {
   }
 
   componentDidMount() {
-    FirebaseRef.child('queue').on('value', this.onQueueChange.bind(this));
+    this.unsubscribe = QueueStore.listen(this.onQueueChange.bind(this));
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
+    this.unsubscribe();
   }
 
-  onQueueChange(snapshot) {
-    // TODO: is toArray the right way to go?
-    let val = _.toArray(snapshot.val());
-    let uris = _.pluck(val, 'uri');
-
-    if(!_.isEmpty(val) && !_.isNull(val)) {
-
-      let trackIds = uris.map(uri => {
-        return utils.spotify.parseId(uri);
-      });
-
-      TrackMetadataApi.tracks(trackIds).then((response) => {
-        this.setState({
-          tracks: response.tracks
-        });
-      }).catch((message) => {
-        throw new Error(message);
-      });
-    }
+  onQueueChange() {
+    this.setState({ tracks: QueueStore.get().tracks });
   }
 
   renderTable() {
