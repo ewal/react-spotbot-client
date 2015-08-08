@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Badge, Button } from 'react-bootstrap';
 import ReactRouterBootstrap from 'react-router-bootstrap';
 import FirebaseRef from 'firebase_ref';
+import _ from 'lodash';
 
 let NavItemLink = ReactRouterBootstrap.NavItemLink;
 
@@ -24,8 +25,13 @@ class NavigationContainer extends React.Component {
   }
 
   onQueueChange(snapshot) {
-    let val = _.toArray(snapshot.val());
-    this.setState({ queueSize: val.length });
+    let val = snapshot.val();
+    if(_.isNull(val)) {
+      this.setState({ queueSize: 0 });
+    }
+    else {
+      this.setState({ queueSize: _.toArray(val).length });
+    }
   }
 
   handleToggleSearch(e) {

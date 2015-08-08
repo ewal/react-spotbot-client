@@ -17,7 +17,6 @@ import FirebaseRef from 'firebase_ref';
 import utils from 'utils';
 
 import CurrentTrackActions from '_actions/current_track_actions';
-import QueueActions from '_actions/queue_actions';
 import CurrentTrackStore from '_stores/current_track_store';
 
 let RouteHandler = Router.RouteHandler,
@@ -47,17 +46,6 @@ class App extends React.Component {
       }
       else {
         CurrentTrackActions.set(trackId);
-      }
-    });
-
-    FirebaseRef.child('queue').on('value', (snapshot) => {
-      let val = snapshot.val();
-      if(!_.isNull(val)) {
-        let uris = _.toArray(val);
-        let ids = uris.map((obj) => {
-          return utils.spotify.parseId(obj.uri);
-        });
-        QueueActions.set(ids);
       }
     });
   }

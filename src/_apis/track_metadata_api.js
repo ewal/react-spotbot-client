@@ -25,7 +25,6 @@ export default {
     return new Promise((resolve, reject) => {
 
       if(this.isLoading) {
-        console.log("already loading");
         return resolve({});
       }
 

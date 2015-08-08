@@ -6,7 +6,6 @@ import Track from 'components/track_table_row';
 import TableHeader from 'components/track_table_header';
 import TrackMetadataApi from '_apis/track_metadata_api';
 import utils from 'utils';
-import QueueStore from '_stores/queue_store';
 
 class QueueContainer extends React.Component {
 
@@ -19,15 +18,31 @@ class QueueContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = QueueStore.listen(this.onQueueChange.bind(this));
+    FirebaseRef.child('queue').on('value', this.onQueueChange.bind(this));
   }
 
   componentWillUnmount() {
-    this.unsubscribe();
+    FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
   }
 
-  onQueueChange() {
-    this.setState({ tracks: QueueStore.get().tracks });
+  onQueueChange(snapshot) {
+    let val = snapshot.val();
+    if(_.isNull(val)) {
+      this.setState({ tracks: [] });
+    }
+    else {
+      let data = _.toArray(val);
+      let trackIds = data.map((item) => {
+        return utils.spotify.parseId(item.uri);
+      });
+      TrackMetadataApi.tracks(trackIds)
+      .then((response) => {
+        this.setState({ tracks: response.tracks });
+      })
+      .catch((message) => {
+        throw new Error(message);
+      });
+    }
   }
 
   renderTable() {
