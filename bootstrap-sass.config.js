@@ -50,7 +50,7 @@ module.exports = {
     'mixins': true,
 
     'normalize': true,
-    'print': true,
+    'print': false,
     'glyphicons': false,
 
     'scaffolding': true,
@@ -74,12 +74,12 @@ module.exports = {
     'badges': true,
     'jumbotron': false,
     'thumbnails': true,
-    'alerts': true,
+    'alerts': false,
     'progress-bars': true,
     'media': true,
-    'list-group': true,
-    'panels': true,
-    'wells': true,
+    'list-group': false,
+    'panels': false,
+    'wells': false,
     'responsive-embed': true,
     'close': true,
 
