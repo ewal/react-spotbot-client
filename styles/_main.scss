@@ -15,7 +15,7 @@
 .main-content {
   @include display-flex();
   @include flex(1);
-  flex-direction: row;
+  @include flex-direction(row);
   position: relative;
 
   &.search-visible {

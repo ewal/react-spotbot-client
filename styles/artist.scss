@@ -48,16 +48,17 @@
 }
 
 .image-collage {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
+  @include display-flex();
+  @include flex(1);
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
 
 
   .wrapper {
-    flex-direction: column;
-    display: flex;
-    flex: 0 0 20%;
+    @include display-flex();
+    @include flex(0 0 20%);
+    @include flex-direction(column);
+
     height: 100%;
     padding-bottom: 100%;
     position: relative;

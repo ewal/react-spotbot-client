@@ -5,19 +5,19 @@
 }
 
 .album-list, .artist-list {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
+  @include display-flex();
+  @include flex(1);
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
   margin-left: -8px;
   margin-right: -8px;
 }
 
 .album-item {
 
-  display: flex;
-  flex-direction: column;
-  flex: 0 0 20%;
+  @include display-flex();
+  @include flex(0 0 20%);
+  @include flex-direction(column);
 
   .thumbnail {
     margin: 8px;

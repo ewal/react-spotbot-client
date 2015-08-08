@@ -21,3 +21,17 @@
   -webkit-order: $val;               /* NEW - Chrome */
   order: $val;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
+
+@mixin flex-direction($val: row) {
+   -ms-flex-direction: $val;
+  -moz-flex-direction: $val;
+  -webkit-flex-direction: $val;
+  flex-direction: $val;
+}
+
+@mixin flex-wrap($val: nowrap) {
+   -ms-flex-wrap: $val;
+  -moz-flex-wrap: $val;
+  -webkit-flex-wrap: $val;
+  flex-wrap: $val;
+}
