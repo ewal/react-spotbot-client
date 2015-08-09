@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import ArtistList from 'artist/artist_list';
+import ComponentHeader from 'components/component_header';
 
 class SearchResultArtists extends React.Component {
 
@@ -14,9 +15,7 @@ class SearchResultArtists extends React.Component {
 
     return (
       <div className="component">
-        <header>
-          <h2>Artists</h2>
-        </header>
+        <ComponentHeader title="Artists" />
         <section>
           <ArtistList artists={this.props.artists} />
         </section>

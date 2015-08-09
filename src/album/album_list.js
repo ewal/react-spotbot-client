@@ -17,9 +17,9 @@ class AlbumList extends React.Component {
 
     if(_.isEmpty(this.props.albums)) { return false; }
 
-    let albums = this.props.albums.map((album, index) => {
+    let albums = this.props.albums.map((album) => {
       return (
-        <AlbumItem album={album} key={index} />
+        <AlbumItem album={album} key={album.id} />
       );
     });
 

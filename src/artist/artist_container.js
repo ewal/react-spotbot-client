@@ -6,6 +6,7 @@ import AlbumList from 'album/album_list';
 import TrackList from 'track/track_list';
 import ArtistList from 'artist/artist_list';
 import BackgroundImage from 'components/background_image';
+import ComponentHeader from 'components/component_header';
 
 /**
  * Artist container module
@@ -118,27 +119,19 @@ class ArtistContainer extends React.Component {
           </div>
         </header>
         <div className="component">
-          <header>
-            <h2>Top songs</h2>
-          </header>
+          <ComponentHeader title="Top songs" />
           <TrackList tracks={this.state.topTracks} image album />
         </div>
         <div className="component">
-          <header>
-            <h2>Related artists</h2>
-          </header>
+          <ComponentHeader title="Related artists" />
           <ArtistList artists={this.state.relatedArtists} />
         </div>
         <div className="component">
-          <header>
-            <h2>Singles</h2>
-          </header>
+          <ComponentHeader title="Singles" />
           <AlbumList albums={this.state.singles} />
         </div>
         <div className="component">
-          <header>
-            <h2>Albums</h2>
-          </header>
+          <ComponentHeader title="Albums" />
           <AlbumList albums={this.state.albums} />
         </div>
       </div>

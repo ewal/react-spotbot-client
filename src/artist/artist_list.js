@@ -14,9 +14,9 @@ class ArtistList extends React.Component {
 
   render() {
     let offset = _.take(this.props.artists, 5);
-    let artists = offset.map((artist, index) => {
+    let artists = offset.map((artist) => {
       return (
-        <ArtistItem artist={artist} key={index} />
+        <ArtistItem artist={artist} key={artist.id} />
       );
     });
 

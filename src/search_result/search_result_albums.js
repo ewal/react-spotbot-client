@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import AlbumList from 'album/album_list';
+import ComponentHeader from 'components/component_header';
 
 class SearchResultAlbums extends React.Component {
 
@@ -14,9 +15,7 @@ class SearchResultAlbums extends React.Component {
 
     return (
       <div className="component">
-        <header>
-          <h2>Albums</h2>
-        </header>
+        <ComponentHeader title="Albums" />
         <section>
           <AlbumList albums={this.props.albums} />
         </section>
