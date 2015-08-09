@@ -11,7 +11,7 @@ class StarPlaylist extends React.Component {
 
     this.state = {
       isStarred: false,
-      rawVal: []
+      refKey: null
     };
   }
 
@@ -24,19 +24,29 @@ class StarPlaylist extends React.Component {
   }
 
   onStarredChange(snapshot) {
-    let items = _.toArray(snapshot.val());
-    let starred = _.findWhere(items, { uri: this.props.uri });
-    console.log(starred);
-    // TODO: fix the setState bug.
-    this.setState({
-      isStarred: !_.isUndefined(starred),
-      rawVal: snapshot.val()
-    });
+
+    let starred = false;
+    if(!_.isNull(snapshot.val())) {
+      snapshot.forEach((child) => {
+        let key = child.key();
+        let val = child.val();
+        if(val.uri === this.props.uri) {
+          this.setState({
+            isStarred: true,
+            refKey: key
+          });
+          starred = true;
+        }
+      });
+      if(!starred) {
+        this.setState({ isStarred: false, refKey: null });
+      }
+    }
   }
 
   toggleStarPlaylist() {
     if(this.state.isStarred) {
-      FirebaseRef.child('starred/' + _.keys(this.state.rawVal)[0]).set(null);
+      FirebaseRef.child('starred/' + this.state.refKey).remove();
     }
     else {
       FirebaseRef.child('starred').push({ uri: this.props.uri, type: this.props.type, name: this.props.name });

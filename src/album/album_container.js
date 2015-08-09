@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import BackgroundImage from 'components/background_image';
 import TrackList from 'track/track_list';
+import StarPlaylist from 'components/star_playlist';
 
 /**
  * Album container module
@@ -83,6 +84,7 @@ class AlbumContainer extends React.Component {
             </div>
             <div className="actions">
               <Button bsStyle="primary" onClick={this.handleClick.bind(this)}>Play album</Button>
+              <StarPlaylist uri={album.uri} type="album" name={album.name} />
             </div>
           </div>
         </header>

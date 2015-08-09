@@ -56,7 +56,7 @@ class NavigationContainer extends React.Component {
             <span className="sr-only">Queue</span>
             <Badge title="Songs in queue" className="in-queue">{this.state.queueSize}</Badge>
           </NavItemLink>
-          <NavItemLink to='starred' className="hide">
+          <NavItemLink to="starred">
             <span className="sr-only">Starred</span>
             <i className="fa fa-star" />
           </NavItemLink>
