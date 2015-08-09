@@ -1,7 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
 import utils from 'utils';
-import { Link } from 'react-router';
 import ArtistMetadataApi from '_apis/artist_metadata_api';
 import AlbumList from 'album/album_list';
 import TrackList from 'track/track_list';
@@ -104,9 +103,6 @@ class ArtistContainer extends React.Component {
 
     let artist = this.state.artist;
     if(_.isEmpty(artist)) { return false; }
-
-    // TODO:
-    // - mashup background image of cover art
 
     return (
       <div className="artist-container container-fluid">

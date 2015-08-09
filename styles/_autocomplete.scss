@@ -6,25 +6,28 @@
   }
 
   dd {
+    @include display-flex();
     background: $gray-dark;
     margin-bottom: 1px;
 
     .info {
-      display: inline-block;
       padding: 8px;
     }
 
     .bg-image {
       width: 33px;
       height: 33px;
-      float: left;
       background-size: cover;
+      @include display-flex();
+      @include flex(0 0 33px);
+      align-self: center;
 
       &.artist {
         width: 23px;
         height: 23px;
         margin: 5px 0 0 5px;
         border-radius: 100%;
+        @include flex(0 0 23px);
       }
     }
   }

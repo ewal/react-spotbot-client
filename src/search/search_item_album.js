@@ -14,10 +14,11 @@ class SearchItemAlbum extends SearchItem {
 
     let klass = classNames('album', { 'active': (this.props.currentIndex === this.props.index) });
     let item = this.props.item;
+    let imageKlasses = classNames('bg-image', { 'hide': _.isUndefined(item.images[2]) } );
 
     return (
       <dd className={klass}>
-        <BackgroundImage image={item.images[2]} classNames="bg-image" />
+        <BackgroundImage image={item.images[2]} classNames={imageKlasses} />
         <span className="info">
           <Link to="album" params={{ id: item.id }} onClick={this.handleClick.bind(this)}>
             {item.name}
