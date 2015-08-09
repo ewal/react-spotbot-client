@@ -3,10 +3,10 @@ import _ from 'lodash';
 import utils from 'utils';
 import { Link } from 'react-router';
 import ArtistMetadataApi from '_apis/artist_metadata_api';
-import ArtistTopTracks from './artist_top_tracks';
 import AlbumList from 'album/album_list';
-import BackgroundImage from 'components/background_image';
+import TrackList from 'track/track_list';
 import ArtistList from 'artist/artist_list';
+import BackgroundImage from 'components/background_image';
 
 /**
  * Artist container module
@@ -22,7 +22,8 @@ class ArtistContainer extends React.Component {
       artist: {},
       albums: [],
       singles: [],
-      relatedArtists: []
+      relatedArtists: [],
+      topTracks: []
     };
   }
 
@@ -63,6 +64,14 @@ class ArtistContainer extends React.Component {
     ArtistMetadataApi.relatedArtists(id).then((response) => {
       this.setState({
         relatedArtists: response.artists
+      });
+    }).catch((message) => {
+      throw new Error(message);
+    });
+
+    ArtistMetadataApi.topTracks(id).then((response) => {
+      this.setState({
+        topTracks: response.tracks
       });
     }).catch((message) => {
       throw new Error(message);
@@ -112,7 +121,12 @@ class ArtistContainer extends React.Component {
             </h1>
           </div>
         </header>
-        <ArtistTopTracks artistId={this.state.artist.id} />
+        <div className="component">
+          <header>
+            <h2>Top songs</h2>
+          </header>
+          <TrackList tracks={this.state.topTracks} image album />
+        </div>
         <div className="component">
           <header>
             <h2>Related artists</h2>

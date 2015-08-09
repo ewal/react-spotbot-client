@@ -1,5 +1,6 @@
 import React from 'react';
 import AlbumItem from 'album/album_item';
+import _ from 'lodash';
 
 /**
  * Album list module
@@ -13,6 +14,9 @@ class AlbumList extends React.Component {
   }
 
   render() {
+
+    if(_.isEmpty(this.props.albums)) { return false; }
+
     let albums = this.props.albums.map((album, index) => {
       return (
         <AlbumItem album={album} key={index} />

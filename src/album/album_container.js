@@ -2,11 +2,10 @@ import React from 'react';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import { Link } from 'react-router';
-import Track from 'components/track_table_row';
-import { Table, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
-import TableHeader from 'components/track_table_header';
 import BackgroundImage from 'components/background_image';
+import TrackList from 'track/track_list';
 
 /**
  * Album container module
@@ -36,34 +35,16 @@ class AlbumContainer extends React.Component {
     super(props);
 
     this.state = {
-      album: {},
-      currentTrack: {}
+      album: {}
     };
   }
 
   componentDidMount() {
     this.fetchAlbum(this.props.params.id);
-    FirebaseRef.child('player/current_track').on('value', this.onTrackChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FirebaseRef.child('player/current_track').off('value', this.onTrackChange.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
     this.fetchAlbum(nextProps.params.id);
-  }
-
-  componentDidUpdate(prevProps) {
-    let row = React.findDOMNode(this.refs.search_active);
-    if(!_.isEmpty(this.props.query) && !_.isNull(row)) {
-      row.focus();
-    }
-  }
-
-  onTrackChange(snapshot) {
-    let val = snapshot.val();
-    this.setState({ currentTrack: val });
   }
 
   handleClick() {
@@ -85,15 +66,6 @@ class AlbumContainer extends React.Component {
     if(_.isEmpty(this.state.album)) { return false; }
 
     let album = this.state.album;
-    let tracks = album.tracks.items.map((track, index) => {
-      let ref = 'item_' + index;
-      if(!_.isEmpty(this.props.query)) {
-        if(this.props.query.trackId === track.id) {
-          ref = 'search_active';
-        }
-      }
-      return <Track track={track} key={index} index={index} ref={ref} currentTrack={this.state.currentTrack} />;
-    });
 
     let releaseDate = utils.date.year(album.release_date);
 
@@ -114,12 +86,7 @@ class AlbumContainer extends React.Component {
             </div>
           </div>
         </header>
-        <Table hover>
-          <TableHeader index />
-          <tbody>
-            {tracks}
-          </tbody>
-        </Table>
+        <TrackList tracks={album.tracks.items} query={this.props.query} />
       </div>
     );
   }

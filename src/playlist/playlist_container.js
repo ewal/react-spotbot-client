@@ -1,13 +1,12 @@
 import React from 'react';
-import { Table, Button, Modal, Input } from 'react-bootstrap';
+import { Button, Modal, Input } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
-import Track from 'components/track_table_row';
-import TableHeader from 'components/track_table_header';
 import utils from 'utils';
 import { Link } from 'react-router';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import TrackMetadataApi from '_apis/track_metadata_api';
+import TrackList from 'track/track_list';
 
 class PlaylistContainer extends React.Component {
 
@@ -19,19 +18,16 @@ class PlaylistContainer extends React.Component {
       tracks: [],
       tyoe: '',
       uri: '',
-      showModal: false,
-      currentTrack: {}
+      showModal: false
     };
   }
 
   componentDidMount() {
     FirebaseRef.child('playlist').on('value', this.onPlaylistChange.bind(this));
-    FirebaseRef.child('player/current_track').on('value', this.onTrackChange.bind(this));
   }
 
   componentWillUnmount() {
     FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
-    FirebaseRef.child('player/current_track').off('value', this.onTrackChange.bind(this));
   }
 
   onTrackChange(snapshot) {
@@ -76,36 +72,14 @@ class PlaylistContainer extends React.Component {
   }
 
   renderPlaylist() {
-
-    let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} index={index} track={track} album artist image currentTrack={this.state.currentTrack} />
-    });
-
     return (
-      <Table hover>
-        <caption>{this.state.playlistName}</caption>
-        <TableHeader index album artist image />
-        <tbody>
-          {tracks}
-        </tbody>
-      </Table>
+      <TrackList tracks={this.state.tracks} album artist image header caption={this.state.playlistName} />
     );
   }
 
   renderAlbum() {
-
-    let tracks = this.state.tracks.map((track, index) => {
-      return <Track key={index} index={index} track={track} currentTrack={this.state.currentTrack} />
-    });
-
     return (
-      <Table hover>
-        <caption>{this.state.playlistName}</caption>
-        <TableHeader index />
-        <tbody>
-          {tracks}
-        </tbody>
-      </Table>
+      <TrackList tracks={this.state.tracks} caption={this.state.playlistName} />
     );
   }
 

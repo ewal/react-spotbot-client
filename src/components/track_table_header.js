@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 class TableHeader extends React.Component {
 
@@ -30,8 +31,10 @@ class TableHeader extends React.Component {
       indexCell = this.cell('#', '');
     }
 
+    let klass = classNames({ 'hide': !this.props.header });
+
     return (
-      <thead>
+      <thead className={klass}>
         <tr>
           {imageCell}
           {indexCell}

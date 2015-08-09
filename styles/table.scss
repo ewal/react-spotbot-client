@@ -20,6 +20,12 @@ table {
 
   tbody {
 
+    tr:first-child {
+      td {
+        border-top: none;
+      }
+    }
+
     tr:focus {
       outline-style: solid;
       outline-color: themeColor(1);
