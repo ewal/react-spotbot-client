@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import TableHeader from 'components/track_table_header';
 import _ from 'lodash';
-import Track from 'components/track_table_row';
+import TrackItem from 'track/track_item';
 import FirebaseRef from 'firebase_ref';
 
 /**
@@ -57,7 +57,8 @@ class TrackList extends React.Component {
       image: this.props.image,
       album: this.props.album,
       artist: this.props.artist,
-      header: this.props.header
+      header: this.props.header,
+      currentTrack: this.state.currentTrack
     };
 
     let tracks = this.props.tracks.map((track, index) => {
@@ -67,7 +68,7 @@ class TrackList extends React.Component {
           ref = 'search_active';
         }
       }
-      return <Track ref={ref} {...props} track={track} index={index} key={track.id} currentTrack={this.state.currentTrack} />;
+      return <TrackItem ref={ref} {...props} track={track} index={index} key={track.id} />;
     });
 
     return (

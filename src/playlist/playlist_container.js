@@ -99,13 +99,7 @@ class PlaylistContainer extends React.Component {
 
   render() {
 
-    if(_.isEmpty(this.state.tracks)) { return false; }
-
-    let tracks = '',
-        playlistType = '';
-
-    // TODO:
-    // - handle keyboard up down. set active item. pass prop function
+    let playlistType = '';
 
     if(this.state.type === 'album') {
       playlistType = this.renderAlbum();
