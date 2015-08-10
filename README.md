@@ -1,5 +1,5 @@
 # react-spotbot-client
-A Spotbot client written in ReactJS
+A [Spotbot client](https://github.com/himynameisjonas/spotbot-client) written in ReactJS.
 
 ## What you need
 1. Install spotbot-server (https://github.com/himynameisjonas/spotbot)
