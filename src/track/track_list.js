@@ -15,17 +15,21 @@ class TrackList extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       currentTrack: {}
     };
   }
 
   componentDidMount() {
-    FirebaseRef.child('player/current_track').on('value', this.onTrackChange.bind(this));
+    this.ref = FirebaseRef.child('player/current_track').on('value', (snapshot) => {
+      let val = snapshot.val();
+      this.setState({ currentTrack: val });
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('player/current_track').off('value', this.onTrackChange.bind(this));
+    FirebaseRef.child('player/current_track').off('value', this.ref);
   }
 
   componentDidUpdate(prevProps) {
@@ -33,11 +37,6 @@ class TrackList extends React.Component {
     if(!_.isEmpty(this.props.query) && !_.isNull(row)) {
       row.focus();
     }
-  }
-
-  onTrackChange(snapshot) {
-    let val = snapshot.val();
-    this.setState({ currentTrack: val });
   }
 
   caption() {

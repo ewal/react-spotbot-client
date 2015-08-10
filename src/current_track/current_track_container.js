@@ -9,37 +9,36 @@ class CurrentTrackContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       track: {}
     };
   }
 
   componentDidMount() {
-    FirebaseRef.child('player/current_track').on('value', this.onTrackChange.bind(this));
+    this.ref = FirebaseRef.child('player/current_track').on('value', (snapshot) => {
+      let val = snapshot.val();
+      let trackId = utils.spotify.parseId(val.uri);
+      TrackMetadataApi.track(trackId)
+      .then((response) => {
+        // TODO: what's the problem here?
+        // Suspect spotbot server is doint something,
+        // Sometimes we get an array, sometimes an object
+        if(_.isArray(response.tracks)) {
+          this.setState({ track: response.tracks[0] });
+        }
+        else {
+          this.setState({ track: response });
+        }
+      })
+      .catch((message) => {
+        throw new Error(message);
+      });
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('player/current_track').off('value', this.onTrackChange.bind(this));
-  }
-
-  onTrackChange(snapshot) {
-    let val = snapshot.val();
-    let trackId = utils.spotify.parseId(val.uri);
-    TrackMetadataApi.track(trackId)
-    .then((response) => {
-      // TODO: what's the problem here?
-      // Suspect spotbot server is doint something,
-      // Sometimes we get an array, sometimes an object
-      if(_.isArray(response.tracks)) {
-        this.setState({ track: response.tracks[0] });
-      }
-      else {
-        this.setState({ track: response });
-      }
-    })
-    .catch((message) => {
-      throw new Error(message);
-    });
+    FirebaseRef.child('player/current_track').off('value', this.ref);
   }
 
   render() {

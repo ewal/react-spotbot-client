@@ -9,6 +9,7 @@ class StarredPlaylistsContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.ref = null;
 
     this.state = {
       playlists: [],
@@ -17,33 +18,30 @@ class StarredPlaylistsContainer extends React.Component {
   }
 
   componentDidMount() {
-    FirebaseRef.child('starred').on('value', this.onStarredChange.bind(this));
+    this.ref = FirebaseRef.child('starred').on('value', (snapshot) => {
+      let snap = _.toArray(snapshot.val());
+      let albums = _.pluck(_.where(snap, { type: 'album' }), 'uri');
+      let albumIds = albums.map((uri) => {
+        return utils.spotify.parseId(uri);
+      });
+
+      let playlists = _.where(snap, { type: 'user' });
+      this.setState({ playlists: playlists });
+
+      if(albumIds.length === 0) { return; }
+
+      AlbumMetadataApi.albums(albumIds).then((response) => {
+        this.setState({
+          albums: response.albums
+        });
+      }).catch((message) => {
+        throw new Error(message);
+      });
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('starred').off('value', this.onStarredChange.bind(this));
-  }
-
-  onStarredChange(snapshot) {
-
-    let snap = _.toArray(snapshot.val());
-    let albums = _.pluck(_.where(snap, { type: 'album' }), 'uri');
-    let albumIds = albums.map((uri) => {
-      return utils.spotify.parseId(uri);
-    });
-
-    let playlists = _.where(snap, { type: 'user' });
-    this.setState({ playlists: playlists });
-
-    if(albumIds.length === 0) { return; }
-
-    AlbumMetadataApi.albums(albumIds).then((response) => {
-      this.setState({
-        albums: response.albums
-      });
-    }).catch((message) => {
-      throw new Error(message);
-    });
+    FirebaseRef.child('starred').off('value', this.ref);
   }
 
   render() {

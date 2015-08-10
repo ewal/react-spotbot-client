@@ -13,6 +13,8 @@ class PlaylistContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
+
     this.state = {
       playlistName: '',
       tracks: [],
@@ -23,56 +25,52 @@ class PlaylistContainer extends React.Component {
   }
 
   componentDidMount() {
-    FirebaseRef.child('playlist').on('value', this.onPlaylistChange.bind(this));
+    this.ref = FirebaseRef.child('playlist').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        let type = utils.spotify.uriType(val.uri);
+        let albumId = utils.spotify.parseId(val.uri);
+
+        if(type === 'album') {
+          AlbumMetadataApi.album(albumId).then((response) => {
+            this.setState({
+              playlistName: val.name,
+              tracks: response.tracks.items,
+              type: type,
+              uri: val.uri
+            });
+          }).catch((message) => {
+            throw new Error(message);
+          });
+        }
+        else {
+          let trackIds = val.tracks.map(uri => {
+            return utils.spotify.parseId(uri);
+          });
+          TrackMetadataApi.tracks(trackIds).then((response) => {
+            this.setState({
+              playlistName: val.name,
+              tracks: response.tracks,
+              type: type,
+              uri: val.uri
+            });
+          }).catch((message) => {
+            throw new Error(message);
+          });
+        }
+      }
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
+    FirebaseRef.child('playlist').off('value', this.ref);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     return nextState.uri !== this.state.uri;
   }
 
-  onTrackChange(snapshot) {
-    let val = snapshot.val();
-    this.setState({ currentTrack: val });
-  }
-
   onPlaylistChange(snapshot) {
-    let val = snapshot.val();
-    if(!_.isNull(val)) {
-      let type = utils.spotify.uriType(val.uri);
-      let albumId = utils.spotify.parseId(val.uri);
-
-      if(type === 'album') {
-        AlbumMetadataApi.album(albumId).then((response) => {
-          this.setState({
-            playlistName: val.name,
-            tracks: response.tracks.items,
-            type: type,
-            uri: val.uri
-          });
-        }).catch((message) => {
-          throw new Error(message);
-        });
-      }
-      else {
-        let trackIds = val.tracks.map(uri => {
-          return utils.spotify.parseId(uri);
-        });
-        TrackMetadataApi.tracks(trackIds).then((response) => {
-          this.setState({
-            playlistName: val.name,
-            tracks: response.tracks,
-            type: type,
-            uri: val.uri
-          });
-        }).catch((message) => {
-          throw new Error(message);
-        });
-      }
-    }
   }
 
   renderPlaylist() {
