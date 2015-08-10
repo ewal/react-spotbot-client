@@ -30,6 +30,10 @@ class PlaylistContainer extends React.Component {
     FirebaseRef.child('playlist').off('value', this.onPlaylistChange.bind(this));
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.uri !== this.state.uri;
+  }
+
   onTrackChange(snapshot) {
     let val = snapshot.val();
     this.setState({ currentTrack: val });

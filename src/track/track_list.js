@@ -68,7 +68,8 @@ class TrackList extends React.Component {
           ref = 'search_active';
         }
       }
-      return <TrackItem ref={ref} {...props} track={track} index={index} key={track.id} />;
+      let isCurrentTrack = this.state.currentTrack.uri === track.uri;
+      return <TrackItem isCurrentTrack={isCurrentTrack} ref={ref} {...props} track={track} index={index} key={track.id + index} />;
     });
 
     return (
