@@ -14,6 +14,11 @@ SPOTIFY_SEARCH_LIMIT=10
 SPOTIFY_SEARCH_TYPES=track,album,artist
 ```
 
+### Install required software for react-spotbot-client
+install node.js (https://nodejs.org/)
+install gulp ```npm install gulp -g```
+install dependencies ```npm install```
+
 ### Start dev server
 run ```gulp```
 
