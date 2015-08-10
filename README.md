@@ -2,8 +2,8 @@
 A [Spotbot client](https://github.com/himynameisjonas/spotbot-client) written in ReactJS.
 
 ## What you need
-1. Install spotbot-server (https://github.com/himynameisjonas/spotbot)
-2. Create a Firebase application (https://www.firebase.com)
+1. Install the [spotbot-server](https://github.com/himynameisjonas/spotbot)
+2. Create a [Firebase](https://www.firebase.com) application
 
 ## .env variables
 ```
