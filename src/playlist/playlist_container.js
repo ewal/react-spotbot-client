@@ -67,10 +67,7 @@ class PlaylistContainer extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.uri !== this.state.uri;
-  }
-
-  onPlaylistChange(snapshot) {
+    return nextState.uri !== this.state.uri || nextState.showModal !== this.state.showModal;
   }
 
   renderPlaylist() {
