@@ -9,34 +9,50 @@ class StarPlaylist extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       isStarred: false,
-      rawVal: []
+      refKey: null,
+      snapshot: {}
     };
   }
 
   componentDidMount() {
-    FirebaseRef.child('starred').on('value', this.onStarredChange.bind(this));
+    this.ref = FirebaseRef.child('starred').on('value', (snapshot) => {
+      let starred = false;
+      if(!_.isNull(snapshot.val())) {
+        snapshot.forEach((child) => {
+          let key = child.key();
+          let val = child.val();
+          if(val.uri === this.props.uri) {
+            starred = true;
+            this.setState({
+              isStarred: true,
+              refKey: key
+            });
+          }
+        });
+        if(!starred) {
+          this.setState({ isStarred: false, refKey: null, snapshot: {} });
+        }
+      }
+      else {
+        this.setState({ isStarred: false, refKey: null, snapshot: {} });
+      }
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('starred').off('value', this.onStarredChange.bind(this));
+    FirebaseRef.child('starred').off('value', this.ref);
   }
 
-  onStarredChange(snapshot) {
-    let items = _.toArray(snapshot.val());
-    let starred = _.findWhere(items, { uri: this.props.uri });
-    console.log(starred);
-    // TODO: fix the setState bug.
-    this.setState({
-      isStarred: !_.isUndefined(starred),
-      rawVal: snapshot.val()
-    });
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.uri !== nextProps.uri || this.state.isStarred !== nextState.isStarred;
   }
 
   toggleStarPlaylist() {
     if(this.state.isStarred) {
-      FirebaseRef.child('starred/' + _.keys(this.state.rawVal)[0]).set(null);
+      FirebaseRef.child('starred').child(this.state.refKey).remove();
     }
     else {
       FirebaseRef.child('starred').push({ uri: this.props.uri, type: this.props.type, name: this.props.name });

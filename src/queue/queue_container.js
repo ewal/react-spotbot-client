@@ -10,37 +10,36 @@ class QueueContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       tracks: []
     };
   }
 
   componentDidMount() {
-    FirebaseRef.child('queue').on('value', this.onQueueChange.bind(this));
+    this.ref = FirebaseRef.child('queue').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(_.isNull(val)) {
+        this.setState({ tracks: [] });
+      }
+      else {
+        let data = _.toArray(val);
+        let trackIds = data.map((item) => {
+          return utils.spotify.parseId(item.uri);
+        });
+        TrackMetadataApi.tracks(trackIds)
+        .then((response) => {
+          this.setState({ tracks: response.tracks });
+        })
+        .catch((message) => {
+          throw new Error(message);
+        });
+      }
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
-  }
-
-  onQueueChange(snapshot) {
-    let val = snapshot.val();
-    if(_.isNull(val)) {
-      this.setState({ tracks: [] });
-    }
-    else {
-      let data = _.toArray(val);
-      let trackIds = data.map((item) => {
-        return utils.spotify.parseId(item.uri);
-      });
-      TrackMetadataApi.tracks(trackIds)
-      .then((response) => {
-        this.setState({ tracks: response.tracks });
-      })
-      .catch((message) => {
-        throw new Error(message);
-      });
-    }
+    FirebaseRef.child('queue').off('value', this.ref);
   }
 
   render() {

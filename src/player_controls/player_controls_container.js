@@ -16,9 +16,23 @@ class PlayerControlsContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       playing: false
     };
+  }
+
+  componentDidMount() {
+    this.ref = FirebaseRef.child('player/playing').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        this.setState({ playing: val });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    FirebaseRef.child('player/playing').off('value', this.ref);
   }
 
   togglePlay() {
@@ -27,21 +41,6 @@ class PlayerControlsContainer extends React.Component {
 
   playNext() {
     FirebaseRef.child('player/next').set(true);
-  }
-
-  onPlayerChange(snapshot) {
-    let val = snapshot.val();
-    if(!_.isNull(val)) {
-      this.setState({ playing: val });
-    }
-  }
-
-  componentDidMount() {
-    FirebaseRef.child('player/playing').on('value', this.onPlayerChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FirebaseRef.child('player/playing').off('value', this.onPlayerChange.bind(this));
   }
 
   render() {

@@ -11,6 +11,7 @@ class VolumeControl extends React.Component {
 
   constructor(props) {
     super(props);
+    this.ref = null;
 
     this.state = {
       volume: -1
@@ -22,17 +23,15 @@ class VolumeControl extends React.Component {
     }, 200);
   }
 
-  onVolumeChange(snapshot) {
-    let val = snapshot.val();
-    this.setState({ volume: val });
-  }
-
   componentDidMount() {
-    FirebaseRef.child('volume').on('value', this.onVolumeChange.bind(this));
+    this.ref = FirebaseRef.child('volume').on('value', (snapshot) => {
+      let val = snapshot.val();
+      this.setState({ volume: val });
+    });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('volume').off('value', this.onVolumeChange.bind(this));
+    FirebaseRef.child('volume').off('value', this.ref);
   }
 
   render() {

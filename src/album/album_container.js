@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import BackgroundImage from 'components/background_image';
 import TrackList from 'track/track_list';
+import StarPlaylist from 'components/star_playlist';
 
 /**
  * Album container module
@@ -47,6 +48,10 @@ class AlbumContainer extends React.Component {
     this.fetchAlbum(nextProps.params.id);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.album.id !== this.state.album.id;
+  }
+
   handleClick() {
     FirebaseRef.child('playlist/uri').set(this.state.album.uri);
     FirebaseRef.child('player/next').set(true);
@@ -63,10 +68,9 @@ class AlbumContainer extends React.Component {
   }
 
   render() {
+
     if(_.isEmpty(this.state.album)) { return false; }
-
     let album = this.state.album;
-
     let releaseDate = utils.date.year(album.release_date);
 
     return (
@@ -83,6 +87,7 @@ class AlbumContainer extends React.Component {
             </div>
             <div className="actions">
               <Button bsStyle="primary" onClick={this.handleClick.bind(this)}>Play album</Button>
+              <StarPlaylist uri={album.uri} name={album.name} type="album" />
             </div>
           </div>
         </header>

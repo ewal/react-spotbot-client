@@ -83,17 +83,15 @@ class TrackItem extends React.Component {
     return cell;
   }
 
-  render() {
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.isCurrentTrack !== this.props.isCurrentTrack;
+  }
 
-    let currentTrack = this.props.currentTrack;
-    let currentUri = '';
-    if(!_.isUndefined(currentTrack)) {
-      currentUri = currentTrack.uri;
-    }
+  render() {
 
     let track = this.props.track,
         duration = utils.formatDuration(track.duration_ms),
-        klass = classNames({ "current-track": currentUri === track.uri });
+        klass = classNames({ "current-track": this.props.isCurrentTrack });
 
     return (
       <tr tabIndex="0" onDoubleClick={this.handleDoubleClick.bind(this)} onKeyUp={this.handleKeyUp.bind(this)} className={klass}>

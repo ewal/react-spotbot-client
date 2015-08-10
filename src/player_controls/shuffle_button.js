@@ -7,28 +7,27 @@ class ShuffleButton extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       isShuffle: false
     };
   }
 
-  onShuffleChange(snapshot) {
-    let val = snapshot.val();
-    if(!_.isNull(val)) {
-      this.setState({ isShuffle: val });
-    }
+  componentDidMount() {
+    this.ref = FirebaseRef.child('playlist/shuffle').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        this.setState({ isShuffle: val });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    FirebaseRef.child('playlist/shuffle').off('value', this.ref);
   }
 
   handleClick() {
     FirebaseRef.child('playlist/shuffle').set(!this.state.isShuffle);
-  }
-
-  componentDidMount() {
-    FirebaseRef.child('playlist/shuffle').on('value', this.onShuffleChange.bind(this));
-  }
-
-  componentWillUnmount() {
-    FirebaseRef.child('playlist/shuffle').off('value', this.onShuffleChange.bind(this));
   }
 
   render() {

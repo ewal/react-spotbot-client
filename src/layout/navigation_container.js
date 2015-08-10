@@ -11,27 +11,26 @@ class NavigationContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       queueSize: 0
     };
   }
 
   componentDidMount() {
-    FirebaseRef.child('queue').on('value', this.onQueueChange.bind(this));
+   this.ref = FirebaseRef.child('queue').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(_.isNull(val)) {
+        this.setState({ queueSize: 0 });
+      }
+      else {
+        this.setState({ queueSize: _.toArray(val).length });
+      }
+   });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('queue').off('value', this.onQueueChange.bind(this));
-  }
-
-  onQueueChange(snapshot) {
-    let val = snapshot.val();
-    if(_.isNull(val)) {
-      this.setState({ queueSize: 0 });
-    }
-    else {
-      this.setState({ queueSize: _.toArray(val).length });
-    }
+    FirebaseRef.child('queue').off('value', this.ref);
   }
 
   handleToggleSearch(e) {
@@ -56,7 +55,7 @@ class NavigationContainer extends React.Component {
             <span className="sr-only">Queue</span>
             <Badge title="Songs in queue" className="in-queue">{this.state.queueSize}</Badge>
           </NavItemLink>
-          <NavItemLink to='starred' className="hide">
+          <NavItemLink to="starred">
             <span className="sr-only">Starred</span>
             <i className="fa fa-star" />
           </NavItemLink>

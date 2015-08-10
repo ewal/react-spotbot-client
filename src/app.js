@@ -13,7 +13,6 @@ import ContextMenuTrack from 'components/context_menu_track';
 import CurrentTrackContainer from 'current_track/current_track_container';
 import StarredPlaylistsContainer from 'starred_playlists/starred_playlists_container';
 import classNames from 'classnames';
-import FirebaseRef from 'firebase_ref';
 import utils from 'utils';
 
 let RouteHandler = Router.RouteHandler,
