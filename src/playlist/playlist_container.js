@@ -7,6 +7,7 @@ import { Link } from 'react-router';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import TrackMetadataApi from '_apis/track_metadata_api';
 import TrackList from 'track/track_list';
+import StarPlaylist from 'components/star_playlist';
 
 class PlaylistContainer extends React.Component {
 
@@ -18,7 +19,7 @@ class PlaylistContainer extends React.Component {
     this.state = {
       playlistName: '',
       tracks: [],
-      tyoe: '',
+      type: '',
       uri: '',
       showModal: false
     };
@@ -89,6 +90,7 @@ class PlaylistContainer extends React.Component {
   changePlaylist() {
     let val = this.refs.input_change.getValue();
     FirebaseRef.child('playlist/uri').set(val);
+    FirebaseRef.child('player/next').set(true);
     this.closeModal();
   }
 
@@ -103,11 +105,24 @@ class PlaylistContainer extends React.Component {
       playlistType = this.renderPlaylist();
     }
 
+    let starProps = {
+      uri: this.state.uri,
+      type: this.state.type,
+      name: this.state.playlistName
+    }
+
+    let starButton = '';
+    if(!_.isEmpty(this.state.uri)) {
+      starButton = <StarPlaylist {...starProps} />;
+    }
+
     return (
       <div className="container-fluid">
         <header className="page-header">
           <h1>
-            Playlist <Button bsStyle="link" onClick={this.showModal.bind(this)}>Change playlist</Button>
+            Playlist
+              <Button bsStyle="link" onClick={this.showModal.bind(this)}>Change playlist</Button>
+              {starButton}
           </h1>
         </header>
         <section>

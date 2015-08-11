@@ -4,6 +4,8 @@ import _ from 'lodash';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import AlbumList from 'album/album_list';
+import ComponentHeader from 'components/component_header';
+import StarPlaylistItem from 'starred_playlists/star_playlist_item';
 
 class StarredPlaylistsContainer extends React.Component {
 
@@ -45,10 +47,9 @@ class StarredPlaylistsContainer extends React.Component {
   }
 
   render() {
-    if(_.isEmpty(this.state.playlists) && _.isEmpty(this.state.albums)) { return false; }
 
     let playlists = this.state.playlists.map((playlist, index) => {
-      return <li key={index}>{playlist.name}</li>;
+      return <StarPlaylistItem playlist={playlist} key={index} />;
     });
 
     return (
@@ -58,20 +59,16 @@ class StarredPlaylistsContainer extends React.Component {
         </div>
 
         <div className="component">
-          <header>
-            <h2>Albums</h2>
-          </header>
+          <ComponentHeader title="Albums" />
           <section>
             <AlbumList albums={this.state.albums} />
           </section>
         </div>
 
         <div className="component">
-          <header>
-            <h2>Playlists</h2>
-          </header>
+          <ComponentHeader title="User playlists" />
           <section>
-            <ul>
+            <ul className="list-unstyled">
               {playlists}
             </ul>
           </section>

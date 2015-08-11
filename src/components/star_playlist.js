@@ -1,6 +1,6 @@
 import React from 'react';
 import FirebaseRef from 'firebase_ref';
-import { Button } from 'react-bootstrap';
+import { Button, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import _ from 'lodash';
 import classNames from 'classnames';
 
@@ -60,13 +60,17 @@ class StarPlaylist extends React.Component {
   }
 
   render() {
-
     let klass = classNames('fa', {'fa-star': this.state.isStarred, 'fa-star-o': !this.state.isStarred});
+    let type = (this.props.type === 'album') ? 'album' : 'playlist';
+    let tooltipText = (this.state.isStarred) ? 'Unstar ' + type : 'Star ' + type;
+    let tooltip = <Tooltip>{tooltipText}</Tooltip>;
 
     return (
-      <Button bsStyle="link" onClick={this.toggleStarPlaylist.bind(this)}>
-        <i className={klass} />
-      </Button>
+      <OverlayTrigger placement='top' overlay={tooltip}>
+        <Button bsStyle="link" onClick={this.toggleStarPlaylist.bind(this)}>
+          <i className={klass} />
+        </Button>
+      </OverlayTrigger>
     );
   }
 };
