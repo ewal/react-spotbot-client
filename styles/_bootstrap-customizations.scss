@@ -537,13 +537,13 @@ $nav-pills-active-link-hover-color:      none;
 //** Tooltip text color
 // $tooltip-color:               #fff
 //** Tooltip background color
-// $tooltip-bg:                  #000
+$tooltip-bg:                  themeColor(1);
 // $tooltip-opacity:             .9
 
 //** Tooltip arrow width
 // $tooltip-arrow-width:         5px
 //** Tooltip arrow color
-// $tooltip-arrow-color:         $tooltip-bg
+$tooltip-arrow-color:         $tooltip-bg;
 
 
 //== Popovers
