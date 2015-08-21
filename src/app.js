@@ -14,6 +14,8 @@ import CurrentTrackContainer from 'current_track/current_track_container';
 import StarredPlaylistsContainer from 'starred_playlists/starred_playlists_container';
 import classNames from 'classnames';
 import utils from 'utils';
+import CurrentTrackActions from '_actions/current_track_actions';
+import FirebaseRef from 'firebase_ref';
 
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
@@ -24,9 +26,23 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.ref = null;
     this.state = {
       searchVisible: false
     };
+  }
+
+  componentDidMount() {
+    this.ref = FirebaseRef.child('player').on('value', (snapshot) => {
+      let val = snapshot.val();
+      let trackId = utils.spotify.parseId(val.current_track.uri);
+      CurrentTrackActions.load(trackId);
+      CurrentTrackActions.setStatus({ startedAt: val.current_track.started_at, isPlaying: val.playing });
+    });
+  }
+
+  componentWillUnmount() {
+    FirebaseRef.child('player/current_track').off('value', this.ref);
   }
 
   toggleSearch() {

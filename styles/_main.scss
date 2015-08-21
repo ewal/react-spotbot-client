@@ -133,6 +133,11 @@ input:focus {
   box-shadow: none !important;
 }
 
+.progress {
+  margin: 0;
+  height: 10px;
+}
+
 @import "component";
 @import "album";
 @import "table";
