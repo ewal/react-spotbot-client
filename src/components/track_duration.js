@@ -15,7 +15,7 @@ class TrackDuration extends React.Component {
 
   componentDidMount() {
     if(this.props.isPlaying) {
-      this.timer = setInterval(this.tick.bind(this), 2000);
+      this.timer = setInterval(this.tick.bind(this), 1000);
     }
     else {
       clearInterval(this.timer);
