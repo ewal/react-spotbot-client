@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import TableHeader from 'components/track_table_header';
 import _ from 'lodash';
 import TrackItem from 'track/track_item';
-import FirebaseRef from 'firebase_ref';
+import CurrentTrackStore from '_stores/current_track_store';
 
 /**
  * Track list module
@@ -22,14 +22,16 @@ class TrackList extends React.Component {
   }
 
   componentDidMount() {
-    this.ref = FirebaseRef.child('player/current_track').on('value', (snapshot) => {
-      let val = snapshot.val();
-      this.setState({ currentTrack: val });
+    this.setState({ currentTrack: CurrentTrackStore.getTrack()  });
+    this.unsubscribe = CurrentTrackStore.listen(() => {
+      this.setState({
+        currentTrack: CurrentTrackStore.getTrack()
+      });
     });
   }
 
   componentWillUnmount() {
-    FirebaseRef.child('player/current_track').off('value', this.ref);
+    this.unsubscribe();
   }
 
   componentDidUpdate(prevProps) {

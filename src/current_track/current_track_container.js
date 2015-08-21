@@ -1,8 +1,8 @@
 import React from 'react';
 import utils from 'utils';
 import { Link } from 'react-router';
-import FirebaseRef from 'firebase_ref';
-import TrackMetadataApi from '_apis/track_metadata_api';
+import CurrentTrackStore from '_stores/current_track_store';
+import TrackDuration from 'components/track_duration';
 
 class CurrentTrackContainer extends React.Component {
 
@@ -16,29 +16,20 @@ class CurrentTrackContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.ref = FirebaseRef.child('player/current_track').on('value', (snapshot) => {
-      let val = snapshot.val();
-      let trackId = utils.spotify.parseId(val.uri);
-      TrackMetadataApi.track(trackId)
-      .then((response) => {
-        // TODO: what's the problem here?
-        // Suspect spotbot server is doint something,
-        // Sometimes we get an array, sometimes an object
-        if(_.isArray(response.tracks)) {
-          this.setState({ track: response.tracks[0] });
-        }
-        else {
-          this.setState({ track: response });
-        }
-      })
-      .catch((message) => {
-        throw new Error(message);
+    this.unsubscribe = CurrentTrackStore.listen(() => {
+      this.setState({
+        isPlaying: CurrentTrackStore.get().isPlaying,
+        startedAt: CurrentTrackStore.get().startedAt,
+        track: CurrentTrackStore.getTrack()
       });
     });
   }
 
+  componentWillUpdate() {
+  }
+
   componentWillUnmount() {
-    FirebaseRef.child('player/current_track').off('value', this.ref);
+    this.unsubscribe();
   }
 
   render() {
@@ -51,6 +42,7 @@ class CurrentTrackContainer extends React.Component {
       <div className="current-track-container">
         <div className="thumbnail">
           <img src={track.album.images[1].url} />
+          <TrackDuration currentTrack={this.state.track} startedAt={this.state.startedAt} isPlaying={this.state.isPlaying} />
         </div>
         <h2>{track.name}</h2>
         <h3 className="duration">{duration}</h3>
