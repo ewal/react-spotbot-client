@@ -1,3 +1,9 @@
 .current-track-container {
   padding: $gutter;
+
+  .bg-image {
+    height: 220px;
+    width: 100%;
+    background-size: cover;
+  }
 }

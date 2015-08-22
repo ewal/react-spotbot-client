@@ -3,6 +3,7 @@ import utils from 'utils';
 import { Link } from 'react-router';
 import CurrentTrackStore from '_stores/current_track_store';
 import TrackDuration from 'components/track_duration';
+import BackgroundImage from 'components/background_image';
 
 class CurrentTrackContainer extends React.Component {
 
@@ -38,10 +39,11 @@ class CurrentTrackContainer extends React.Component {
     let track = this.state.track,
         duration = utils.formatDuration(track.duration_ms);
 
+
     return (
       <div className="current-track-container">
+        <BackgroundImage image={track.album.images[1]} classNames="bg-image" />
         <div className="thumbnail">
-          <img src={track.album.images[1].url} />
           <TrackDuration currentTrack={this.state.track} startedAt={this.state.startedAt} isPlaying={this.state.isPlaying} />
         </div>
         <h2>{track.name}</h2>

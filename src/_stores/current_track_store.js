@@ -33,7 +33,7 @@ let Store = Reflux.createStore({
 
   onLoadCompleted(track) {
     // Sometimes the result back is a bit messy...
-    if(_.isArray(track)) {
+    if(!_.isUndefined(track.tracks)) {
       this.info.currentTrack = track.tracks[0];
     }
     else {
