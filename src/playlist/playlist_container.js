@@ -48,6 +48,7 @@ class PlaylistContainer extends React.Component {
             return utils.spotify.parseId(uri);
           });
           TrackMetadataApi.tracks(trackIds).then((response) => {
+            console.log(val);
             this.setState({
               playlistName: val.name,
               tracks: response.tracks,
@@ -64,11 +65,6 @@ class PlaylistContainer extends React.Component {
 
   componentWillUnmount() {
     FirebaseRef.child('playlist').off('value', this.ref);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-    //return nextState.uri !== this.state.uri || nextState.showModal !== this.state.showModal;
   }
 
   renderPlaylist() {

@@ -12,6 +12,7 @@ import ArtistContainer from 'artist/artist_container';
 import ContextMenuTrack from 'components/context_menu_track';
 import CurrentTrackContainer from 'current_track/current_track_container';
 import StarredPlaylistsContainer from 'starred_playlists/starred_playlists_container';
+import FullscreenContainer from 'fullscreen/fullscreen_container';
 import classNames from 'classnames';
 import utils from 'utils';
 import CurrentTrackActions from '_actions/current_track_actions';
@@ -28,7 +29,8 @@ class App extends React.Component {
 
     this.ref = null;
     this.state = {
-      searchVisible: false
+      searchVisible: false,
+      showFullscreen: false
     };
   }
 
@@ -47,6 +49,10 @@ class App extends React.Component {
 
   toggleSearch() {
     this.setState({ searchVisible: !this.state.searchVisible });
+  }
+
+  toggleFullscreen() {
+    this.setState({ showFullscreen: !this.state.showFullscreen });
   }
 
   hideSearchContainer() {
@@ -70,13 +76,18 @@ class App extends React.Component {
       toggleSearch: this.toggleSearch.bind(this)
     };
 
+    let hideMainStyle = {
+      display: (this.state.showFullscreen) ? 'none' : 'flex'
+    };
+
     return (
       <div className="flex">
         <ContextMenuTrack />
-        <main role="main" className={searchVisibleKlass}>
+        <FullscreenContainer showFullscreen={this.state.showFullscreen} toggleFullscreen={this.toggleFullscreen.bind(this)}  />
+        <main role="main" className={searchVisibleKlass} style={hideMainStyle}>
           <aside className="player">
             <CurrentTrackContainer />
-            <PlayerControlsContainer />
+            <PlayerControlsContainer toggleFullscreen={this.toggleFullscreen.bind(this)}  />
           </aside>
           <section className="yield" onClick={this.hideSearchContainer.bind(this)}>
             <article className="inner">

@@ -1,0 +1,53 @@
+.fullscreen-container {
+  display: flex;
+  position: fixed;
+  background: #000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+
+  .cover {
+    -webkit-filter: blur(4px) grayscale(.6);
+    filter: blur(4px) grayscale(.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      background: rgba(0,0,0,.6);
+    }
+  }
+
+  .bg-image {
+    width: 300px;
+    height: 300px;
+  }
+
+  .media {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    max-width: 70%;
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+  p {
+    font-size: 16px;
+  }
+}

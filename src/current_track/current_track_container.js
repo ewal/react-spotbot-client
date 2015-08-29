@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import CurrentTrackStore from '_stores/current_track_store';
 import TrackDuration from 'components/track_duration';
 import BackgroundImage from 'components/background_image';
+import _ from 'lodash';
 
 class CurrentTrackContainer extends React.Component {
 
@@ -24,9 +25,6 @@ class CurrentTrackContainer extends React.Component {
         track: CurrentTrackStore.getTrack()
       });
     });
-  }
-
-  componentWillUpdate() {
   }
 
   componentWillUnmount() {
