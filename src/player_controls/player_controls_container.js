@@ -5,7 +5,6 @@ import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import ShuffleButton from 'player_controls/shuffle_button';
 import VolumeControl from 'player_controls/volume_control';
-import FullscreenToggle from 'components/fullscreen_toggle';
 
 /**
  * Player controls container module
@@ -55,7 +54,6 @@ class PlayerControlsContainer extends React.Component {
           <Button onClick={this.playNext.bind(this)} bsStyle="default" className="pause"><i className="fa fa-step-forward" /></Button>
         </ButtonGroup>
         <ShuffleButton />
-        <FullscreenToggle toggleFullscreen={this.props.toggleFullscreen}  />
         <VolumeControl />
       </div>
     );

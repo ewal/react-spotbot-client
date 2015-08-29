@@ -5,6 +5,7 @@ import CurrentTrackStore from '_stores/current_track_store';
 import TrackDuration from 'components/track_duration';
 import BackgroundImage from 'components/background_image';
 import _ from 'lodash';
+import FullscreenToggle from 'components/fullscreen_toggle';
 
 class CurrentTrackContainer extends React.Component {
 
@@ -40,7 +41,10 @@ class CurrentTrackContainer extends React.Component {
 
     return (
       <div className="current-track-container">
-        <BackgroundImage image={track.album.images[1]} classNames="bg-image" />
+        <div className="current-track-media">
+          <BackgroundImage image={track.album.images[1]} classNames="bg-image" />
+          <FullscreenToggle toggleFullscreen={this.props.toggleFullscreen}  />
+        </div>
         <div className="thumbnail">
           <TrackDuration currentTrack={this.state.track} startedAt={this.state.startedAt} isPlaying={this.state.isPlaying} />
         </div>

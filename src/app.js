@@ -86,8 +86,8 @@ class App extends React.Component {
         <FullscreenContainer showFullscreen={this.state.showFullscreen} toggleFullscreen={this.toggleFullscreen.bind(this)}  />
         <main role="main" className={searchVisibleKlass} style={hideMainStyle}>
           <aside className="player">
-            <CurrentTrackContainer />
-            <PlayerControlsContainer toggleFullscreen={this.toggleFullscreen.bind(this)}  />
+            <CurrentTrackContainer toggleFullscreen={this.toggleFullscreen.bind(this)}/>
+            <PlayerControlsContainer />
           </aside>
           <section className="yield" onClick={this.hideSearchContainer.bind(this)}>
             <article className="inner">

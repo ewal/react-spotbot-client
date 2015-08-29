@@ -1,6 +1,7 @@
 import React from 'react';
 import CurrentTrackStore from '_stores/current_track_store';
 import BackgroundImage from 'components/background_image';
+import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import utils from 'utils';
 
@@ -8,9 +9,11 @@ class FullscreenContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    this.ref = null;
 
     this.state = {
-      track: {}
+      track: {},
+      playing: false
     };
   }
 
@@ -23,18 +26,30 @@ class FullscreenContainer extends React.Component {
       });
     });
 
+    this.ref = FirebaseRef.child('player/playing').on('value', (snapshot) => {
+      let val = snapshot.val();
+      if(!_.isNull(val)) {
+        this.setState({ playing: val });
+      }
+    });
+
     window.addEventListener('keyup', this.handleKeyUp.bind(this));
   }
 
   componentWillUnmount() {
     this.unsubscribe();
+    FirebaseRef.child('player/playing').off('value', this.ref);
     window.removeEventListener('keyup', this.handleKeyUp.bind(this));
     console.log("unmount");
   }
 
   handleKeyUp(e) {
-    if(e.which === 27) {
-      this.props.toggleFullscreen();
+    if(!this.props.showFullscreen) { return; }
+    switch(e.which) {
+      case 27: this.props.toggleFullscreen();
+      break;
+      case 32: FirebaseRef.child('player/playing').set(!this.state.playing)
+      break;
     }
   }
 
