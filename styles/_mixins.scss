@@ -1,37 +1,39 @@
 @mixin display-flex() {
-  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-  display: -ms-flexbox;      /* TWEENER - IE 10 */
   display: -webkit-flex;     /* NEW - Chrome */
   display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
 @mixin flex($val) {
-  -webkit-box-flex: $val;      /* OLD - iOS 6-, Safari 3.1-6 */
-  -moz-box-flex: $val;         /* OLD - Firefox 19- */
   -webkit-flex: $val;          /* Chrome */
-  -ms-flex: $val;              /* IE 10 */
   flex: $val;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
 @mixin flex-order($val) {
-  -webkit-box-ordinal-group: $val;   /* OLD - iOS 6-, Safari 3.1-6 */
-  -moz-box-ordinal-group: $val;      /* OLD - Firefox 19- */
-  -ms-flex-order: $val;              /* TWEENER - IE 10 */
   -webkit-order: $val;               /* NEW - Chrome */
   order: $val;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
 @mixin flex-direction($val: row) {
-   -ms-flex-direction: $val;
-  -moz-flex-direction: $val;
   -webkit-flex-direction: $val;
   flex-direction: $val;
 }
 
 @mixin flex-wrap($val: nowrap) {
-   -ms-flex-wrap: $val;
-  -moz-flex-wrap: $val;
   -webkit-flex-wrap: $val;
   flex-wrap: $val;
+}
+
+@mixin justify-content($val: center) {
+  -webkit-justify-content: $val;
+  justify-content: $val;
+}
+
+@include align-self($val: center) {
+  -webkit-align-self: center;
+  align-self: center;
+}
+
+@include align-items($val: center) {
+  -webkit-align-items: center; /* Safari 7.0+ */
+  align-items: center;
 }
