@@ -1,5 +1,7 @@
 .fullscreen-container {
-  display: flex;
+  @include display-flex();
+  @include align-items();
+  @include justify-content();
   position: fixed;
   background: #000;
   top: 0;
@@ -7,8 +9,6 @@
   right: 0;
   bottom: 0;
   z-index: 9999;
-  align-items: center;
-  justify-content: center;
   animation-name: fadeIn;
   animation-duration: 2s;
   animation-direction: forwards;
@@ -43,10 +43,16 @@
   }
 
   .media {
-    display: flex;
-    align-self: center;
-    align-items: center;
+    @include display-flex();
+    @include align-items();
+    @include align-self();
     max-width: 70%;
+  }
+
+  // Safari fix
+  .media-left {
+    display: table;
+    width: 300px;
   }
 
   h1 {
