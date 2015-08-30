@@ -47,7 +47,9 @@ class FullscreenContainer extends React.Component {
     switch(e.which) {
       case 27: this.props.toggleFullscreen();
       break;
-      case 32: FirebaseRef.child('player/playing').set(!this.state.playing)
+      case 32: FirebaseRef.child('player/playing').set(!this.state.playing);
+      break;
+      case 39: FirebaseRef.child('player/next').set(true);
       break;
     }
   }

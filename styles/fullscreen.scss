@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   animation-name: fadeIn;
-  animation-duration: 1s;
+  animation-duration: 2s;
   animation-direction: forwards;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
@@ -60,10 +60,8 @@
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0);
   }
   to {
     opacity: 1;
-    transform: scale(1);
   }
 }
