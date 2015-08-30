@@ -63,7 +63,7 @@ class App extends React.Component {
 
   render() {
 
-    let searchVisibleKlass = classNames('main-content', {'search-visible': this.state.searchVisible});
+    let searchVisibleKlass = classNames('main-content', {'search-visible': this.state.searchVisible, 'hide': this.state.showFullscreen});
 
     let searchContainerProps = {
       searchVisible: this.state.searchVisible,
@@ -76,15 +76,11 @@ class App extends React.Component {
       toggleSearch: this.toggleSearch.bind(this)
     };
 
-    let hideMainStyle = {
-      display: (this.state.showFullscreen) ? 'none' : 'flex'
-    };
-
     return (
       <div className="flex">
         <ContextMenuTrack />
         <FullscreenContainer showFullscreen={this.state.showFullscreen} toggleFullscreen={this.toggleFullscreen.bind(this)}  />
-        <main role="main" className={searchVisibleKlass} style={hideMainStyle}>
+        <main role="main" className={searchVisibleKlass}>
           <aside className="player">
             <CurrentTrackContainer toggleFullscreen={this.toggleFullscreen.bind(this)}/>
             <PlayerControlsContainer />
