@@ -40,7 +40,6 @@ class FullscreenContainer extends React.Component {
     this.unsubscribe();
     FirebaseRef.child('player/playing').off('value', this.ref);
     window.removeEventListener('keyup', this.handleKeyUp.bind(this));
-    console.log("unmount");
   }
 
   handleKeyUp(e) {

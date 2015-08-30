@@ -48,7 +48,6 @@ class PlaylistContainer extends React.Component {
             return utils.spotify.parseId(uri);
           });
           TrackMetadataApi.tracks(trackIds).then((response) => {
-            console.log(val);
             this.setState({
               playlistName: val.name,
               tracks: response.tracks,
