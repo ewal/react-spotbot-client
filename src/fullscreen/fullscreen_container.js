@@ -73,7 +73,7 @@ class FullscreenContainer extends React.Component {
             <BackgroundImage image={track.album.images[1]} classNames="bg-image media-object" />
           </div>
           <div className="media-body">
-            <h1 className="media-heading">{track.name} <br />{duration}</h1>
+            <h1 className="media-heading">{track.name} <time>{duration}</time></h1>
             <p>{track.artists[0].name}</p>
           </div>
         </div>
