@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react/addons';
 import CurrentTrackStore from '_stores/current_track_store';
 import BackgroundImage from 'components/background_image';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import utils from 'utils';
+
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class FullscreenContainer extends React.Component {
 
@@ -60,24 +62,28 @@ class FullscreenContainer extends React.Component {
     let track = this.state.track,
         duration = utils.formatDuration(track.duration_ms);
 
+    console.log("render");
+
     let style = {
       backgroundImage: 'url(' + track.album.images[0].url + ')',
       backgroundSize: 'cover'
     };
 
     return (
-      <div className="fullscreen-container">
-        <div className="cover" style={style} />
-        <div className="media">
-          <div className="media-left media-middle">
-            <BackgroundImage image={track.album.images[1]} classNames="bg-image media-object" />
-          </div>
-          <div className="media-body">
-            <h1 className="media-heading">{track.name} <time>{duration}</time></h1>
-            <p>{track.artists[0].name}</p>
+      <ReactCSSTransitionGroup transitionName="fscreen" transitionAppear={true}>
+        <div className="fullscreen-container">
+          <div className="cover" style={style} />
+          <div className="media">
+            <div className="media-left media-middle">
+              <BackgroundImage image={track.album.images[1]} classNames="bg-image media-object" />
+            </div>
+            <div className="media-body">
+              <h1 className="media-heading">{track.name} <time>{duration}</time></h1>
+              <p>{track.artists[0].name}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </ReactCSSTransitionGroup>
     );
   }
 };
