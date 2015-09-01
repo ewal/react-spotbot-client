@@ -62,8 +62,6 @@ class FullscreenContainer extends React.Component {
     let track = this.state.track,
         duration = utils.formatDuration(track.duration_ms);
 
-    console.log("render");
-
     let style = {
       backgroundImage: 'url(' + track.album.images[0].url + ')',
       backgroundSize: 'cover'

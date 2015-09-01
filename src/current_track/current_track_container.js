@@ -38,7 +38,6 @@ class CurrentTrackContainer extends React.Component {
     let track = this.state.track,
         duration = utils.formatDuration(track.duration_ms);
 
-
     return (
       <div className="current-track-container">
         <div className="current-track-media">
