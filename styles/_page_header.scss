@@ -1,4 +1,6 @@
 .page-header {
+  @include display-flex();
+
   .media {
     float: left;
 
@@ -17,7 +19,7 @@
 
   h1 {
     font-size: 32px;
-    margin: 0;
+    margin: 0 0 10px;
   }
 
   .info {
@@ -25,6 +27,7 @@
     margin-left: $gutter;
     display: table-cell;
     vertical-align: middle;
+    @include align-self();
   }
 
 }
