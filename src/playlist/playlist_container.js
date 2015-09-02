@@ -66,11 +66,6 @@ class PlaylistContainer extends React.Component {
     FirebaseRef.child('playlist').off('value', this.ref);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-    //return nextState.uri !== this.state.uri || nextState.showModal !== this.state.showModal;
-  }
-
   renderPlaylist() {
     return (
       <TrackList tracks={this.state.tracks} album artist image header caption={this.state.playlistName} />

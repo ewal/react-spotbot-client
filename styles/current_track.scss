@@ -1,6 +1,34 @@
 .current-track-container {
   padding: $gutter;
 
+
+  .current-track-media {
+    position: relative;
+
+  &:hover {
+    .btn {
+      display: block;
+    }
+  }
+
+    .btn {
+      display: none;
+      position: absolute;
+      top: 50%;
+      z-index: 100;
+      left: 50%;
+      margin-left: -50px;
+      margin-top: -50px;
+      font-size: 50px;
+      width: 100px;
+      height: 100px;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
   .bg-image {
     height: 220px;
     width: 100%;

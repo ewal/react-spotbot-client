@@ -12,6 +12,7 @@ import ArtistContainer from 'artist/artist_container';
 import ContextMenuTrack from 'components/context_menu_track';
 import CurrentTrackContainer from 'current_track/current_track_container';
 import StarredPlaylistsContainer from 'starred_playlists/starred_playlists_container';
+import FullscreenContainer from 'fullscreen/fullscreen_container';
 import classNames from 'classnames';
 import utils from 'utils';
 import CurrentTrackActions from '_actions/current_track_actions';
@@ -28,7 +29,8 @@ class App extends React.Component {
 
     this.ref = null;
     this.state = {
-      searchVisible: false
+      searchVisible: false,
+      showFullscreen: false
     };
   }
 
@@ -49,6 +51,10 @@ class App extends React.Component {
     this.setState({ searchVisible: !this.state.searchVisible });
   }
 
+  toggleFullscreen() {
+    this.setState({ showFullscreen: !this.state.showFullscreen });
+  }
+
   hideSearchContainer() {
     if(this.state.searchVisible) {
       this.setState({ searchVisible: false });
@@ -57,7 +63,7 @@ class App extends React.Component {
 
   render() {
 
-    let searchVisibleKlass = classNames('main-content', {'search-visible': this.state.searchVisible});
+    let searchVisibleKlass = classNames('main-content', {'search-visible': this.state.searchVisible, 'hide': this.state.showFullscreen});
 
     let searchContainerProps = {
       searchVisible: this.state.searchVisible,
@@ -73,9 +79,10 @@ class App extends React.Component {
     return (
       <div className="flex">
         <ContextMenuTrack />
+        <FullscreenContainer showFullscreen={this.state.showFullscreen} toggleFullscreen={this.toggleFullscreen.bind(this)}  />
         <main role="main" className={searchVisibleKlass}>
           <aside className="player">
-            <CurrentTrackContainer />
+            <CurrentTrackContainer toggleFullscreen={this.toggleFullscreen.bind(this)}/>
             <PlayerControlsContainer />
           </aside>
           <section className="yield" onClick={this.hideSearchContainer.bind(this)}>

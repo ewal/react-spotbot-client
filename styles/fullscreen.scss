@@ -1,0 +1,76 @@
+.fullscreen-container {
+  @include display-flex();
+  @include align-items();
+  @include justify-content();
+  position: fixed;
+  background: #000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+
+  .cover {
+    -webkit-filter: blur(4px) grayscale(.6);
+    filter: blur(4px) grayscale(.6);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    &:after {
+      position: absolute;
+      content: "";
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 0;
+      background: rgba(0,0,0,.6);
+    }
+  }
+
+  .bg-image {
+    width: 400px;
+    height: 400px;
+    background-size: cover;
+    background-repeat: none;
+  }
+
+  .media {
+    @include display-flex();
+    @include align-items();
+    @include align-self();
+    max-width: 70%;
+  }
+
+  // Safari fix
+  .media-left {
+    display: table;
+    width: 300px;
+    margin-right: 20px;
+  }
+
+  h1 {
+    font-size: 100px;
+
+    time {
+      font-size: 50px;
+    }
+  }
+  p {
+    font-size: 40px;
+    font-weight: lighter;
+  }
+}
+
+.fscreen-appear {
+  opacity: 0.01;
+  transition: opacity 1s ease-in-out;
+}
+
+.fscreen-appear.fscreen-appear-active {
+  opacity: 1;
+}
