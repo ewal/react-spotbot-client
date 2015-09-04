@@ -114,7 +114,7 @@ class PlaylistContainer extends React.Component {
           {playlistType}
         </section>
         <Modal show={this.state.showModal} onHide={this.closeModal.bind(this)} autoFocus backdrop>
-          <Modal.Header closeButton>
+          <Modal.Header>
             <Modal.Title>Change playlist</Modal.Title>
           </Modal.Header>
           <Modal.Body>
