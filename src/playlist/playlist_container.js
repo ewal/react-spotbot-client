@@ -125,7 +125,6 @@ class PlaylistContainer extends React.Component {
             <Button bsStyle="primary" onClick={this.changePlaylist.bind(this)}>Ok</Button>
           </Modal.Footer>
         </Modal>
-
       </div>
     );
   }
