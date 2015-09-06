@@ -1,10 +1,8 @@
 import React from 'react';
 import { Nav, Badge, Button } from 'react-bootstrap';
-import ReactRouterBootstrap from 'react-router-bootstrap';
+import { NavItemLink } from 'react-router-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
-
-let NavItemLink = ReactRouterBootstrap.NavItemLink;
 
 class NavigationContainer extends React.Component {
 
