@@ -49,6 +49,7 @@
     @include align-items();
     @include align-self();
     max-width: 70%;
+    text-shadow: 2px 1px 0 $gray-dark;
   }
 
   // Safari fix

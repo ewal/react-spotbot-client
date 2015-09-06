@@ -6,8 +6,10 @@
     position: relative;
 
   &:hover {
-    .btn {
-      display: block;
+    @media (min-width: $screen-sm-min) {
+      .btn {
+        display: block;
+      }
     }
   }
 
@@ -30,7 +32,8 @@
   }
 
   .bg-image {
-    height: 220px;
+    height: 100%;
+    padding-bottom: 100%;
     width: 100%;
     background-size: cover;
   }

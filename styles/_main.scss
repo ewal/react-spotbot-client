@@ -46,6 +46,11 @@
     @include flex-order(0);
     @include flex(1);
     position: relative;
+    display: none;
+
+    @media (min-width: $screen-sm-min) {
+      display: block;
+    }
 
     &:before {
       visibility: hidden;
@@ -94,15 +99,25 @@
     @include flex(0 0 60px);
     position: relative;
     z-index: 5000;
+    display: none;
+
+    @media (min-width: $screen-sm-min) {
+      display: block;
+    }
   }
 
   .player {
     @include flex-order(1);
-    @include flex(0 0 250px);
+    @include flex(1);
     background: $gray-darker;
     position: relative;
     z-index: 5000;
     text-align: center;
+
+
+    @media (min-width: $screen-sm-min) {
+      @include flex(0 0 250px);
+    }
   }
 }
 
@@ -123,6 +138,7 @@ a:hover {
   text-align: center;
   border-bottom: solid $gray-base 1px;
   height: 60px;
+  font-size: 30px;
 
   i {
     @include align-self(center);
