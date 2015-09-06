@@ -123,6 +123,7 @@ a:hover {
   text-align: center;
   border-bottom: solid $gray-base 1px;
   height: 60px;
+  font-size: 30px;
 
   i {
     @include align-self(center);
