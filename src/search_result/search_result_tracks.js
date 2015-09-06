@@ -14,7 +14,7 @@ class SearchResultTracks extends React.Component {
     return (
       <div className="component">
         <ComponentHeader title="Songs" />
-        <TrackList tracks={this.props.tracks} image album artist />
+        <TrackList tracks={this.props.tracks} image album artist header />
       </div>
     );
   }

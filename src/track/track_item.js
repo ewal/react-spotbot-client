@@ -98,8 +98,8 @@ class TrackItem extends React.Component {
         {this.imageCell()}
         {this.indexCell()}
         <td>{track.name}</td>
-        {this.albumCell()}
         {this.artistCell()}
+        {this.albumCell()}
         <td className="duration">{duration}</td>
       </tr>
     );

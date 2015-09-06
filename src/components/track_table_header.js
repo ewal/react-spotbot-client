@@ -39,8 +39,8 @@ class TableHeader extends React.Component {
           {imageCell}
           {indexCell}
           <th>Song</th>
-          {albumCell}
           {artistCell}
+          {albumCell}
           <th className="duration"><i className="fa fa-clock-o" /></th>
         </tr>
       </thead>
