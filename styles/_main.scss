@@ -116,10 +116,18 @@ a:hover {
 }
 
 .logo {
-  @include flex(0 0 60px);
+  @include display-flex();
+  @include justify-content(center);
   font-size: 25px;
   color: themeColor(1);
   text-align: center;
+  border-bottom: solid $gray-base 1px;
+  height: 60px;
+
+  i {
+    @include align-self(center);
+    @include flex(1);
+  }
 }
 
 :focus {

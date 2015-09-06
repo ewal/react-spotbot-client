@@ -2,9 +2,19 @@
   border-right: solid $gray-base 1px;
   background: $gray-darker;
 
+  a:hover, a:focus {
+    color: white;
+  }
+
   .active {
-    a, a:hover {
+    a {
+      background: $gray-dark;
+    }
+    a, a:hover, a:active {
       color: themeColor(1);
+    }
+    a:focus {
+      color: white;
     }
   }
 
@@ -24,9 +34,8 @@
     padding: 0 !important;
     margin: 0 !important;
     text-align: center;
-  }
-  a:hover {
-    border: none;
+    border-bottom: solid 1px $gray-base;
+    outline: none !important;
   }
 }
 
@@ -37,5 +46,9 @@
     &:hover {
       color: $text-color;
     }
+  }
+
+  li {
+    margin: 0 !important;
   }
 }

@@ -18,7 +18,7 @@ $gutter: 15px;
 //
 //## Gray and brand colors for use across Bootstrap.
 
-// $gray-base:              #000
+$gray-base:              #000;
 $gray-darker:            lighten($gray-base, 10%); // #222
 $gray-dark:              lighten($gray-base, 15%);   // #333
 // $gray:                   lighten($gray-base, 33.5%) // #555
