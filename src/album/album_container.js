@@ -17,7 +17,9 @@ class Artists extends React.Component {
   render() {
 
     let artists = this.props.artists.map((artist, index) => {
-      return <span key={index}><Link to='artist' params={{ id: artist.id }}>{artist.name}</Link></span>;
+      let separator = "";
+      if(this.props.artists.length-1 !== index) { separator = ", "; }
+      return <span key={index}><Link to='artist' params={{ id: artist.id }}>{artist.name}</Link>{separator}</span>;
     });
 
     return (
