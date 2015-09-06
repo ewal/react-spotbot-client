@@ -3,6 +3,18 @@
 
   margin: $gutter 0;
   text-align: center;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 1px;
+    top: 7px;
+    left: 10%;
+    right: 10%;
+    background: themeColor(.5);
+    z-index: 10;
+  }
 
   input {
     margin: 0 5px;
@@ -17,10 +29,10 @@
 
   input[type=range]::-webkit-slider-runnable-track {
     cursor: pointer;
-    background: themeColor(.5);
+    background: none !important;
     border-radius: 0px;
     border: none;
-    height: 1px;
+    height: 11px;
   }
 
   input[type=range]::-webkit-slider-thumb {
@@ -31,7 +43,7 @@
     background: themeColor(1);
     cursor: pointer;
     -webkit-appearance: none;
-    margin-top: -5px;
+    margin-top: 0;
   }
 
   input[type=range]:focus::-webkit-slider-runnable-track {
@@ -40,10 +52,10 @@
 
   input[type=range]::-moz-range-track {
     cursor: pointer;
-    background: themeColor(.2);
+    background: none !important;
     border-radius: 0px;
     border: none;
-    height: 1px;
+    height: 11px;
   }
 
   input[type=range]::-moz-range-thumb {
