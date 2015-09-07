@@ -15,7 +15,7 @@ SPOTIFY_SEARCH_TYPES=track,album,artist
 ```
 
 ### Install required software for react-spotbot-client
-install node.js (https://nodejs.org)
+install [node.js](https://nodejs.org)
 
 install gulp ```npm install gulp -g```
 
@@ -28,5 +28,3 @@ run ```gulp```
 run ```gulp dist```
 
 ### Deploy to divshot
-// TODO:
-* Copy the index.html file from /build to /dist.
