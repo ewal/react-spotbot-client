@@ -15,7 +15,7 @@ class StarPlaylistItem extends React.Component {
     return (
       <li>
         <Button bsStyle="link" onClick={this.handleClick.bind(this)}>
-          {playlist.name}
+          <i className="fa fa-play-circle" /> {playlist.name}
         </Button>
       </li>
     );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Input } from 'react-bootstrap';
+import { Button, Modal, Input, ButtonGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import utils from 'utils';
@@ -23,6 +23,8 @@ class PlaylistContainer extends React.Component {
       uri: '',
       showModal: false
     };
+
+    this.changePlaylistTooltip = <Tooltip id="change-playlist">Change playlist</Tooltip>;
   }
 
   componentDidMount() {
@@ -118,12 +120,18 @@ class PlaylistContainer extends React.Component {
 
     return (
       <div className="container-fluid">
-        <header className="page-header">
+        <header className="page-header page-header-playlist-container">
           <h1>
             Playlist
-              <Button bsStyle="link" onClick={this.showModal.bind(this)}>Change playlist</Button>
-              {starButton}
           </h1>
+          <ButtonGroup>
+              <Button bsStyle="link" onClick={this.showModal.bind(this)}>
+                <OverlayTrigger overlay={this.changePlaylistTooltip} placement="top">
+                  <i className="fa fa-pencil-square-o" />
+                </OverlayTrigger>
+              </Button>
+            {starButton}
+          </ButtonGroup>
         </header>
         <section>
           {playlistType}

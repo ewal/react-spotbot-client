@@ -6,6 +6,7 @@ import utils from 'utils';
 import AlbumList from 'album/album_list';
 import ComponentHeader from 'components/component_header';
 import StarPlaylistItem from 'starred_playlists/star_playlist_item';
+import { Tabs, Tab } from 'react-bootstrap';
 
 class StarredPlaylistsContainer extends React.Component {
 
@@ -53,26 +54,31 @@ class StarredPlaylistsContainer extends React.Component {
     });
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid star-playlist-container">
         <div className="page-header">
-          <h1>Starred playlists</h1>
+          <h1>Starred albums & playlists</h1>
         </div>
 
-        <div className="component">
-          <ComponentHeader title="Albums" />
-          <section>
-            <AlbumList albums={this.state.albums} />
-          </section>
-        </div>
+        <Tabs defaultActiveKey={1}>
+          <Tab eventKey={1} title="Albums">
+            <div className="component">
+              <section>
+                <AlbumList albums={this.state.albums} />
+              </section>
+            </div>
+          </Tab>
 
-        <div className="component">
-          <ComponentHeader title="User playlists" />
-          <section>
-            <ul className="list-unstyled">
-              {playlists}
-            </ul>
-          </section>
-        </div>
+          <Tab eventKey={2} title="Playlists">
+            <div className="component">
+              <section>
+                <ul className="list-unstyled user-playlists">
+                  {playlists}
+                </ul>
+              </section>
+            </div>
+          </Tab>
+
+        </Tabs>
       </div>
     );
   }
