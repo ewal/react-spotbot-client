@@ -16,7 +16,6 @@ class StarPlaylist extends React.Component {
       snapshot: {}
     };
 
-    this.starPlaylistTooltip = <Tooltip id="star-playlist">Star</Tooltip>;
   }
 
   componentDidMount() {
@@ -63,8 +62,8 @@ class StarPlaylist extends React.Component {
 
   render() {
     let klass = classNames('fa', {'fa-star': this.state.isStarred, 'fa-star-o': !this.state.isStarred});
-    let type = (this.props.type === 'album') ? 'album' : 'playlist';
-    let tooltipText = (this.state.isStarred) ? 'Unstar ' + type : 'Star ' + type;
+    let tooltipText = (this.state.isStarred) ? 'Unstar' : 'Star';
+    this.starPlaylistTooltip = <Tooltip id="star-playlist">{tooltipText}</Tooltip>;
 
     return (
       <Button bsStyle="link" onClick={this.toggleStarPlaylist.bind(this)}>
