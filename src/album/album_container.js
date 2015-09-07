@@ -83,7 +83,7 @@ class AlbumContainer extends React.Component {
           </div>
           <div className="info">
             <span className="header-label">Album</span>
-            <h1>{album.name} {releaseDate}</h1>
+            <h1>{album.name} <span className="release-date">{releaseDate}</span></h1>
             <div>
               <Artists artists={album.artists} />
             </div>

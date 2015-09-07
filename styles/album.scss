@@ -2,6 +2,10 @@
   .actions {
     margin: $gutter 0;
   }
+
+  .release-date {
+    color: $gray-light;
+  }
 }
 
 .album-list, .artist-list {
