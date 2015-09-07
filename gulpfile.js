@@ -6,7 +6,8 @@ var WebpackDevServer = require('webpack-dev-server'),
     path = require('path'),
     gutil = require('gulp-util'),
     webpack = require('webpack'),
-    dotenv = require('dotenv');
+    dotenv = require('dotenv'),
+    htmlreplace = require('gulp-html-replace');
 
 dotenv.load();
 var conf = Object.create(webpackConfig);
@@ -34,6 +35,20 @@ gulp.task('webpack-dev-server', function(callback) {
  * Build for production
  */
 gulp.task('webpack:dist', function(callback) {
+
+  var paths = {
+    src:'./build',
+    dest:'./dist'
+  };
+
+  gulp.src(paths.src + '/*.html')
+    .pipe(htmlreplace({
+      js: {
+        src: 'dist.entry.js',
+        tpl: '<script src="%s"></script>'
+      }
+    }))
+    .pipe(gulp.dest(paths.dest));
 
   conf.output.path = path.join(__dirname, 'dist');
 
