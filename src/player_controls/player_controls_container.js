@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import ShuffleButton from 'player_controls/shuffle_button';
+import RepeatButton from 'player_controls/repeat_button';
 import VolumeControl from 'player_controls/volume_control';
 
 /**
@@ -54,6 +55,7 @@ class PlayerControlsContainer extends React.Component {
           <Button onClick={this.playNext.bind(this)} bsStyle="default" className="pause"><i className="fa fa-step-forward" /></Button>
         </ButtonGroup>
         <ShuffleButton />
+        <RepeatButton />
         <VolumeControl />
       </div>
     );
