@@ -1,8 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Exo+2:400,200);
-@import "_mixins";
+@import "bourbon";
 
 .flex {
-  @include display-flex();
+  @include display(flex);
   height: 100vh;
   overflow: hidden;
   flex-direction: column;
@@ -13,7 +13,7 @@
 }
 
 .main-content {
-  @include display-flex();
+  @include display(flex);
   @include flex(1);
   @include flex-direction(row);
   position: relative;
@@ -43,7 +43,7 @@
   }
 
   .yield {
-    @include flex-order(0);
+    @include order(0);
     @include flex(1);
     position: relative;
     display: none;
@@ -68,7 +68,6 @@
     }
 
     // Scrolling container
-    // TODO: find a better className
     .inner {
       position: absolute;
       height: 100%;
@@ -95,7 +94,7 @@
   }
 
   .main-navigation {
-    @include flex-order(-2);
+    @include order(-2);
     @include flex(0 0 60px);
     position: relative;
     z-index: 5000;
@@ -107,7 +106,7 @@
   }
 
   .player {
-    @include flex-order(1);
+    @include order(1);
     @include flex(1);
     background: $gray-darker;
     position: relative;
@@ -131,7 +130,7 @@ a:hover {
 }
 
 .logo {
-  @include display-flex();
+  @include display(flex);
   @include justify-content(center);
   font-size: 25px;
   color: themeColor(1);
@@ -162,16 +161,21 @@ input:focus {
   height: 10px;
 }
 
-@import "component";
-@import "album";
-@import "table";
+@import "containers/album";
+@import "containers/artist";
+@import "containers/current_track";
+@import "containers/search";
+@import "containers/fullscreen";
+@import "containers/player";
+
 @import "main_navigation";
-@import "artist";
-@import "current_track";
-@import "player";
-@import "search";
-@import "_context_menu";
-@import "_page_header";
 @import "_autocomplete";
-@import "_volume_control";
-@import "fullscreen";
+
+@import "components/_component";
+@import "components/_context_menu";
+@import "components/_page_header";
+@import "components/_table";
+@import "components/_volume_control";
+@import "components/_bg_image";
+@import "components/_album_list";
+@import "components/_album_item";

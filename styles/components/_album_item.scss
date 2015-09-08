@@ -1,25 +1,5 @@
-.album-container {
-  .actions {
-    margin: $gutter 0;
-  }
-
-  .release-date {
-    color: $gray-light;
-  }
-}
-
-.album-list, .artist-list {
-  @include display-flex();
-  @include flex(1);
-  @include flex-direction(row);
-  @include flex-wrap(wrap);
-  margin-left: -8px;
-  margin-right: -8px;
-}
-
 .album-item {
-
-  @include display-flex();
+  @include display(flex);
   @include flex(0 0 20%);
   @include flex-direction(column);
 
@@ -35,20 +15,18 @@
   &-image-wrapper {
     position: relative;
     height: auto; // responsive aspect ratio trick
-    padding-bottom: 100%;
 
     &:hover {
       .album-item-actions {
-        display: block;
+        display: flex;
       }
     }
-
 
     &:after {
       position: absolute;
       z-index: 50;
       font-family: FontAwesome;
-      content: "\f1c5";
+      content: "\F1C5";
       left: 50%;
       top: 50%;
       width: 50px;
@@ -63,34 +41,23 @@
     }
   }
 
-  &-image-container {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 100;
-  }
-
   &-actions {
+    @include flex(1);
+    @include justify-content(space-around);
     display: none;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 500;
     background: rgba(0,0,0,0.8);
     text-align: center;
-    z-index: 500;
 
     button {
-      width: 60px;
+      @include flex(0 0 60px);
+      @include align-self(center);
       height: 60px;
-      position: absolute;
-      top: 50%;
-      margin-top: -30px;
-      margin-left: -30px;
       padding: 0;
       background: rgba(0,0,0,.2);
       border-radius: 60px;

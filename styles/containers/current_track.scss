@@ -1,17 +1,16 @@
 .current-track-container {
   padding: $gutter;
 
-
   .current-track-media {
     position: relative;
 
-  &:hover {
-    @media (min-width: $screen-sm-min) {
-      .btn {
-        display: block;
+    &:hover {
+      @media (min-width: $screen-sm-min) {
+        .btn {
+          display: block;
+        }
       }
     }
-  }
 
     .btn {
       display: none;
@@ -29,12 +28,5 @@
         color: #fff;
       }
     }
-  }
-
-  .bg-image {
-    height: 100%;
-    padding-bottom: 100%;
-    width: 100%;
-    background-size: cover;
   }
 }

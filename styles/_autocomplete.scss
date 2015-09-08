@@ -6,7 +6,7 @@
   }
 
   dd {
-    @include display-flex();
+    @include display(flex);
     background: $gray-dark;
     margin-bottom: 1px;
 
@@ -17,10 +17,9 @@
     .bg-image {
       width: 33px;
       height: 33px;
-      background-size: cover;
-      @include display-flex();
       @include flex(0 0 33px);
-      align-self: center;
+      @include align-self(center);
+      padding-bottom: 0;
 
       &.artist {
         width: 23px;
@@ -47,7 +46,6 @@
   }
 
   .track {
-
     .artist {
       display: block;
       color: $gray-light;
@@ -55,7 +53,6 @@
   }
 
   .album {
-
     .artist {
       display: block;
       color: $gray-light;

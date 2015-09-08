@@ -1,0 +1,32 @@
+.artist-container {
+  .image-column {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
+.artist-item-image-wrapper {
+  padding-bottom: 100%;
+
+  &.has-image {
+    &:before {
+      position: absolute;
+      content: "";
+      background: rgba(0,0,0,.8);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+
+  .artist-image {
+    border-radius: 50%;
+    height: 90%;
+    width: 90%;
+    padding-bottom: 90%;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+  }
+}

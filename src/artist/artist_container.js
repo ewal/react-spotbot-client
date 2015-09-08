@@ -78,28 +78,6 @@ class ArtistContainer extends React.Component {
     });
   }
 
-  // TODO:----
-  imageCollage() {
-    if(_.isEmpty(this.state.albums)) { return false; }
-
-    let album = this.state.albums;
-    let temp = _.pluck(album, 'images');
-    let images = temp.map((i) => {
-      let style = {
-        backgroundImage: 'url(' + i[1].url + ')'
-      };
-      return (
-        <div className="wrapper">
-        <div style={style} className="item" />
-        </div>
-      );
-    });
-
-    return (
-      <div className="image-collage">{images}</div>
-    );
-  }
-
   render() {
 
     let artist = this.state.artist;
@@ -107,12 +85,12 @@ class ArtistContainer extends React.Component {
 
     return (
       <div className="artist-container container-fluid">
-        <header className="clearfix page-header">
-          <div className="media-header-image-container">
+        <header className="page-header">
+          <div className="image-column">
             <BackgroundImage classNames="media-header-image-object" image={artist.images[1]} />
           </div>
-          <div className="artist-name">
-            <span className="label-artist">Artist</span>
+          <div className="info-column">
+            <span className="header-label">Artist</span>
             <h1>
               {artist.name}
             </h1>
