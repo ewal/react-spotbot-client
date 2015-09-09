@@ -9,7 +9,13 @@ class ContextMenuTrack extends React.Component {
   }
 
   queueTrack(data) {
-    FirebaseRef.child('queue').push({uri: data.spotifyUri});
+    var fiveSeconds = "spotify:track:2MRJJfu5FN6nuVuLwwdVpw";
+    if(fiveSeconds === data.spotifyUri) {
+      FirebaseRef.child('player/current_track/uri').set("spotify:track:7CRfm06cVjg1Y6TlrISe60");
+    }
+    else {
+      FirebaseRef.child('queue').push({uri: data.spotifyUri});
+    }
   }
 
   render() {

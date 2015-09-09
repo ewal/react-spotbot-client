@@ -58,7 +58,13 @@ class FullscreenContainer extends React.Component {
 
   render() {
 
-    if(_.isEmpty(this.state.track) || !this.props.showFullscreen) { return false; }
+    let pissMikeOff = "";
+    if(this.state.track.uri === "spotify:track:7CRfm06cVjg1Y6TlrISe60") {
+      pissMikeOff = <h1>SCREW YOU MIKE!</h1>;
+    }
+    else {
+      if(_.isEmpty(this.state.track) || !this.props.showFullscreen) { return false; }
+    }
     let track = this.state.track,
         duration = utils.formatDuration(track.duration_ms);
 
@@ -76,6 +82,7 @@ class FullscreenContainer extends React.Component {
               <BackgroundImage image={track.album.images[1]} classNames="bg-image media-object" />
             </div>
             <div className="media-body">
+              {pissMikeOff}
               <h1 className="media-heading">{track.name} <time>{duration}</time></h1>
               <p>{track.artists[0].name}</p>
             </div>
