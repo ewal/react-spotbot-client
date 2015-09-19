@@ -31,7 +31,6 @@ class SearchContainer extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // Always reset the index
     if(nextProps.searchVisible) {
       // Hopefully everythings is rendered and done.
       // Wait for it ... and focus

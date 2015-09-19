@@ -1,0 +1,42 @@
+.page-header {
+  @include display-flex();
+
+  &-playlist-container {
+    @include justify-content(space-between);
+  }
+
+  .media {
+    float: left;
+
+    &-object {
+      height: 250px;
+      width: 250px;
+      background-size: cover;
+    }
+  }
+
+  .header-label {
+    font-family: 'Exo 2', sans-serif;
+    text-transform: uppercase;
+    color: $gray-light;
+  }
+
+  h1 {
+    font-size: 32px;
+    margin: 0 0 10px;
+  }
+
+  .info {
+    float: left;
+    margin-left: $gutter;
+    display: table-cell;
+    vertical-align: middle;
+    @include align-self();
+  }
+
+  .btn-group {
+    @include display-flex();
+    @include align-items(center);
+  }
+
+}

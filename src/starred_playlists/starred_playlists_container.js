@@ -4,6 +4,9 @@ import _ from 'lodash';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import AlbumList from 'album/album_list';
+import ComponentHeader from 'components/component_header';
+import StarPlaylistItem from 'starred_playlists/star_playlist_item';
+import { Tabs, Tab } from 'react-bootstrap';
 
 class StarredPlaylistsContainer extends React.Component {
 
@@ -45,37 +48,37 @@ class StarredPlaylistsContainer extends React.Component {
   }
 
   render() {
-    if(_.isEmpty(this.state.playlists) && _.isEmpty(this.state.albums)) { return false; }
 
     let playlists = this.state.playlists.map((playlist, index) => {
-      return <li key={index}>{playlist.name}</li>;
+      return <StarPlaylistItem playlist={playlist} key={index} />;
     });
 
     return (
-      <div className="container-fluid">
+      <div className="container-fluid star-playlist-container">
         <div className="page-header">
-          <h1>Starred playlists</h1>
+          <h1>Starred albums & playlists</h1>
         </div>
 
-        <div className="component">
-          <header>
-            <h2>Albums</h2>
-          </header>
-          <section>
-            <AlbumList albums={this.state.albums} />
-          </section>
-        </div>
+        <Tabs defaultActiveKey={1}>
+          <Tab eventKey={1} title="Albums">
+            <div className="component">
+              <section>
+                <AlbumList albums={this.state.albums} />
+              </section>
+            </div>
+          </Tab>
 
-        <div className="component">
-          <header>
-            <h2>Playlists</h2>
-          </header>
-          <section>
-            <ul>
-              {playlists}
-            </ul>
-          </section>
-        </div>
+          <Tab eventKey={2} title="Playlists">
+            <div className="component">
+              <section>
+                <ul className="list-unstyled user-playlists">
+                  {playlists}
+                </ul>
+              </section>
+            </div>
+          </Tab>
+
+        </Tabs>
       </div>
     );
   }
