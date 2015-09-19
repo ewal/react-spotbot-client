@@ -14,4 +14,8 @@ class FullscreenToggle extends React.Component {
   }
 };
 
+FullscreenToggle.propTypes = {
+  toggleFullscreen: React.PropTypes.func.isRequired
+};
+
 export default FullscreenToggle;
