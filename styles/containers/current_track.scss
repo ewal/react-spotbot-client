@@ -10,19 +10,30 @@
           display: block;
         }
       }
+
+      &:after {
+        content: "";
+        background: rgba(0,0,0,.8);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+      }
     }
 
     .btn {
       display: none;
       position: absolute;
       top: 50%;
-      z-index: 100;
       left: 50%;
       margin-left: -50px;
       margin-top: -50px;
       font-size: 50px;
       width: 100px;
       height: 100px;
+      z-index: 200;
 
       &:hover {
         color: #fff;
