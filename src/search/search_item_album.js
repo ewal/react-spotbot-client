@@ -29,4 +29,10 @@ class SearchItemAlbum extends SearchItem {
   }
 };
 
+SearchItemAlbum.propTypes = {
+  index: React.PropTypes.number.isRequired,
+  currentIndex: React.PropTypes.number.isRequired,
+  item: React.PropTypes.object.isRequired
+};
+
 export default SearchItemAlbum;

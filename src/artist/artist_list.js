@@ -13,6 +13,9 @@ class ArtistList extends React.Component {
   }
 
   render() {
+
+    if(_.isEmpty(this.props.artists)) { return false; }
+
     let offset = _.take(this.props.artists, 5);
     let artists = offset.map((artist) => {
       return (
@@ -29,7 +32,11 @@ class ArtistList extends React.Component {
 };
 
 ArtistList.propTypes = {
-  artists: React.PropTypes.array.isRequired
+  artists: React.PropTypes.array
+};
+
+ArtistList.defaultProps = {
+  artists: []
 };
 
 export default ArtistList;

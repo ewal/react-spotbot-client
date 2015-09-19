@@ -18,7 +18,10 @@ class SearchResultTracks extends React.Component {
       </div>
     );
   }
+};
 
+SearchResultTracks.propTypes = {
+  tracks: React.PropTypes.array
 };
 
 export default SearchResultTracks;

@@ -19,4 +19,9 @@ class SearchItem extends React.Component {
   }
 };
 
+SearchItem.propTypes = {
+  currentIndex: React.PropTypes.number.isRequired,
+  hideSearchContainer: React.PropTypes.func.isRequired
+};
+
 export default SearchItem;

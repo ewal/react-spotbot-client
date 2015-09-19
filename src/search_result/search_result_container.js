@@ -39,9 +39,6 @@ class SearchResultContainer extends React.Component {
     this.fetchSearchResult(this.props.params.query);
   }
 
-  // TODO:
-  // - set current search tracks as playlist
-
   render() {
     return (
       <div className="container-fluid">

@@ -50,4 +50,12 @@ class AutoComplete extends React.Component {
   }
 };
 
+AutoComplete.propTypes = {
+  hideSearchContainer: React.PropTypes.func.isRequired,
+  index: React.PropTypes.number.isRequired,
+  tracks: React.PropTypes.array.isRequired,
+  albums: React.PropTypes.array.isRequired,
+  artists: React.PropTypes.array.isRequired
+};
+
 export default AutoComplete;

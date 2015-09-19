@@ -10,4 +10,8 @@ class ComponentHeader extends React.Component {
   }
 };
 
+ComponentHeader.propTypes = {
+  title: React.PropTypes.string
+};
+
 export default ComponentHeader;

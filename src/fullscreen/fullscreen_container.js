@@ -86,4 +86,13 @@ class FullscreenContainer extends React.Component {
   }
 };
 
+FullscreenContainer.propTypes = {
+  toggleFullscreen: React.PropTypes.func.isRequired,
+  showFullscreen: React.PropTypes.bool
+};
+
+FullscreenContainer.defaultProps = {
+  showFullscreen: false
+};
+
 export default FullscreenContainer;

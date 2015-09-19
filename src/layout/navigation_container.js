@@ -63,4 +63,9 @@ class NavigationContainer extends React.Component {
   }
 };
 
+NavigationContainer.propTypes = {
+  hideSearchContainer: React.PropTypes.func.isRequired,
+  toggleSearch: React.PropTypes.func.isRequired
+};
+
 export default NavigationContainer;

@@ -57,4 +57,8 @@ class CurrentTrackContainer extends React.Component {
   }
 };
 
+CurrentTrackContainer.propTypes = {
+  toggleFullscreen: React.PropTypes.func.isRequired
+};
+
 export default CurrentTrackContainer;

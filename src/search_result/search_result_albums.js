@@ -22,7 +22,15 @@ class SearchResultAlbums extends React.Component {
       </div>
     );
   }
-
 };
+
+SearchResultAlbums.propTypes = {
+  albums: React.PropTypes.array
+};
+
+SearchResultAlbums.defaultProps = {
+  albums: []
+};
+
 
 export default SearchResultAlbums;

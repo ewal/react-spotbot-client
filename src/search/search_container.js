@@ -173,4 +173,9 @@ SearchContainer.contextTypes = {
   router: React.PropTypes.func.isRequired
 };
 
+SearchContainer.propTypes = {
+  hideSearchContainer: React.PropTypes.func.isRequired,
+  toggleSearch: React.PropTypes.func.isRequired
+};
+
 export default SearchContainer;

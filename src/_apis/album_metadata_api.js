@@ -63,8 +63,6 @@ export default {
           reject(response.text);
         }
       });
-
     });
   }
-
 };
