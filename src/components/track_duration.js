@@ -40,4 +40,10 @@ class TrackDuration extends React.Component {
   }
 };
 
+TrackDuration.propTypes = {
+  currentTrack: React.PropTypes.object.isRequired,
+  startedAt: React.PropTypes.number.isRequired,
+  isPlaying: React.PropTypes.bool.isRequired
+};
+
 export default TrackDuration;
