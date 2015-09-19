@@ -48,4 +48,12 @@ class TableHeader extends React.Component {
   }
 };
 
+TableHeader.propTypes = {
+  image: React.PropTypes.string,
+  artist: React.PropTypes.string,
+  album: React.PropTypes.string,
+  index: React.PropTypes.number,
+  header: React.PropTypes.bool
+};
+
 export default TableHeader;
