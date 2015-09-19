@@ -77,11 +77,11 @@ class AlbumContainer extends React.Component {
 
     return (
       <div className="container-fluid album-container">
-        <header className="page-header clearfix">
-          <div className="media">
+        <header className="page-header">
+          <div className="image-column">
             <BackgroundImage classNames="media-object" image={album.images[1]} />
           </div>
-          <div className="info">
+          <div className="info-column">
             <span className="header-label">Album</span>
             <h1>{album.name} <span className="release-date">{releaseDate}</span></h1>
             <div>

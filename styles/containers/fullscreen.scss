@@ -1,7 +1,7 @@
 .fullscreen-container {
-  @include display-flex();
-  @include align-items();
-  @include justify-content();
+  @include display(flex);
+  @include align-items(center);
+  @include justify-content(center);
   position: fixed;
   background: #000;
   top: 0;
@@ -45,11 +45,10 @@
   }
 
   .media {
-    @include display-flex();
-    @include align-items();
-    @include align-self();
+    @include display(flex);
+    @include align-items(center);
+    @include align-self(center);
     max-width: 70%;
-    text-shadow: 2px 1px 0 $gray-dark;
   }
 
   // Safari fix

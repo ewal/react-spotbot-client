@@ -1,0 +1,8 @@
+.album-list, .artist-list {
+  @include display(flex);
+  @include flex(1);
+  @include flex-direction(row);
+  @include flex-wrap(wrap);
+  margin-left: -8px;
+  margin-right: -8px;
+}

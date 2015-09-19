@@ -1,0 +1,24 @@
+.page-header {
+  @include display(flex);
+  @include align-items(center);
+
+  h1 {
+    font-size: 32px;
+    margin: 0;
+  }
+
+  .header-label {
+    font-family: "Exo 2", sans-serif;
+    text-transform: uppercase;
+    color: $gray-light;
+  }
+
+  .image-column {
+    @include flex(0 0 200px);
+  }
+
+  .info-column {
+    @include flex(1);
+    margin-left: $gutter;
+  }
+}

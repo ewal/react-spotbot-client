@@ -1,5 +1,6 @@
 // Example file. Copy this to your project. Change then names of the referenced files or comment
 // them out. Convention is to name sass partials to start with an '_'
+var bourbon = require('node-bourbon').includePaths;
 module.exports = {
   verbose: true, // Set to true to show diagnostic information
 
@@ -20,7 +21,7 @@ module.exports = {
   mainSass: './styles/_main.scss',
 
   // Default for the style loading
-  styleLoader: 'style-loader!css-loader!sass-loader',
+  styleLoader: 'style-loader!css-loader!sass-loader?includePaths[]=' + bourbon,
   //
   // If you want to use the ExtractTextPlugin
   //   and you want compressed

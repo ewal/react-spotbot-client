@@ -3,7 +3,7 @@
   background: $gray-darker;
 
   a:hover, a:focus {
-    color: white;
+    color: #fff;
   }
 
   .active {
@@ -14,7 +14,7 @@
       color: themeColor(1);
     }
     a:focus {
-      color: white;
+      color: #fff;
     }
   }
 
@@ -38,7 +38,6 @@
     outline: none !important;
   }
 }
-
 
 .nav-stacked {
   a {

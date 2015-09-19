@@ -2,6 +2,11 @@ import React from 'react';
 import _ from 'lodash';
 
 class BackgroundImage extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
 
     let url = '';
@@ -14,7 +19,9 @@ class BackgroundImage extends React.Component {
     };
 
     return (
-      <div style={bgImage} className={this.props.classNames} />
+      <div style={bgImage} className={"bg-image " + this.props.classNames}>
+        {this.props.children}
+      </div>
     );
   }
 };

@@ -21,6 +21,7 @@
     "gulp-html-replace": "^1.5.1",
     "gulp-util": "^3.0.6",
     "lodash": "^3.10.0",
+    "node-bourbon": "^4.2.3",
     "node-libs-browser": "^0.5.2",
     "path": "^0.11.14",
     "react": "^0.13.3",

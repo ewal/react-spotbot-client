@@ -30,12 +30,13 @@ class AlbumItem extends React.Component {
       <div className="album-item">
         <div className="thumbnail">
           <div className="album-item-image-wrapper">
-            <BackgroundImage image={album.images[1]} classNames="album-item-image-container" />
-            <div className="album-item-actions">
-              <Button bsStyle="link" onClick={this.handleClick.bind(this)}>
-                <i className="fa fa-play" />
-              </Button>
-            </div>
+            <BackgroundImage image={album.images[1]} classNames="album-item-image-container">
+              <div className="album-item-actions">
+                <Button bsStyle="link" onClick={this.handleClick.bind(this)}>
+                  <i className="fa fa-play" />
+                </Button>
+              </div>
+            </BackgroundImage>
           </div>
 
           <Link className="caption" to="album" params={{ id: album.id }}>{name}</Link>
