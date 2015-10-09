@@ -18,6 +18,8 @@ import utils from 'utils';
 import CurrentTrackActions from '_actions/current_track_actions';
 import FirebaseRef from 'firebase_ref';
 
+import PrankContainer from 'prank/prank_container';
+
 let RouteHandler = Router.RouteHandler,
     Route = Router.Route,
     DefaultRoute = Router.DefaultRoute;
@@ -61,7 +63,7 @@ class App extends React.Component {
     }
   }
 
-  render() {
+  renderMain() {
 
     let searchVisibleKlass = classNames('main-content', {'search-visible': this.state.searchVisible, 'hide': this.state.showFullscreen});
 
@@ -101,6 +103,12 @@ class App extends React.Component {
           </aside>
         </main>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <PrankContainer />
     );
   }
 };

@@ -161,6 +161,12 @@ input:focus {
   height: 10px;
 }
 
+
+// TODO: remove after
+@import "styles";
+@import "styles2";
+@import "containers/prank";
+
 @import "containers/album";
 @import "containers/artist";
 @import "containers/current_track";
@@ -180,3 +186,4 @@ input:focus {
 @import "components/_album_list";
 @import "components/_album_item";
 @import "star_playlist";
+

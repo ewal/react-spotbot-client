@@ -1,0 +1,45 @@
+.prank-container {
+  background-image: url("http://schmoesknow.com/wp-content/uploads/2014/03/saw_v_2_by_hassoomi-d31v9zz.jpg");
+  position: absolute;;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-animation: fadein 10s; /* Firefox */
+  -webkit-animation: fadein 10s; /* Safari and Chrome */
+  animation: fadein 10s;
+}
+
+.intro {
+  * {
+    font-family: 'laundromat1967' !important;
+  }
+}
+
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
