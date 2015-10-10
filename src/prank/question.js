@@ -1,4 +1,4 @@
-import React from 'react/addons';
+import React from 'react';
 import { Button, Input } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 
@@ -8,8 +8,8 @@ class Question extends React.Component {
 
     this.state = {
       hasAnswered: false,
-      time: 20,
-      answer: 0
+      answer: false,
+      timeLeft: 0
     };
 
     this.timer = null;
@@ -17,20 +17,24 @@ class Question extends React.Component {
 
   componentDidMount() {
     FirebaseRef.child('player/current_track/uri').set(this.props.song);
-    this.timer = setInterval(() => {
-      let left = this.state.time -1;
+    FirebaseRef.child('player/playing').set(true);
 
-      if(left !== 0) {
-        this.setState({ time: left });
+    this.setState({ timeLeft: this.props.getTimeLeft() });
+    this.timer = setInterval(() => {
+      let left = this.state.timeLeft -1;
+
+      if(left > -1 && !this.state.hasAnswered) {
+        this.setState({ timeLeft: left });
+      }
+      if(left === -1 && !this.state.hasAnswered) {
+        clearInterval(this.timer);
+        this.props.setOutOfTime();
       }
     }, 1000);
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-
-  componentWillUnmount() {
+    this.props.updateTimeLeft(this.state.timeLeft);
     clearInterval(this.timer);
   }
 
@@ -57,9 +61,12 @@ class Question extends React.Component {
     return (
       <div>
         <header>
-          <h1>Question</h1>
+          <h1>Question {this.props.no}</h1>
           <p>
-            Time left: {this.state.time}
+            {this.props.question}
+          </p>
+          <p>
+            Time left: {this.state.timeLeft}
           </p>
         </header>
         <ul className="list-unstyled">
@@ -74,14 +81,9 @@ class Question extends React.Component {
 
   render() {
 
-    let style = {
-      backgroundImage: 'url(' + this.props.bg + ')',
-      backgroundSize: 'cover'
-    };
-
     return (
-      <div style={style}>
-        <section>
+      <div className="card">
+        <section className="card-inner">
           {this.renderOptions()}
           {this.renderContinue()}
         </section>

@@ -1,45 +1,44 @@
 .prank-container {
   background-image: url("http://schmoesknow.com/wp-content/uploads/2014/03/saw_v_2_by_hassoomi-d31v9zz.jpg");
-  position: absolute;;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   z-index: 1000;
   background-repeat: no-repeat;
   background-size: cover;
-  -moz-animation: fadein 10s; /* Firefox */
-  -webkit-animation: fadein 10s; /* Safari and Chrome */
-  animation: fadein 10s;
-}
+  @include display(flex);
+  @include flex(1);
+  @include justify-content(center);
+  height: 100vh;
 
-.intro {
-  * {
-    font-family: 'laundromat1967' !important;
+  h1 {
+    font-size: 50px;
+  }
+
+  .card {
+    @include display(flex);
+    @include flex(1);
+    @include align-items(center);
+    @include justify-content(center);
+    width: 100%;
+    height: 100vh;
+    background: rgba(0,0,0,.8);
+  }
+
+  .card-inner {
+    @include flex(1);
+    @include flex(0 0 50%);
+  }
+
+  img {
+    width: 320px;
+  }
+
+  p {
+    font-size: 20px;
+    margin-bottom: 20px;
   }
 }
 
-@-moz-keyframes fadein { /* Firefox */
-    from {
-        opacity:0;
-    }
-    to {
-        opacity:1;
-    }
-}
-@-webkit-keyframes fadein { /* Safari and Chrome */
-    from {
-        opacity:0;
-    }
-    to {
-        opacity:1;
-    }
-}
-@keyframes fadein {
-    from {
-        opacity:0;
-    }
-    to {
-        opacity:1;
-    }
+.intro, .between {
+  h1 {
+    font-family: 'laundromat1967' !important;
+  }
 }

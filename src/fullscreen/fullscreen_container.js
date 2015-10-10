@@ -1,11 +1,9 @@
-import React from 'react/addons';
+import React from 'react';
 import CurrentTrackStore from '_stores/current_track_store';
 import BackgroundImage from 'components/background_image';
 import FirebaseRef from 'firebase_ref';
 import _ from 'lodash';
 import utils from 'utils';
-
-let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class FullscreenContainer extends React.Component {
 
@@ -74,7 +72,6 @@ class FullscreenContainer extends React.Component {
     };
 
     return (
-      <ReactCSSTransitionGroup transitionName="fscreen" transitionAppear={true}>
         <div className="fullscreen-container">
           <div className="cover" style={style} />
           <div className="media">
@@ -88,7 +85,6 @@ class FullscreenContainer extends React.Component {
             </div>
           </div>
         </div>
-      </ReactCSSTransitionGroup>
     );
   }
 };

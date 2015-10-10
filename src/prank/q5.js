@@ -2,16 +2,16 @@ import React from 'react';
 import Question from './question';
 import { Button, Input } from 'react-bootstrap';
 
-class Q3 extends Question {
+class Q5 extends Question {
 
   renderContinue() {
     if(!this.state.hasAnswered) { return false; }
 
     return (
       <div>
-        <h2>Halfway through!</h2>
+        <h2>Yeah!</h2>
         <p>
-          I'm so excited for you!
+          All questions are answered! Lets continue and find out how you scored!
         </p>
         <div>
           <Button bsStyle="primary" onClick={this.props.upIndex}>Next question!</Button>
@@ -22,4 +22,4 @@ class Q3 extends Question {
 
 };
 
-export default Q3;
+export default Q5;

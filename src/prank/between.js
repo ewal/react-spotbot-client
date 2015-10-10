@@ -1,4 +1,5 @@
-import React from 'react/addons';
+import React from 'react';
+import FirebaseRef from 'firebase_ref';
 
 class Between extends React.Component {
 
@@ -13,6 +14,8 @@ class Between extends React.Component {
   }
 
   componentDidMount() {
+    //FirebaseRef.child('player/current_track/uri').set("spotify:track:2YG8xAFfakdvfZkg8fXZpJ");
+    FirebaseRef.child('player/playing').set(false);
     this.timer = setInterval(() => {
       let time = this.state.time -1;
       if(time === 0) {
@@ -21,7 +24,7 @@ class Between extends React.Component {
       else {
         this.setState({ time: time });
       }
-    }, 1000);
+    }, 800);
   }
 
   componentWillUnmount() {
@@ -30,9 +33,11 @@ class Between extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Get ready!</h1>
-        <h1>#{this.state.time}</h1>
+      <div className="card between">
+        <div className="card-inner">
+          <h1>Get ready!</h1>
+          <h1>{this.state.time}</h1>
+        </div>
       </div>
     );
   }
