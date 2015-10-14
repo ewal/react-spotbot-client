@@ -32,11 +32,7 @@ class ArtistList extends React.Component {
 };
 
 ArtistList.propTypes = {
-  artists: React.PropTypes.array
-};
-
-ArtistList.defaultProps = {
-  artists: []
+  artists: React.PropTypes.array.isRequired
 };
 
 export default ArtistList;

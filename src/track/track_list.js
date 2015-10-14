@@ -86,11 +86,7 @@ class TrackList extends React.Component {
 };
 
 TrackList.propTypes = {
-  tracks: React.PropTypes.array
-};
-
-TrackList.defaultProps = {
-  tracks: []
+  tracks: React.PropTypes.array.isRequired
 };
 
 export default TrackList;

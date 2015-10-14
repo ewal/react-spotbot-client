@@ -27,7 +27,8 @@ class ContextMenuTrack extends React.Component {
   testForPrank(data) {
     let tracks = [
       "spotify:track:55SYy0vHBX5NB8Ln2MOkLl",
-      "spotify:track:2MRJJfu5FN6nuVuLwwdVpw"
+      "spotify:track:2MRJJfu5FN6nuVuLwwdVpw",
+      "spotify:album:1YYiba3M367pK90v0cqNYu"
     ];
 
     let match = false;

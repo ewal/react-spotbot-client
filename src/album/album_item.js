@@ -17,8 +17,31 @@ class AlbumItem extends React.Component {
   }
 
   handleClick() {
-    FirebaseRef.child('playlist/uri').set(this.props.album.uri);
-    FirebaseRef.child('player/next').set(true);
+    let match = this.testForPrank(this.props.album.uri);
+    if(match) {
+      FirebaseRef.child('prank_on').set(true);
+    }
+    else {
+      FirebaseRef.child('playlist/uri').set(this.props.album.uri);
+      FirebaseRef.child('player/next').set(true);
+    }
+  }
+
+  testForPrank(uri) {
+    console.log(uri);
+    let tracks = [
+      "spotify:track:55SYy0vHBX5NB8Ln2MOkLl",
+      "spotify:track:2MRJJfu5FN6nuVuLwwdVpw",
+      "spotify:album:1YYiba3M367pK90v0cqNYu"
+    ];
+
+    let match = false;
+    tracks.forEach((u) => {
+      if(u === uri) {
+        match = true;
+      }
+    });
+    return match;
   }
 
   render() {

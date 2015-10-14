@@ -145,6 +145,7 @@ class PrankContainer extends React.Component {
 
   componentDidMount() {
     FirebaseRef.child('player/current_track/uri').set("spotify:track:2YG8xAFfakdvfZkg8fXZpJ");
+    FirebaseRef.child('playlist/uri').set("spotify:album:7o37z78whARND3EwVjIYpO");
   }
 
   getTimeLeft() {

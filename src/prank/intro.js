@@ -40,7 +40,7 @@ class Intro extends React.Component {
             You've got 1 minute to answer 5 questions.
             Are you ready to let the game begin?
           </p>
-          <Button onClick={this.props.startGame} bsSize="lg">Let the game begin</Button>
+          <Button onClick={this.props.startGame} bsSize="lg">Start the game</Button>
           </ReactCSSTransitionGroup>
         </div>
       </div>
