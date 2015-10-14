@@ -13,7 +13,7 @@ class Outro extends React.Component {
       "This wont simply do ... try harder!",
       "More than half of them right... close but no cigarr!",
       "Four! Four is not bad! Which one did you miss?",
-      "Wow! You did it! You are simply amazing. I bet you feel just awesome right now! Now, go tell your friends what you have learned!"
+      "Wow! You did it! You are simply amazing. I bet you feel just terrific! Now, go tell your friends what you have learned!"
     ];
 
     this.gifs = [
@@ -35,10 +35,14 @@ class Outro extends React.Component {
     }
   }
 
+  endGame() {
+    FirebaseRef.child('prank_on').set(false);
+  }
+
   renderButton() {
     if(this.props.correctAnswers === 5) {
         return (
-          <Button onClick={this.props.resetGame}>Get out of here</Button>
+          <Button onClick={this.endGame.bind(this)}>Get out of here</Button>
         );
     }
     else {

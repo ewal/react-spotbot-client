@@ -42,3 +42,35 @@
     font-family: 'laundromat1967' !important;
   }
 }
+
+.switch-appear {
+  opacity: 0.01;
+}
+.switch-appear.switch-appear-active {
+  @include transition(opacity 5s ease-in);
+  opacity: 1.0;
+}
+
+.switch1-appear,
+.switch2-appear,
+.switch3-appear,
+.switch4-appear {
+  opacity: 0.01;
+}
+
+.switch1-appear.switch1-appear-active {
+  @include transition(opacity 2s ease-in 5s);
+  opacity: 1.0;
+}
+.switch2-appear.switch2-appear-active {
+  @include transition(opacity 2s ease-in 7s);
+  opacity: 1.0;
+}
+.switch3-appear.switch3-appear-active {
+  @include transition(opacity 2s ease-in 9s);
+  opacity: 1.0;
+}
+.switch4-appear.switch4-appear-active {
+  @include transition(opacity 2s ease-in 11s);
+  opacity: 1.0;
+}

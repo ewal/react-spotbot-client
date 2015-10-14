@@ -30,9 +30,11 @@ class App extends React.Component {
     super(props);
 
     this.ref = null;
+    this.prankRef = null;
     this.state = {
       searchVisible: false,
-      showFullscreen: false
+      showFullscreen: false,
+      prankOn: false
     };
   }
 
@@ -42,6 +44,10 @@ class App extends React.Component {
       let trackId = utils.spotify.parseId(val.current_track.uri);
       CurrentTrackActions.load(trackId);
       CurrentTrackActions.setStatus({ startedAt: val.current_track.started_at, isPlaying: val.playing });
+    });
+
+    this.prankRef = FirebaseRef.child('prank_on').on('value', (snapshot) => {
+      this.setState({ prankOn: snapshot.val() });
     });
   }
 
@@ -107,8 +113,17 @@ class App extends React.Component {
   }
 
   render() {
+    let container = null;
+    if(this.state.prankOn) {
+      container = <PrankContainer />;
+    }
+    else {
+      container = this.renderMain();
+    }
     return (
-      <PrankContainer />
+      <div>
+        {container}
+      </div>
     );
   }
 };

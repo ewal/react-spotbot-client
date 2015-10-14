@@ -1,16 +1,14 @@
-import React from 'react';
+import React from 'react/addons';
 import { Button, Input } from 'react-bootstrap';
 import classNames from 'classnames';
 import Intro from './intro';
 import Outro from './outro';
-import Q1 from './q1';
-import Q2 from './q2';
-import Q3 from './q3';
-import Q4 from './q4';
-import Q5 from './q5';
+import Question from './question';
 import Between from './between';
 import FirebaseRef from 'firebase_ref';
 import OutOfTime from './out_of_time';
+
+let ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 let q1Answers = [
   { correct: false, answer: "1978" },
@@ -42,6 +40,36 @@ let q5Answers = [
   { correct: true, answer: "3" }
 ];
 
+let q1Taunt = {
+  header: "First question done!",
+  body: "But the trip has just begun!",
+  image: null
+};
+
+let q2Taunt = {
+  header: "Wohoo!",
+  body: "Man isn't this fun? Take a look at this picture. Aren't they having fun together? They are most likley listening to one of Totos many hits. Don't you wanna be apart of this picture, Mike?",
+  image: "/images/Happy-People1.jpg"
+};
+
+let q3Taunt = {
+  header: "Halfway through!",
+  body: "I'm so excited for you!",
+  image: null
+};
+
+let q4Taunt = {
+  header: "Woop! Woop!",
+  body: "You are almost done!",
+  image: "/images/final.gif"
+};
+
+let q5Taunt = {
+  header: "Yeah!",
+  body: "All questions are answered! Lets continue and find out how you did!",
+  image: null
+};
+
 let defaultState = {
   cardIndex: 0,
   gameBegun: false,
@@ -67,48 +95,52 @@ class PrankContainer extends React.Component {
 
     this.cards = [
       <Between {...commonProps} />,
-      <Q1 {...commonProps}
+      <Question {...commonProps}
         question="Which year did Toto release their first album?"
         answers={q1Answers}
+        taunt={q1Taunt}
         song="spotify:track:1aTAR21kFePsDBHnc74Hli"
         bg="/images/africa.jpg"
         no="1"
       />,
       <Between {...commonProps} />,
-      <Q2  {...commonProps}
+      <Question {...commonProps}
         question="What was the name of Totos first drummer?"
         answers={q2Answers}
+        taunt={q2Taunt}
         song="spotify:track:4aVuWgvD0X63hcOCnZtNFA"
         bg="/images/hold_the_line.jpg"
         no="2"
       />,
       <Between {...commonProps} />,
-      <Q3 {...commonProps}
+      <Question {...commonProps}
         question="How many studio albums have Toto released over the years?"
         answers={q3Answers}
+        taunt={q3Taunt}
         song="spotify:track:37BTh5g05cxBIRYMbw8g2T"
         bg="/images/rosanna.jpg"
         no="3"
       />,
       <Between {...commonProps} />,
-      <Q4 {...commonProps}
+      <Question {...commonProps}
         question="What guitar brand does Steve Lukather play on?"
         answers={q4Answers}
+        taunt={q4Taunt}
         song="spotify:track:3LFdvM7nIV8t02zyhYLvJo"
         bg="/images/rosanna.jpg"
         no="4"
       />,
       <Between {...commonProps} />,
-      <Q5 {...commonProps}
+      <Question {...commonProps}
         question="How many fingers am I holding up?"
         answers={q5Answers}
+        taunt={q5Taunt}
         song="spotify:track:73bzcsDjx9FqzqKWcPLMiH"
         bg="/images/rosanna.jpg"
         no="5"
       />
     ];
 
-    this.answers = [];
   }
 
   componentDidMount() {
@@ -128,7 +160,6 @@ class PrankContainer extends React.Component {
   }
 
   setOutOfTime() {
-    console.log("out");
     this.setState({ timeLeft: 0 });
   }
 
@@ -171,9 +202,11 @@ class PrankContainer extends React.Component {
     };
 
     return (
+      <ReactCSSTransitionGroup transitionName="switch" transitionAppear={true}>
       <div style={styles} className="prank-container">
         {card}
       </div>
+      </ReactCSSTransitionGroup>
     );
   }
 };

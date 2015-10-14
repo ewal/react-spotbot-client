@@ -79,6 +79,31 @@ class Question extends React.Component {
     );
   }
 
+  renderContinue() {
+    if(!this.state.hasAnswered) { return false; }
+
+    let image = '';
+    if(this.props.taunt.image !== null) {
+      image = <p><img src={this.props.taunt.image} /></p>;
+    }
+
+    return (
+      <div>
+        <h2>{this.props.taunt.header}</h2>
+        <p>
+          {this.props.taunt.body}
+        </p>
+        {image}
+        <p>
+          Time left: {this.state.timeLeft}
+        </p>
+        <div>
+          <Button bsStyle="primary" onClick={this.props.upIndex}>Next question!</Button>
+        </div>
+      </div>
+    );
+  }
+
   render() {
 
     return (

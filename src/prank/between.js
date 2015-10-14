@@ -14,7 +14,6 @@ class Between extends React.Component {
   }
 
   componentDidMount() {
-    //FirebaseRef.child('player/current_track/uri').set("spotify:track:2YG8xAFfakdvfZkg8fXZpJ");
     FirebaseRef.child('player/playing').set(false);
     this.timer = setInterval(() => {
       let time = this.state.time -1;
@@ -24,7 +23,7 @@ class Between extends React.Component {
       else {
         this.setState({ time: time });
       }
-    }, 800);
+    }, 700);
   }
 
   componentWillUnmount() {
