@@ -4,11 +4,6 @@ import _ from 'lodash';
 import BackgroundImage from 'components/background_image';
 import classNames from 'classnames';
 
-/**
- * Artist item module
- * @module artist/artist_item
- */
-
 class ArtistItem extends React.Component {
 
   render() {

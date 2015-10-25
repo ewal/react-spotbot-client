@@ -8,11 +8,6 @@ import { Link } from 'react-router';
 import SearchStore from '_stores/search_store';
 import AutoComplete from 'search/auto_complete';
 
-/**
- * Search container module
- * @module search/search_container
- */
-
 class SearchContainer extends React.Component {
 
   constructor(props) {

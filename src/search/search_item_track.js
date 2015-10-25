@@ -3,11 +3,6 @@ import SearchItem from 'search/search_item';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 
-/**
- * Search item track module
- * @module search/search_item_track
- */
-
 class SearchItemTrack extends SearchItem {
   render() {
 

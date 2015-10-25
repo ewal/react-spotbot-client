@@ -7,11 +7,6 @@ import ShuffleButton from 'player_controls/shuffle_button';
 import RepeatButton from 'player_controls/repeat_button';
 import VolumeControl from 'player_controls/volume_control';
 
-/**
- * Player controls container module
- * @module player_controls/player_controls_container
- */
-
 class PlayerControlsContainer extends React.Component {
 
   constructor(props) {

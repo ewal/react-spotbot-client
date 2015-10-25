@@ -8,11 +8,6 @@ import ArtistList from 'artist/artist_list';
 import BackgroundImage from 'components/background_image';
 import Section from 'components/section';
 
-/**
- * Artist container module
- * @module artist/artist_container
- */
-
 class ArtistContainer extends React.Component {
 
   constructor(props) {

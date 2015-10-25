@@ -8,11 +8,6 @@ import BackgroundImage from 'components/background_image';
 import TrackList from 'track/track_list';
 import StarPlaylist from 'components/star_playlist';
 
-/**
- * Album container module
- * @module album/album_container
- */
-
 class Artists extends React.Component {
   render() {
 

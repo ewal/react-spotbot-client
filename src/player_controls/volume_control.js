@@ -2,11 +2,6 @@ import React from 'react';
 import _ from 'lodash';
 import FirebaseRef from 'firebase_ref';
 
-/**
- * Volume control module
- * @module player_controls/volume_control
- */
-
 class VolumeControl extends React.Component {
 
   constructor(props) {

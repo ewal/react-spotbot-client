@@ -4,11 +4,6 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 import BackgroundImage from 'components/background_image';
 
-/**
- * Search item artist module
- * @module search/search_item_artist
- */
-
 class SearchItemArtist extends SearchItem {
   render() {
 

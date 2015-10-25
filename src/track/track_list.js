@@ -5,11 +5,6 @@ import _ from 'lodash';
 import TrackItem from 'track/track_item';
 import CurrentTrackStore from '_stores/current_track_store';
 
-/**
- * Track list module
- * @module track/track_list
- */
-
 class TrackList extends React.Component {
 
   constructor(props) {

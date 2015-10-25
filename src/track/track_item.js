@@ -6,11 +6,6 @@ import { ContextMenuLayer } from "react-contextmenu";
 import FirebaseRef from 'firebase_ref';
 import classNames from 'classnames';
 
-/**
- * Track item module
- * @module track/track_item
- */
-
 class TrackItem extends React.Component {
 
   constructor(props) {

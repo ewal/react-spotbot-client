@@ -2,11 +2,6 @@ import React from 'react';
 import AlbumItem from 'album/album_item';
 import _ from 'lodash';
 
-/**
- * Album list module
- * @module album/album_list
- */
-
 class AlbumList extends React.Component {
 
   constructor(props) {

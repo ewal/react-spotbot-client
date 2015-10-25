@@ -5,11 +5,6 @@ import { Button } from 'react-bootstrap';
 import FirebaseRef from 'firebase_ref';
 import BackgroundImage from 'components/background_image';
 
-/**
- * Album item module
- * @module album/album_item
- */
-
 class AlbumItem extends React.Component {
 
   constructor(props) {

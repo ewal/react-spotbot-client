@@ -3,11 +3,6 @@ import SearchItemTrack from 'search/search_item_track';
 import SearchItemAlbum from 'search/search_item_album';
 import SearchItemArtist from 'search/search_item_artist';
 
-/**
- * Search auto complete module
- * @module search/auto_complete
- */
-
 class AutoComplete extends React.Component {
 
   getIndex(index) {

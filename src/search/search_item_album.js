@@ -4,11 +4,6 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 import BackgroundImage from 'components/background_image';
 
-/**
- * Search item album module
- * @module search/search_item_album
- */
-
 class SearchItemAlbum extends SearchItem {
   render() {
 

@@ -1,11 +1,6 @@
 import React from 'react';
 import ArtistItem from 'artist/artist_item';
 
-/**
- * Artist list module
- * @module artist/artist_list
- */
-
 class ArtistList extends React.Component {
 
   constructor(props) {
