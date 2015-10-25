@@ -4,10 +4,6 @@ let CacheStore = {
 
   cache: [],
 
-  getStore() {
-    return this.cache;
-  },
-
   get(cacheKey) {
     return _.findWhere(this.cache, { key: cacheKey });
   },
