@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import TrackList from 'track/track_list';
-import ComponentHeader from 'components/component_header';
+import Section from 'components/section';
 
 class SearchResultTracks extends React.Component {
 
@@ -12,10 +12,9 @@ class SearchResultTracks extends React.Component {
   render() {
 
     return (
-      <div className="component">
-        <ComponentHeader title="Songs" />
+      <Section title="Songs">
         <TrackList tracks={this.props.tracks} image album artist header />
-      </div>
+      </Section>
     );
   }
 };

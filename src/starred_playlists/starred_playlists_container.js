@@ -4,7 +4,6 @@ import _ from 'lodash';
 import AlbumMetadataApi from '_apis/album_metadata_api';
 import utils from 'utils';
 import AlbumList from 'album/album_list';
-import ComponentHeader from 'components/component_header';
 import StarPlaylistItem from 'starred_playlists/star_playlist_item';
 import { Tabs, Tab } from 'react-bootstrap';
 

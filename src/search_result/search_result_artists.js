@@ -1,7 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import ArtistList from 'artist/artist_list';
-import ComponentHeader from 'components/component_header';
+import Section from 'components/section';
 
 class SearchResultArtists extends React.Component {
 
@@ -14,12 +14,9 @@ class SearchResultArtists extends React.Component {
     if(_.isEmpty(this.props.artists)) { return false; }
 
     return (
-      <div className="component">
-        <ComponentHeader title="Artists" />
-        <section>
-          <ArtistList artists={this.props.artists} />
-        </section>
-      </div>
+      <Section title="Artists">
+        <ArtistList artists={this.props.artists} />
+      </Section>
     );
   }
 

@@ -14,6 +14,8 @@ class CurrentTrackContainer extends React.Component {
 
     this.ref = null;
     this.state = {
+      isPlaying: false,
+      startedAt: 0,
       track: {}
     };
   }
