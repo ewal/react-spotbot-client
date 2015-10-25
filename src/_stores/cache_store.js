@@ -1,16 +1,8 @@
-import Reflux from 'reflux';
 import _ from 'lodash';
 
-/**
- * Cache store module
- * @module _stores/cache_store
- */
+let CacheStore = {
 
-let CacheStore = Reflux.createStore({
-
-  init() {
-    this.cache = [];
-  },
+  cache: [],
 
   getStore() {
     return this.cache;
@@ -24,6 +16,6 @@ let CacheStore = Reflux.createStore({
     this.cache.push({ key: key, data: data });
   }
 
-});
+};
 
 export default CacheStore;
