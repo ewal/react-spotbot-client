@@ -16,8 +16,9 @@ export default {
   album(albumId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'album_' + albumId;
-      let cacheItem = CacheStore.get(cacheKey);
+      let cacheKey = 'album_' + albumId,
+          cacheItem = CacheStore.get(cacheKey);
+
       if(!_.isUndefined(cacheItem)) {
         return resolve(cacheItem.data);
       }
@@ -42,21 +43,35 @@ export default {
   albums(albumIds) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'albums_' + albumIds.join('');
-      let cacheItem = CacheStore.get(cacheKey);
+      let cacheKey = 'albums_' + albumIds.join(''),
+          cacheItem = CacheStore.get(cacheKey),
+          uniqeIds = _.uniq(albumIds),
+          arrs = _.chunk(uniqeIds, 20),
+          obj = { albums: [] };
+
       if(!_.isUndefined(cacheItem)) {
         return resolve(cacheItem.data);
       }
 
-      let params = {
-        ids: albumIds.join(',')
-      };
+      arrs.forEach((arr) => {
+        this.fetch(arr.join(',')).then((response) => {
+          obj.albums = _.union(obj.albums, response.albums);
+          if(uniqeIds.length === obj.albums.length) {
+            CacheStore.set(cacheKey, obj);
+            resolve(obj);
+          }
+        });
+      });
 
+    });
+  },
+
+  fetch(ids) {
+    return new Promise((resolve, reject) => {
       request.get('https://api.spotify.com/v1/albums/')
-      .query(params)
+      .query({ ids: ids })
       .end((error, response) => {
         if(response.ok) {
-          CacheStore.set(cacheKey, response.body);
           resolve(response.body);
         }
         else {

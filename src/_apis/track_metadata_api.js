@@ -29,8 +29,9 @@ export default {
       }
 
       this.isLoading = true;
-      let cacheKey = 'track_' + trackId;
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'track_' + trackId,
+          findInCache = CacheStore.get(cacheKey);
+
       if(!_.isUndefined(findInCache)) {
         this.isLoading = false;
         return resolve(findInCache.data);
@@ -58,22 +59,35 @@ export default {
 
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'track_' + trackIds.join('');
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'track_' + trackIds.join(''),
+          findInCache = CacheStore.get(cacheKey),
+          uniqeIds = _.uniq(trackIds),
+          arrs = _.chunk(uniqeIds, 50),
+          obj = { tracks: [] };
 
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
 
-      let params = {
-        ids: _.take(trackIds, 50).join(',')
-      };
+      arrs.forEach((arr) => {
+        this.fetch(arr.join(',')).then((response) => {
+          obj.tracks = _.union(obj.tracks, response.tracks);
+          if(uniqeIds.length === obj.tracks.length) {
+            CacheStore.set(cacheKey, obj);
+            resolve(obj);
+          }
+        });
+      });
 
+    });
+  },
+
+  fetch(ids) {
+    return new Promise((resolve, reject) => {
       request.get('https://api.spotify.com/v1/tracks/')
-      .query(params)
+      .query({ ids: ids })
       .end((error, response) => {
         if(response.ok) {
-          CacheStore.set(cacheKey, response.body);
           resolve(response.body);
         }
         else {
