@@ -16,8 +16,9 @@ export default {
   artist(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'artist_' + artistId;
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'artist_' + artistId,
+          findInCache = CacheStore.get(cacheKey);
+
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
@@ -42,17 +43,17 @@ export default {
   singles(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'artist_singles_' + artistId;
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'artist_singles_' + artistId,
+          findInCache = CacheStore.get(cacheKey),
+          params = {
+            album_type: 'single',
+            market: process.env.SPOTIFY_MARKET,
+            limit: 5
+          };
+
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
-
-      let params = {
-        album_type: 'single',
-        market: process.env.SPOTIFY_MARKET,
-        limit: 5
-      };
 
       request.get('https://api.spotify.com/v1/artists/' + artistId + '/albums')
       .query(params)
@@ -75,17 +76,17 @@ export default {
   albums(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'artist_albums_' + artistId;
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'artist_albums_' + artistId,
+          findInCache = CacheStore.get(cacheKey),
+          params = {
+            album_type: 'album',
+            market: process.env.SPOTIFY_MARKET,
+            limit: 50
+          };
+
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
-
-      let params = {
-        album_type: 'album',
-        market: process.env.SPOTIFY_MARKET,
-        limit: 50
-      };
 
       request.get('https://api.spotify.com/v1/artists/' + artistId + '/albums')
       .query(params)
@@ -108,15 +109,15 @@ export default {
   topTracks(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'top_tracks_' + artistId;
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'top_tracks_' + artistId,
+          findInCache = CacheStore.get(cacheKey),
+          params = {
+            country: process.env.SPOTIFY_MARKET
+          };
+
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
-
-      let params = {
-        country: process.env.SPOTIFY_MARKET
-      };
 
       request.get('https://api.spotify.com/v1/artists/' + artistId + '/top-tracks')
       .query(params)
@@ -139,15 +140,15 @@ export default {
   relatedArtists(artistId) {
     return new Promise((resolve, reject) => {
 
-      let cacheKey = 'related_artists_' + artistId;
-      let findInCache = CacheStore.get(cacheKey);
+      let cacheKey = 'related_artists_' + artistId,
+          findInCache = CacheStore.get(cacheKey),
+          params = {
+            country: process.env.SPOTIFY_MARKET
+          };
+
       if(!_.isUndefined(findInCache)) {
         return resolve(findInCache.data);
       }
-
-      let params = {
-        country: process.env.SPOTIFY_MARKET
-      };
 
       request.get('https://api.spotify.com/v1/artists/' + artistId + '/related-artists')
       .query(params)
